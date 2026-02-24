@@ -101,7 +101,7 @@ const translations = {
             recommendationsTitle: "2026년 추천 사항",
             downloadButton: "📥 이미지 저장",
             shareButton: "📤 결과 공유",
-            retryButton: "🔄 다시 하기",
+            retryButton: "🔄 테스트하기",
             exploreTitle: "모든 아우라 둘러보기"
         },
         colors: {

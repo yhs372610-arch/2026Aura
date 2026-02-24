@@ -371,4 +371,8 @@ function fallbackShare(text, url) {
     } else alert(fullText);
 }
 
-function retryTest() { startTest(); }
+function retryTest() {
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:newUrl}, '', newUrl);
+    showScreen('home-screen');
+}
