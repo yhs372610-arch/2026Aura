@@ -263,7 +263,7 @@ function drawResultToCanvas() {
         ctx.fillText(translations[currentLanguage].canvasTitle || translations['en'].canvasTitle, canvas.width / 2, 180);
         
         const img = new Image();
-        img.crossOrigin = "anonymous";
+        // img.crossOrigin = "anonymous"; // Removed to prevent CORS issues with local relative paths
         img.onload = function() {
             const centerX = canvas.width / 2;
             const centerY = 550;
@@ -293,7 +293,9 @@ function drawResultToCanvas() {
                 offsetY = centerY - drawHeight / 2;
             }
 
-            ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+            if (isFinite(drawWidth) && isFinite(drawHeight)) {
+                ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+            }
             ctx.restore();
             
             ctx.strokeStyle = 'white';
@@ -322,6 +324,10 @@ function drawResultToCanvas() {
             ctx.font = '35px Arial';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
             ctx.fillText('Check your aura at: 2026-aura.pages.dev', centerX, canvas.height - 120);
+            resolve();
+        };
+        img.onerror = function() {
+            console.error("Failed to load aura image for canvas");
             resolve();
         };
         img.src = result.colorInfo.image;
