@@ -119,31 +119,31 @@ const answerScores = [
     ]
 ];
 
-// 컬러별 상세 정보
+// 컬러별 상세 정보 (이름과 어울리는 색상으로 수정)
 const colorData = {
     coolBlue: {
-        color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        hex: '#667eea'
+        color: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+        hex: '#3b82f6'
     },
     vampPurple: {
-        color: 'linear-gradient(135deg, #a445b2 0%, #d41872 100%)',
-        hex: '#a445b2'
+        color: 'linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)',
+        hex: '#8b5cf6'
     },
     solarGold: {
-        color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        hex: '#f5576c'
+        color: 'linear-gradient(135deg, #b45309 0%, #fbbf24 100%)',
+        hex: '#fbbf24'
     },
     forestGreen: {
-        color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        hex: '#00f2fe'
+        color: 'linear-gradient(135deg, #064e3b 0%, #10b981 100%)',
+        hex: '#10b981'
     },
     softRose: {
-        color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-        hex: '#fa709a'
+        color: 'linear-gradient(135deg, #9d174d 0%, #f472b6 100%)',
+        hex: '#f472b6'
     },
     midnightBlack: {
-        color: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-        hex: '#330867'
+        color: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)',
+        hex: '#334155'
     }
 };
 
@@ -159,9 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 언어 자동 감지 및 적용
     updatePageLanguage();
-    
-    // 구글 애드센스 광고 로드 (승인 후 활성화)
-    // loadAds();
 });
 
 // ========== 화면 전환 함수 ==========
@@ -356,26 +353,26 @@ function downloadResult() {
     
     const result = window.currentResult;
     
-    // 배경 그라데이션
+    // 배경 그라데이션 (이름에 어울리는 색상으로 업데이트)
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     if (result.color === 'coolBlue') {
-        gradient.addColorStop(0, '#667eea');
-        gradient.addColorStop(1, '#764ba2');
+        gradient.addColorStop(0, '#1e3a8a');
+        gradient.addColorStop(1, '#3b82f6');
     } else if (result.color === 'vampPurple') {
-        gradient.addColorStop(0, '#a445b2');
-        gradient.addColorStop(1, '#d41872');
+        gradient.addColorStop(0, '#4c1d95');
+        gradient.addColorStop(1, '#8b5cf6');
     } else if (result.color === 'solarGold') {
-        gradient.addColorStop(0, '#f093fb');
-        gradient.addColorStop(1, '#f5576c');
+        gradient.addColorStop(0, '#b45309');
+        gradient.addColorStop(1, '#fbbf24');
     } else if (result.color === 'forestGreen') {
-        gradient.addColorStop(0, '#4facfe');
-        gradient.addColorStop(1, '#00f2fe');
+        gradient.addColorStop(0, '#064e3b');
+        gradient.addColorStop(1, '#10b981');
     } else if (result.color === 'softRose') {
-        gradient.addColorStop(0, '#fa709a');
-        gradient.addColorStop(1, '#fee140');
+        gradient.addColorStop(0, '#9d174d');
+        gradient.addColorStop(1, '#f472b6');
     } else if (result.color === 'midnightBlack') {
-        gradient.addColorStop(0, '#30cfd0');
-        gradient.addColorStop(1, '#330867');
+        gradient.addColorStop(0, '#0f172a');
+        gradient.addColorStop(1, '#334155');
     }
     
     ctx.fillStyle = gradient;
@@ -466,36 +463,11 @@ function fallbackShare(text, url) {
         document.body.removeChild(textArea);
         alert('Link copied to clipboard!');
     }
-    
-    // SNS 공유 링크 (선택사항)
-    const encodedText = encodeURIComponent(text);
-    const encodedUrl = encodeURIComponent(url);
-    
-    // Facebook
-    // window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank');
-    
-    // Twitter
-    // window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank');
-    
-    // WhatsApp
-    // window.open(`https://wa.me/?text=${encodedText}%20${encodedUrl}`, '_blank');
 }
 
 // ========== 테스트 재시도 ==========
 function retryTest() {
     startTest();
-}
-
-// ========== 구글 애드센스 광고 로드 (승인 후 활성화) ==========
-function loadAds() {
-    // 구글 애드센스 승인 후 주석 해제
-    /*
-    try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-        console.error('Ad loading error:', e);
-    }
-    */
 }
 
 // ========== 유틸리티: 번역 함수 (languages.js에서 가져옴) ==========
