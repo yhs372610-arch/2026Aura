@@ -119,30 +119,30 @@ const answerScores = [
     ]
 ];
 
-// 컬러별 상세 정보 (이름과 어울리는 색상으로 수정)
+// 컬러별 상세 정보 (업로드된 이미지 적용)
 const colorData = {
     coolBlue: {
-        color: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+        image: 'cool-blue.png',
         hex: '#3b82f6'
     },
     vampPurple: {
-        color: 'linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)',
+        image: 'vamp-purple.png',
         hex: '#8b5cf6'
     },
     solarGold: {
-        color: 'linear-gradient(135deg, #b45309 0%, #fbbf24 100%)',
+        image: 'solar-gold.png',
         hex: '#fbbf24'
     },
     forestGreen: {
-        color: 'linear-gradient(135deg, #064e3b 0%, #10b981 100%)',
+        image: 'forest-green.png',
         hex: '#10b981'
     },
     softRose: {
-        color: 'linear-gradient(135deg, #9d174d 0%, #f472b6 100%)',
+        image: 'soft-rose.png',
         hex: '#f472b6'
     },
     midnightBlack: {
-        color: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)',
+        image: 'midnight-black.png',
         hex: '#334155'
     }
 };
@@ -290,9 +290,10 @@ function showResult() {
     const result = translations[currentLanguage].colors[resultColor];
     const colorInfo = colorData[resultColor];
     
-    // 컬러 원 표시
+    // 컬러 이미지 표시
     const colorDisplay = document.getElementById('result-color-display');
-    colorDisplay.style.background = colorInfo.color;
+    colorDisplay.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
+    colorDisplay.style.borderRadius = '50%'; // 원형 유지
     
     // 제목
     document.getElementById('result-title').textContent = result.name;
@@ -353,7 +354,7 @@ function downloadResult() {
     
     const result = window.currentResult;
     
-    // 배경 그라데이션 (이름에 어울리는 색상으로 업데이트)
+    // 배경 그라데이션
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     if (result.color === 'coolBlue') {
         gradient.addColorStop(0, '#1e3a8a');
@@ -384,41 +385,54 @@ function downloadResult() {
     ctx.textAlign = 'center';
     ctx.fillText('2026 Aura Color', canvas.width / 2, 150);
     
-    // 컬러 원
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, 400, 150, 0, 2 * Math.PI);
-    ctx.fillStyle = result.colorInfo.hex;
-    ctx.fill();
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 10;
-    ctx.stroke();
-    
-    // 결과 이름
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 80px Arial';
-    ctx.fillText(result.name, canvas.width / 2, 700);
-    
-    // 부제목
-    ctx.font = '40px Arial';
-    ctx.fillText(result.subtitle, canvas.width / 2, 780);
-    
-    // 키워드
-    let yPos = 900;
-    ctx.font = 'bold 45px Arial';
-    result.keywords.forEach((keyword, index) => {
-        ctx.fillText(keyword, canvas.width / 2, yPos + (index * 70));
-    });
-    
-    // 하단 워터마크
-    ctx.font = '35px Arial';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.fillText('aura-color-test.com', canvas.width / 2, canvas.height - 100);
-    
-    // 다운로드
-    const link = document.createElement('a');
-    link.download = `my-2026-aura-${result.color}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    // 아우라 이미지 그리기
+    const img = new Image();
+    img.onload = function() {
+        // 원형 클리핑 효과
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        
+        ctx.drawImage(img, canvas.width / 2 - 250, 450 - 250, 500, 500);
+        ctx.restore();
+        
+        // 흰색 테두리
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 15;
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // 결과 이름
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 90px Arial';
+        ctx.fillText(result.name, canvas.width / 2, 820);
+        
+        // 부제목
+        ctx.font = '45px Arial';
+        ctx.fillText(result.subtitle, canvas.width / 2, 900);
+        
+        // 키워드
+        let yPos = 1050;
+        ctx.font = 'bold 55px Arial';
+        result.keywords.forEach((keyword, index) => {
+            ctx.fillText(`#${keyword}`, canvas.width / 2, yPos + (index * 90));
+        });
+        
+        // 하단 워터마크
+        ctx.font = '35px Arial';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillText('aura-color-test.com', canvas.width / 2, canvas.height - 100);
+        
+        // 다운로드
+        const link = document.createElement('a');
+        link.download = `my-2026-aura-${result.color}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    };
+    img.src = result.colorInfo.image;
 }
 
 // ========== 결과 공유 ==========
@@ -427,7 +441,6 @@ function shareResult() {
     const shareText = `My 2026 Aura Color is ${result.name}! 🌟 Find yours at aura-color-test.com`;
     const shareUrl = window.location.href;
     
-    // Web Share API 지원 확인
     if (navigator.share) {
         navigator.share({
             title: '2026 Aura Color Test',
@@ -446,15 +459,12 @@ function shareResult() {
 
 // ========== 대체 공유 방법 ==========
 function fallbackShare(text, url) {
-    // 클립보드에 복사
     const fullText = `${text}\n${url}`;
-    
     if (navigator.clipboard) {
         navigator.clipboard.writeText(fullText).then(() => {
             alert(t('result.shareButton') + ' - Link copied to clipboard!');
         });
     } else {
-        // 구형 브라우저 대응
         const textArea = document.createElement('textarea');
         textArea.value = fullText;
         document.body.appendChild(textArea);
@@ -469,6 +479,3 @@ function fallbackShare(text, url) {
 function retryTest() {
     startTest();
 }
-
-// ========== 유틸리티: 번역 함수 (languages.js에서 가져옴) ==========
-// t() 함수는 languages.js에 정의되어 있음
