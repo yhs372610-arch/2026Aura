@@ -149,6 +149,14 @@ const colorData = {
 
 // ========== 페이지 로드 시 초기화 ==========
 document.addEventListener('DOMContentLoaded', function() {
+    // 언어 버튼 이벤트 리스너 연결
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            changeLanguage(lang);
+        });
+    });
+
     // 언어 자동 감지 및 적용
     updatePageLanguage();
     

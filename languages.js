@@ -1,6 +1,10 @@
 // 다국어 번역 데이터
 const translations = {
     en: {
+        meta: {
+            title: "What's Your 2026 Aura Color?",
+            description: "Discover your energy color through psychology-based personality analysis. Take the 2026 Aura Test!"
+        },
         home: {
             title: "2026 Aura Color Test",
             subtitle: "Discover your energy color through psychology-based personality analysis",
@@ -274,6 +278,10 @@ const translations = {
         }
     },
     ko: {
+        meta: {
+            title: "나의 2026 오라 컬러는?",
+            description: "심리학 기반 성격 분석으로 당신의 2026년 에너지 컬러를 찾아보세요!"
+        },
         home: {
             title: "2026 나의 아우라 컬러",
             subtitle: "심리학 기반 성격 분석으로 당신의 에너지 컬러를 찾아보세요",
@@ -547,6 +555,10 @@ const translations = {
         }
     },
     ja: {
+        meta: {
+            title: "あなたの2026年オーラカラーは？",
+            description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
+        },
         home: {
             title: "2026 オーラカラーテスト",
             subtitle: "心理学に基づいた性格分析であなたのエネルギーカラーを発見",
@@ -573,7 +585,7 @@ const translations = {
                 ]
             },
             {
-                q: "2026年の理想的な週末は？",
+                q: "2026年の理想的な週末은？",
                 a: [
                     "個人プロジェクトを計画し実行",
                     "愛する人たちと過ごす",
@@ -632,7 +644,7 @@ const translations = {
                     "信頼できて組織的",
                     "思いやりがあり共感力が高い",
                     "エネルギッシュでインスピレーションを与える",
-                    "賢明で内省的"
+                    "賢明で内省적"
                 ]
             },
             {
@@ -707,7 +719,7 @@ const translations = {
         colors: {
             coolBlue: {
                 name: "クールブルー",
-                subtitle: "冷静なストラテジスト",
+                subtitle: "冷静なストラテジ스트",
                 keywords: ["戦略的", "冷静", "信頼"],
                 description: "あなたのオーラは冷静で落ち着いたエネルギーを放っています。論理と明晰さで人生に取り組み、自然な問題解決者です。2026年、あなたの安定した存在感が最大の強みになります。",
                 strengths: [
@@ -719,7 +731,7 @@ const translations = {
                 recommendations: [
                     "慎重な計画が必要なプロジェクトをリード",
                     "執筆や教育を通じて洞察を共有",
-                    "論理と創造的探求のバランス",
+                    "論理と創造적探求のバランス",
                     "混沌とした環境に穏やかな空間を創造"
                 ]
             },
@@ -763,7 +775,7 @@ const translations = {
                 name: "フォレストグリーン",
                 subtitle: "バランスのとれた調和者",
                 keywords: ["バランス", "安定", "平和"],
-                description: "あなたのオーラは自然で調和のとれたエネルギーで流れています。森のように、避難所とバランスを提供します。真の強さは平衡と自然とのつながりから来ることを理解しています。",
+                description: "あなたのオーラは自然で調和のとれたエネルギーで流れています。森のように、避難所とバランスを提供します.真の強さは平衡と自然とのつながりから来ることを理解しています。",
                 strengths: [
                     "調和とバランスの創造に卓越",
                     "安定した確かな存在感",
@@ -820,6 +832,10 @@ const translations = {
         }
     },
     es: {
+        meta: {
+            title: "¿Cuál es tu Color de Aura 2026?",
+            description: "¡Descubre tu color de energía para el 2026 a través del análisis de personalidad basado en psicología!"
+        },
         home: {
             title: "Test de Color de Aura 2026",
             subtitle: "Descubre tu color de energía a través del análisis de personalidad basado en psicología",
@@ -1131,6 +1147,38 @@ function updatePageLanguage() {
             element.textContent = value;
         }
     });
+
+    // 메타 태그 업데이트 (SNS 공유용)
+    const metaData = translations[currentLanguage].meta;
+    if (metaData) {
+        document.title = "2026 Aura Color Test - " + metaData.title;
+        
+        // Open Graph
+        updateMetaTag('property', 'og:title', metaData.title);
+        updateMetaTag('property', 'og:description', metaData.description);
+        
+        // Twitter
+        updateMetaTag('name', 'twitter:title', metaData.title);
+        updateMetaTag('name', 'twitter:description', metaData.description);
+        
+        // Primary Meta
+        updateMetaTag('name', 'title', "2026 Aura Color Test - " + metaData.title);
+        updateMetaTag('name', 'description', metaData.description);
+    }
+}
+
+// 메타 태그 도우미 함수
+function updateMetaTag(attrName, attrValue, content) {
+    let element = document.querySelector(`meta[${attrName}="${attrValue}"]`);
+    if (element) {
+        element.setAttribute('content', content);
+    } else {
+        // 존재하지 않으면 생성
+        element = document.createElement('meta');
+        element.setAttribute(attrName, attrValue);
+        element.setAttribute('content', content);
+        document.head.appendChild(element);
+    }
 }
 
 // 현재 언어의 번역 가져오기
