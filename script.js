@@ -348,33 +348,65 @@ async function shareResult() {
     const shareUrl = window.location.href;
     await drawResultToCanvas();
     let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
-    if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    const canvas = document.getElementById('result-canvas');
+
+    // 1. 시스템 공유 시도 (모바일 및 지원하는 데스크탑)
+    if (navigator.share) {
         try {
-            const canvas = document.getElementById('result-canvas');
             canvas.toBlob(async (blob) => {
-                const file = new File([blob], 'my-aura.png', { type: 'image/png' });
+                const file = new File([blob], 'my-2026-aura.png', { type: 'image/png' });
                 const shareData = { title: '2026 Aura Color Test', text: shareText, url: shareUrl };
-                if (navigator.canShare && navigator.canShare({ files: [file] })) shareData.files = [file];
-                await navigator.share(shareData);
-            });
-        } catch (err) { fallbackShare(shareText, shareUrl); }
-    } else fallbackShare(shareText, shareUrl);
+                
+                // 파일 공유 가능 여부 체크
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    shareData.files = [file];
+                }
+                
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    if (err.name !== 'AbortError') fallbackShare(shareText, shareUrl, canvas);
+                }
+            }, 'image/png');
+            return;
+        } catch (err) {
+            console.error("Native share failed:", err);
+        }
+    }
+    
+    // 2. 지원하지 않는 환경일 경우 폴백 실행
+    fallbackShare(shareText, shareUrl, canvas);
 }
 
-function fallbackShare(text, url) {
+async function fallbackShare(text, url, canvas) {
     const fullText = `${text}\n${url}`;
     const copiedMsg = translations[currentLanguage].linkCopied || translations['en'].linkCopied;
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(fullText).then(() => alert(copiedMsg)).catch(() => {
-            const textArea = document.createElement("textarea");
-            textArea.value = fullText;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert(copiedMsg);
-        });
-    } else alert(fullText);
+    
+    // 데스크탑 환경: 이미지 클립보드 복사 시도
+    let imageCopied = false;
+    if (canvas && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        try {
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            const data = [new ClipboardItem({ [blob.type]: blob })];
+            await navigator.clipboard.write(data);
+            imageCopied = true;
+        } catch (err) {
+            console.error("Clipboard image copy failed:", err);
+        }
+    }
+
+    // 텍스트 복사 및 알림
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullText).then(() => {
+            if (imageCopied) {
+                alert(currentLanguage === 'ko' ? "결과 이미지와 링크가 복사되었습니다! 대화창에 붙여넣기(Ctrl+V)하여 공유해보세요." : "Result image and link copied to clipboard!");
+            } else {
+                alert(copiedMsg);
+            }
+        }).catch(() => alert(fullText));
+    } else {
+        alert(fullText);
+    }
 }
 
 function retryTest() {
