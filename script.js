@@ -119,30 +119,30 @@ const answerScores = [
     ]
 ];
 
-// 컬러별 상세 정보 (업로드된 이미지 적용)
+// 컬러별 상세 정보 (업로드된 이미지 경로 적용, 캐시 방지 버전 추가)
 const colorData = {
     coolBlue: {
-        image: 'cool-blue.png',
+        image: 'cool-blue.png?v=2',
         hex: '#3b82f6'
     },
     vampPurple: {
-        image: 'vamp-purple.png',
+        image: 'vamp-purple.png?v=2',
         hex: '#8b5cf6'
     },
     solarGold: {
-        image: 'solar-gold.png',
+        image: 'solar-gold.png?v=2',
         hex: '#fbbf24'
     },
     forestGreen: {
-        image: 'forest-green.png',
+        image: 'forest-green.png?v=2',
         hex: '#10b981'
     },
     softRose: {
-        image: 'soft-rose.png',
+        image: 'soft-rose.png?v=2',
         hex: '#f472b6'
     },
     midnightBlack: {
-        image: 'midnight-black.png',
+        image: 'midnight-black.png?v=2',
         hex: '#334155'
     }
 };
