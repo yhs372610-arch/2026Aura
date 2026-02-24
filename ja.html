@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>2026 Aura Color Test - あなたの2026年オーラカラーは？</title>
+    <meta name="title" content="2026 Aura Color Test - あなたの2026年オーラカラーは？">
+    <meta name="description" content="心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://2026aura.pages.dev/ja.html">
+    <meta property="og:site_name" content="2026 Aura Color Test">
+    <meta property="og:title" content="あなたの2026年オー라カラーは？">
+    <meta property="og:description" content="心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！">
+    <meta property="og:image" content="https://2026aura.pages.dev/og-image.png?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://2026aura.pages.dev/ja.html">
+    <meta property="twitter:title" content="あなたの2026年オー라カラーは？">
+    <meta property="twitter:description" content="心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！">
+    <meta property="twitter:image" content="https://2026aura.pages.dev/og-image.png?v=3">
+
+    <!-- SEO -->
+    <meta name="keywords" content="aura test, personality test, 2026 aura, color personality, energy test, オーラカラーテスト, 性格テスト">
+    
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-start-lang="ja">
+    <!-- 언어 선택 드롭다운 -->
+    <div class="language-dropdown" id="language-dropdown">
+        <button class="dropdown-btn" id="dropdown-main-btn">
+            <span class="current-lang-text">JA</span>
+            <span class="arrow-down">▼</span>
+        </button>
+        <div class="dropdown-content" id="dropdown-menu">
+            <button class="lang-option" data-lang="ko">한국어</button>
+            <button class="lang-option" data-lang="en">English</button>
+            <button class="lang-option" data-lang="ja">日本語</button>
+            <button class="lang-option" data-lang="es">Español</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 홈 화면 -->
+        <div id="home-screen" class="screen active">
+            <div class="home-content">
+                <div class="sparkle">✨</div>
+                <h1 class="main-title" data-i18n="home.title">2026 Aura Color Test</h1>
+                <p class="subtitle" data-i18n="home.subtitle">Discover your energy color through psychology-based personality analysis</p>
+                <div class="ad-space"><div class="ad-placeholder">Ad Space 1</div></div>
+                <button class="start-btn" onclick="startTest()" data-i18n="home.startButton">Start Test</button>
+                <div class="info-box"><p data-i18n="home.info">⏱️ 2 minutes | 📝 15 questions | 🎨 6 color results</p></div>
+            </div>
+        </div>
+
+        <!-- 질문 화면 -->
+        <div id="question-screen" class="screen">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-text"><span id="current-question">1</span>/15</div>
+            </div>
+            <div class="question-card">
+                <h2 class="question-title" id="question-title"></h2>
+                <div class="answers-container" id="answers-container"></div>
+            </div>
+            <div id="mid-ad" class="ad-space" style="display:none; margin-top: 30px;"><div class="ad-placeholder">Ad Space 2</div></div>
+        </div>
+
+        <!-- 로딩 화면 -->
+        <div id="loading-screen" class="screen">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <h2 class="loading-title" data-i18n="loading.analyzing">Analyzing your aura...</h2>
+                <p class="loading-step" id="loading-step" data-i18n="loading.step1">Extracting energy patterns...</p>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <div class="result-color-display" id="result-color-display"></div>
+                <h1 class="result-title" id="result-title"></h1>
+                <div class="result-subtitle" id="result-subtitle"></div>
+                <div class="keywords" id="keywords"></div>
+                <div class="ad-space"><div class="ad-placeholder">Ad Space 3</div></div>
+                <div class="result-details">
+                    <h3 data-i18n="result.aboutTitle">About Your Aura</h3>
+                    <p id="result-description"></p>
+                    <h3 data-i18n="result.strengthsTitle">Your Strengths</h3>
+                    <ul id="strengths-list"></ul>
+                    <h3 data-i18n="result.recommendationsTitle">2026 Recommendations</h3>
+                    <ul id="recommendations-list"></ul>
+                </div>
+                <div class="action-buttons">
+                    <button class="download-btn" onclick="downloadResult()" data-i18n="result.downloadButton">📥 Download Image</button>
+                    <button class="share-btn" onclick="shareResult()" data-i18n="result.shareButton">📤 Share Result</button>
+                </div>
+                <div class="ad-space"><div class="ad-placeholder">Ad Space 4</div></div>
+                <button class="retry-btn" onclick="retryTest()" data-i18n="result.retryButton">🔄 Try Again</button>
+            </div>
+        </div>
+    </div>
+    <canvas id="result-canvas" style="display:none;"></canvas>
+    <footer><p>&copy; 2026 Aura Color Test | <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a> | <a href="#" data-i18n="footer.contact">Contact</a></p></footer>
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

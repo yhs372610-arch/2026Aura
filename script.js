@@ -31,6 +31,12 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. 시작 언어 결정 (HTML의 data-start-lang 우선)
+    const bodyStartLang = document.body.getAttribute('data-start-lang');
+    if (bodyStartLang) {
+        currentLanguage = bodyStartLang;
+    }
+
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
     
@@ -60,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const textEl = document.querySelector('.current-lang-text');
     if (textEl) textEl.textContent = currentLanguage.toUpperCase();
 
+    // URL 파라미터 확인
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
     if (sharedResult && colorData[sharedResult]) {
@@ -96,7 +103,6 @@ function displayQuestion() {
         answersContainer.appendChild(button);
     });
     updateProgress();
-    document.getElementById('mid-ad').style.display = (currentQuestion === 7) ? 'block' : 'none';
 }
 
 function selectAnswer(answerIndex) {
@@ -110,8 +116,10 @@ function selectAnswer(answerIndex) {
 
 function updateProgress() {
     const progress = ((currentQuestion + 1) / 15) * 100;
-    document.getElementById('progress-bar').style.width = progress + '%';
-    document.getElementById('current-question').textContent = currentQuestion + 1;
+    const bar = document.getElementById('progress-bar');
+    if (bar) bar.style.width = progress + '%';
+    const text = document.getElementById('current-question');
+    if (text) text.textContent = currentQuestion + 1;
 }
 
 function showLoadingScreen() {
@@ -138,49 +146,66 @@ function showResult() {
             resultColor = color;
         }
     }
-    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?r=' + resultColor;
+    
+    // 현재 언어에 맞는 파일명을 포함하여 URL 업데이트
+    let fileName = currentLanguage === 'ko' ? '' : currentLanguage + '.html';
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\/[^\/]*$/, '/') + fileName + '?r=' + resultColor;
     window.history.pushState({path:newUrl}, '', newUrl);
+    
     showResultWithKey(resultColor);
 }
 
 function showResultWithKey(resultColor) {
     const result = translations[currentLanguage].colors[resultColor];
     const colorInfo = colorData[resultColor];
-    document.getElementById('result-color-display').style.background = `url('${colorInfo.image}') center/cover no-repeat`;
+    const displayEl = document.getElementById('result-color-display');
+    if (displayEl) displayEl.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
+    
     document.getElementById('result-title').textContent = result.name;
     document.getElementById('result-subtitle').textContent = result.subtitle;
+    
     const keywordsContainer = document.getElementById('keywords');
-    keywordsContainer.innerHTML = '';
-    result.keywords.forEach(keyword => {
-        const tag = document.createElement('div');
-        tag.className = 'keyword-tag';
-        tag.textContent = keyword;
-        keywordsContainer.appendChild(tag);
-    });
+    if (keywordsContainer) {
+        keywordsContainer.innerHTML = '';
+        result.keywords.forEach(keyword => {
+            const tag = document.createElement('div');
+            tag.className = 'keyword-tag';
+            tag.textContent = keyword;
+            keywordsContainer.appendChild(tag);
+        });
+    }
+    
     document.getElementById('result-description').textContent = result.description;
+    
     const strengthsList = document.getElementById('strengths-list');
-    strengthsList.innerHTML = '';
-    result.strengths.forEach(s => {
-        const li = document.createElement('li');
-        li.textContent = s;
-        strengthsList.appendChild(li);
-    });
+    if (strengthsList) {
+        strengthsList.innerHTML = '';
+        result.strengths.forEach(s => {
+            const li = document.createElement('li');
+            li.textContent = s;
+            strengthsList.appendChild(li);
+        });
+    }
+    
     const recommendationsList = document.getElementById('recommendations-list');
-    recommendationsList.innerHTML = '';
-    result.recommendations.forEach(r => {
-        const li = document.createElement('li');
-        li.textContent = r;
-        recommendationsList.appendChild(li);
-    });
+    if (recommendationsList) {
+        recommendationsList.innerHTML = '';
+        result.recommendations.forEach(r => {
+            const li = document.createElement('li');
+            li.textContent = r;
+            recommendationsList.appendChild(li);
+        });
+    }
+    
     window.currentResult = { color: resultColor, name: result.name, subtitle: result.subtitle, keywords: result.keywords, colorInfo: colorInfo };
     showScreen('result-screen');
     setTimeout(drawResultToCanvas, 500);
 }
 
-// 캔버스 그리기 함수를 Promise로 감싸서 완료를 기다릴 수 있게 함
 function drawResultToCanvas() {
     return new Promise((resolve) => {
         const canvas = document.getElementById('result-canvas');
+        if (!canvas) return resolve();
         const ctx = canvas.getContext('2d');
         const result = window.currentResult;
         if (!result) return resolve();
@@ -251,9 +276,9 @@ async function downloadResult() {
 
 async function shareResult() {
     const result = window.currentResult;
+    // 현재 주소(언어별 HTML 파일 경로가 포함됨)를 공유
     const shareUrl = window.location.href;
     
-    // 공유 전 이미지를 최신 언어 상태로 다시 그림
     await drawResultToCanvas();
     
     let shareText = translations[currentLanguage].shareMessage || translations['en'].shareMessage;
