@@ -378,9 +378,11 @@ async function shareResult() {
 
 function fallbackShare(text, url) {
     const fullText = `${text}\n${url}`;
+    const copiedMsg = translations[currentLanguage].linkCopied || translations['en'].linkCopied;
+    
     if (navigator.clipboard) {
         navigator.clipboard.writeText(fullText).then(() => {
-            alert(currentLanguage === 'ko' ? '결과 링크가 복사되었습니다! 친구들에게 공유해보세요.' : (currentLanguage === 'ja' ? '結果リンクがコピーされました！友達に共有してみてください。' : 'Result link copied! Share it with your friends.'));
+            alert(copiedMsg);
         }).catch(() => {
             const textArea = document.createElement("textarea");
             textArea.value = fullText;
@@ -388,7 +390,7 @@ function fallbackShare(text, url) {
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert(currentLanguage === 'ko' ? '결과 링크가 복사되었습니다!' : 'Link copied!');
+            alert(copiedMsg);
         });
     } else {
         alert(fullText);

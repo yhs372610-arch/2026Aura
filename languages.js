@@ -6,6 +6,7 @@ const translations = {
             description: "Discover your energy color through psychology-based personality analysis. Take the 2026 Aura Test!"
         },
         shareMessage: "My 2026 Aura Color is [COLOR]! ✨ Discover your energy color now!",
+        linkCopied: "Result link copied! Share it with your friends.",
         home: {
             title: "2026 Aura Color Test",
             subtitle: "Discover your energy color through psychology-based personality analysis",
@@ -284,6 +285,7 @@ const translations = {
             description: "심리학 기반 성격 분석으로 당신의 2026년 에너지 컬러를 찾아보세요!"
         },
         shareMessage: "나의 2026년 아우라 컬러는 [COLOR]! ✨ 당신의 에너지 컬러도 지금 확인해보세요!",
+        linkCopied: "결과 링크가 복사되었습니다! 친구들에게 공유해보세요.",
         home: {
             title: "2026 나의 아우라 컬러",
             subtitle: "심리학 기반 성격 분석으로 당신의 에너지 컬러를 찾아보세요",
@@ -558,15 +560,16 @@ const translations = {
     },
     ja: {
         meta: {
-            title: "あなたの2026年オー라カラーは？",
+            title: "あなたの2026年オーラカラーは？",
             description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
         },
-        shareMessage: "私の2026年のオーラカラーは [COLOR]! ✨ あなたのエネルギーカラーも今すぐチェック！",
+        shareMessage: "私の2026年のオーラカラーは [COLOR]! ✨ あなたのエネルギーカラー도 今すぐチェック！",
+        linkCopied: "結果リンクがコピーされました！友達に共有してみてください。",
         home: {
-            title: "2026 オー라カラーテスト",
+            title: "2026 オーラカラーテスト",
             subtitle: "心理学に基づいた性格分析であなたのエネルギーカラーを発見",
             startButton: "テスト開始",
-            info: "⏱️ 2分 | 📝 15問 | 🎨 6色の結果"
+            info: "⏱️ 2분 | 📝 15問 | 🎨 6色の結果"
         },
         questions: [
             {
@@ -588,7 +591,7 @@ const translations = {
                 ]
             },
             {
-                q: "2026年の理想的な週末은？",
+                q: "2026年の理想的な週末は？",
                 a: [
                     "個人プロジェクトを計画し実行",
                     "愛する人たちと過ごす",
@@ -602,7 +605,7 @@ const translations = {
                     "論理と実質的な結果",
                     "他人の感情への影響",
                     "直感と情熱に従う",
-                    "深い内省と知恵"
+                    "深い内省と知혜"
                 ]
             },
             {
@@ -642,12 +645,12 @@ const translations = {
                 ]
             },
             {
-                q: "人々가 あなたを表現するとき、よく言われるのは？",
+                q: "人々があなたを表現するとき、よく言われるのは？",
                 a: [
                     "信頼できて組織的",
                     "思いやりがあり共感力が高い",
                     "エネルギッシュでインスピレーションを与える",
-                    "賢明で内省적"
+                    "賢明で内省的"
                 ]
             },
             {
@@ -663,7 +666,7 @@ const translations = {
                 q: "変化に直面したとき、あなたは？",
                 a: [
                     "慎重な計画で適応",
-                    "다른 사람이 어떻게 대처하는지 확인",
+                    "他の人がどう対処しているか確認",
                     "興奮して受け入れる",
                     "より深い意味を内省"
                 ]
@@ -680,7 +683,7 @@ const translations = {
             {
                 q: "2026年末に感じたい感情は？",
                 a: [
-                    "達成感と成功",
+                    "達成感과 성공",
                     "愛されつながっている",
                     "生きていて充実",
                     "平和で賢明"
@@ -691,8 +694,8 @@ const translations = {
                 a: [
                     "秩序とパターンを鑑賞",
                     "最もつながりを感じる場所",
-                    "活力とインスピレーションを与える",
-                    "内省に不可欠"
+                    "活力과 인스피레이션",
+                    "内省에 필수적"
                 ]
             },
             {
@@ -722,8 +725,8 @@ const translations = {
         colors: {
             coolBlue: {
                 name: "クールブルー",
-                subtitle: "冷静なストラテジ스트",
-                keywords: ["戦略적", "冷静", "信頼"],
+                subtitle: "冷静なストラテジスト",
+                keywords: ["戦略的", "冷静", "信頼"],
                 description: "あなたのオーラは冷静で落ち着いたエネルギーを放っています。論理と明晰さで人生に取り組み、自然な問題解決者です。2026年、あなたの安定した存在感が最大の強みになります。",
                 strengths: [
                     "戦略的計画と分析に優れる",
@@ -734,7 +737,7 @@ const translations = {
                 recommendations: [
                     "慎重な計画が必要なプロジェクトをリード",
                     "執筆や教育を通じて洞察を共有",
-                    "論理と創造적探求のバランス",
+                    "論理と創造的探求のバランス",
                     "混沌とした環境に穏やかな空間を創造"
                 ]
             },
@@ -742,25 +745,25 @@ const translations = {
                 name: "ヴァンプパープル",
                 subtitle: "神秘的なクリエイター",
                 keywords: ["神秘的", "創造的", "強烈"],
-                description: "あなたのオーラは魅惑的で神秘的なエネルギーを持っています。暗闇の中に美を、複雑さの中に深さを見出します.あなたの創造的な強烈さは、他者をあなたの独特な世界に引き込みます。",
+                description: "あなたのオーラは魅惑적이고 신비로운 에너지를 담고 있습니다. 暗闇の中に美を, 複雑さの中に深さを見出します. あなたの創造的な強烈さは, 他者をあなたの独特な世界に引き込みます.",
                 strengths: [
                     "深い創造的비전과 예술적 재능",
-                    "복잡함과 뉘앙스에 편안함",
+                    "複雑さとニュアンスに快適",
                     "好奇心を刺激する磁気的存在感",
                     "暗闇を美に変換"
                 ],
                 recommendations: [
-                    "独自の創造적 스타일 포용",
-                    "Boldly share your art with the world",
+                    "独自の創造的スタイルを受け入れる",
+                    "大胆に芸術を世界と共有",
                     "インスピレーションを与える雰囲気のある空間を創造",
-                    "고딕, 로맨틱, 드라마틱한 미학 탐구"
+                    "ゴシック, ロマンチック, ドラマチック한 미학 탐구"
                 ]
             },
             solarGold: {
                 name: "ソーラーゴールド",
                 subtitle: "輝くリーダー",
                 keywords: ["エネルギッシュ", "インスパイア", "自信"],
-                description: "あなたのオーラは太陽のように輝き、周囲のすべてを照らします。感染性のあるエネルギーと楽観主義で、どこへ行っても温かさをもたらす生まれつきのリーダーです。",
+                description: "あなたのオーラは太陽のように輝き, 周囲のすべてを照らします. 感染性のあるエネルギーと楽観主義で, どこへ行っても温かさをもたらす生まれつきのリーダーです.",
                 strengths: [
                     "生まれつきのカリスマとリーダーシップ能力",
                     "他者に活力と動機を与える",
@@ -778,7 +781,7 @@ const translations = {
                 name: "フォレストグリーン",
                 subtitle: "バランスのとれた調和者",
                 keywords: ["バランス", "安定", "平和"],
-                description: "あなたのオーラは自然で調和のとれたエネルギーで流れています。森のように、避難所とバランスを提供します.真の強さは平衡と自然とのつながりから来ることを理解しています。",
+                description: "あなたのオーラは自然で調和のとれたエネルギーで流れています. 森のように, 避難所とバランスを提供します. 真の強さは平衡と自然とのつながりから来ることを理解しています.",
                 strengths: [
                     "調和とバランスの創造に卓越",
                     "安定した確かな存在感",
@@ -796,10 +799,10 @@ const translations = {
                 name: "ソフトローズ",
                 subtitle: "慈悲深いヒーラー",
                 keywords: ["共感的", "育む", "愛"],
-                description: "あなたのオーラは優しく癒すエネルギーで輝いています。深い共感の稀な才能を持ち、他者が本当に見られ、ケアされていると感じさせます.あなたの存在自体が癒しの形です。",
+                description: "あなたのオーラは優しく癒すエネルギーで輝いています. 深い共感の稀な才能を持ち, 他者が本当に見られ, ケアされていると感じさせます. あなたの存在自体が癒しの形です.",
                 strengths: [
                     "深い感情的知性と共感能力",
-                    "慰め癒す生まれつきの能力",
+                    "慰め癒す生まれつき의 능력",
                     "脆弱性のための安全な空間を創造",
                     "すべての人の最高を見る"
                 ],
@@ -814,7 +817,7 @@ const translations = {
                 name: "ミッドナイトブラック",
                 subtitle: "深い哲学者",
                 keywords: ["内省的", "賢明", "深遠"],
-                description: "あなたのオーラは真夜中の深さを持ち、そこから最も偉大な洞察が生まれます。表面を超えた意味を求め、瞑想的な性質は他者が見逃す真実を明らかにします。",
+                description: "あなたのオーラは真夜中の深さを持ち, そこから最も偉大な洞察が生まれます. 表面を超えた意味を求め, 瞑想的な性質は他者が見逃す真実を明らかにします.",
                 strengths: [
                     "深遠な哲学的で分析的思考",
                     "複雑さと曖昧さに快適",
@@ -824,7 +827,7 @@ const translations = {
                 recommendations: [
                     "執筆や教育を通じて洞察を共有",
                     "孤独と深い思考のための時間を作る",
-                    "哲学、心理学、またはスピリチュアリティを探求",
+                    "哲学, 心理学, またはスピリチュアリティを探求",
                     "直感と内なる知恵を信頼"
                 ]
             }
@@ -840,6 +843,7 @@ const translations = {
             description: "¡Descubre tu color de energía para el 2026 a través del análisis de personalidad basado en psicología!"
         },
         shareMessage: "¡Mi color de aura para 2026 es [COLOR]! ✨ ¡Descubre tu color de energía ahora!",
+        linkCopied: "¡Enlace del resultado copiado! Compártelo con tus amigos.",
         home: {
             title: "Test de Color de Aura 2026",
             subtitle: "Descubre tu color de energía a través del análisis de personalidad basado en psicología",
