@@ -307,7 +307,11 @@ function drawResultToCanvas() {
     ctx.fillStyle = 'white';
     ctx.font = 'bold 60px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('2026 Aura Color', canvas.width / 2, 150);
+    
+    // 번역된 캔버스 제목 사용
+    const canvasTitle = translations[currentLanguage].canvasTitle || translations['en'].canvasTitle;
+    ctx.fillText(canvasTitle, canvas.width / 2, 150);
+    
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = function() {
