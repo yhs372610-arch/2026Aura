@@ -1,1 +1,790 @@
-/* Add styles here */
+/* ========== 모바일 최우선 설계 ========== */
+
+/* 전역 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* 모바일 탭 하이라이트 제거 */
+}
+
+:root {
+    /* 안전 영역 (iPhone 노치 대응) */
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+    --safe-area-left: env(safe-area-inset-left);
+    --safe-area-right: env(safe-area-inset-right);
+}
+
+html {
+    /* 부드러운 스크롤 */
+    scroll-behavior: smooth;
+    /* iOS 오버스크롤 방지 */
+    overscroll-behavior: none;
+    /* 폰트 크기 자동 조절 방지 (iOS) */
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+    position: relative;
+    
+    /* Safe Area 적용 */
+    padding-top: var(--safe-area-top);
+    padding-bottom: var(--safe-area-bottom);
+    padding-left: var(--safe-area-left);
+    padding-right: var(--safe-area-right);
+}
+
+/* ========== 언어 선택 버튼 (모바일 최적화) ========== */
+.language-selector {
+    position: fixed;
+    top: calc(10px + var(--safe-area-top)); /* 노치 고려 */
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    max-width: 180px;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    padding: 10px 14px; /* 터치 영역 확보 */
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    
+    /* 터치 반응 개선 */
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    
+    /* 최소 터치 영역 (44x44px - Apple 가이드라인) */
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.lang-btn:active {
+    transform: scale(0.95);
+    background: #667eea;
+    color: white;
+}
+
+/* ========== 컨테이너 (모바일 우선) ========== */
+.container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    /* 언어 버튼 영역 확보 */
+    padding-top: calc(60px + var(--safe-area-top));
+}
+
+/* ========== 화면 전환 애니메이션 ========== */
+.screen {
+    display: none;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== 홈 화면 (모바일 최적화) ========== */
+.home-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-top: 20px;
+    /* 부드러운 터치 스크롤 */
+    -webkit-overflow-scrolling: touch;
+}
+
+.sparkle {
+    font-size: 50px;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.15) rotate(180deg);
+    }
+}
+
+.main-title {
+    font-size: clamp(28px, 8vw, 48px); /* 반응형 폰트 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 15px 0;
+    font-weight: 800;
+    line-height: 1.2;
+    word-break: keep-all; /* 한글 단어 단위로 줄바꿈 */
+}
+
+.subtitle {
+    font-size: clamp(14px, 4vw, 18px);
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    padding: 0 10px;
+    word-break: keep-all;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: clamp(16px, 4.5vw, 20px);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 320px;
+    
+    /* 터치 최적화 */
+    touch-action: manipulation;
+    user-select: none;
+    min-height: 56px; /* 충분한 터치 영역 */
+}
+
+.start-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.6);
+}
+
+.info-box {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f8f9ff;
+    border-radius: 15px;
+    color: #555;
+    font-size: clamp(13px, 3.5vw, 15px);
+}
+
+/* ========== 진행률 바 (모바일 최적화) ========== */
+.progress-container {
+    background: white;
+    border-radius: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: calc(10px + var(--safe-area-top));
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.progress-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 700;
+    color: #667eea;
+    font-size: clamp(15px, 4vw, 18px);
+}
+
+/* ========== 질문 카드 (모바일 최적화) ========== */
+.question-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+.question-title {
+    font-size: clamp(18px, 5vw, 24px);
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.5;
+    font-weight: 700;
+    word-break: keep-all;
+    padding: 0 5px;
+}
+
+.answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.answer-btn {
+    background: #f8f9ff;
+    border: 2px solid #e0e7ff;
+    padding: 18px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: clamp(14px, 3.8vw, 16px);
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #333;
+    font-weight: 600;
+    line-height: 1.5;
+    word-break: keep-all;
+    
+    /* 터치 최적화 */
+    touch-action: manipulation;
+    user-select: none;
+    min-height: 60px; /* 충분한 터치 영역 */
+    
+    /* 터치 피드백 개선 */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 터치 시 물결 효과 */
+.answer-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.answer-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.answer-btn:active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    transform: scale(0.98);
+}
+
+/* ========== 로딩 화면 (모바일 최적화) ========== */
+.loading-content {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 25px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-top: 40px;
+}
+
+.spinner {
+    width: 70px;
+    height: 70px;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 25px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-title {
+    font-size: clamp(22px, 6vw, 28px);
+    color: #667eea;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.loading-step {
+    font-size: clamp(14px, 4vw, 16px);
+    color: #666;
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+/* ========== 결과 화면 (모바일 최적화) ========== */
+.result-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.result-color-display {
+    width: clamp(120px, 35vw, 150px);
+    height: clamp(120px, 35vw, 150px);
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.result-title {
+    font-size: clamp(32px, 9vw, 42px);
+    text-align: center;
+    margin-bottom: 8px;
+    font-weight: 800;
+    line-height: 1.2;
+    word-break: keep-all;
+}
+
+.result-subtitle {
+    text-align: center;
+    font-size: clamp(16px, 4.5vw, 20px);
+    color: #666;
+    margin-bottom: 25px;
+    word-break: keep-all;
+}
+
+.keywords {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.keyword-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: clamp(12px, 3.5vw, 14px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    white-space: nowrap;
+}
+
+.result-details {
+    text-align: left;
+    margin-top: 30px;
+    padding: 0 5px;
+}
+
+.result-details h3 {
+    color: #667eea;
+    margin: 25px 0 12px 0;
+    font-size: clamp(18px, 5vw, 22px);
+    font-weight: 700;
+}
+
+.result-details p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: clamp(14px, 4vw, 16px);
+    word-break: keep-all;
+}
+
+.result-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.result-details li {
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    line-height: 1.6;
+    font-size: clamp(13px, 3.8vw, 15px);
+    word-break: keep-all;
+}
+
+.result-details li:last-child {
+    border-bottom: none;
+}
+
+.result-details li::before {
+    content: "✨ ";
+    margin-right: 8px;
+}
+
+/* ========== 버튼들 (모바일 최적화) ========== */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 30px 0;
+    padding: 0 5px;
+}
+
+.download-btn,
+.share-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: clamp(15px, 4vw, 16px);
+    font-weight: 700;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s;
+    
+    /* 터치 최적화 */
+    touch-action: manipulation;
+    user-select: none;
+    width: 100%;
+    min-height: 52px;
+}
+
+.download-btn:active,
+.share-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 15px rgba(102, 126, 234, 0.5);
+}
+
+.retry-btn {
+    background: #f8f9ff;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 16px 35px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: clamp(15px, 4vw, 16px);
+    font-weight: 700;
+    margin-top: 15px;
+    transition: all 0.3s;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* 터치 최적화 */
+    touch-action: manipulation;
+    user-select: none;
+    min-height: 52px;
+}
+
+.retry-btn:active {
+    background: #667eea;
+    color: white;
+    transform: scale(0.98);
+}
+
+/* ========== 광고 공간 (모바일 최적화) ========== */
+.ad-space {
+    margin: 25px 0;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ad-placeholder {
+    background: #f0f0f0;
+    padding: 30px 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #999;
+    border: 2px dashed #ddd;
+    width: 100%;
+    font-size: clamp(12px, 3.5vw, 14px);
+}
+
+/* ========== Footer (모바일 최적화) ========== */
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    padding-bottom: calc(25px + var(--safe-area-bottom));
+    color: white;
+    margin-top: 40px;
+    font-size: clamp(12px, 3.5vw, 14px);
+}
+
+footer p {
+    line-height: 1.8;
+    word-break: keep-all;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 8px;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+    display: inline-block;
+    padding: 5px;
+    /* 터치 영역 확보 */
+    min-width: 44px;
+    min-height: 44px;
+    line-height: 34px;
+}
+
+footer a:active {
+    opacity: 1;
+    transform: scale(0.95);
+}
+
+/* ========== 태블릿 최적화 (세로 모드) ========== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        max-width: 600px;
+        padding: 20px 25px;
+    }
+    
+    .home-content,
+    .question-card,
+    .loading-content,
+    .result-content {
+        padding: 50px 35px;
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .download-btn,
+    .share-btn {
+        width: auto;
+        min-width: 200px;
+    }
+}
+
+/* ========== 태블릿 가로 모드 / 데스크탑 ========== */
+@media (min-width: 769px) {
+    .container {
+        max-width: 800px;
+        padding: 20px 30px;
+    }
+    
+    .home-content {
+        padding: 60px 50px;
+        margin-top: 60px;
+    }
+    
+    .question-card {
+        padding: 40px 45px;
+    }
+    
+    .result-content {
+        padding: 50px 45px;
+        margin-top: 60px;
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .download-btn,
+    .share-btn {
+        width: auto;
+        min-width: 220px;
+    }
+    
+    /* 데스크탑에서 호버 효과 활성화 */
+    .answer-btn:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+        transform: translateX(8px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .start-btn:hover,
+    .download-btn:hover,
+    .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+    }
+    
+    .lang-btn:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .retry-btn:hover {
+        background: #667eea;
+        color: white;
+    }
+}
+
+/* ========== 대형 데스크탑 (1920px+) ========== */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 900px;
+    }
+    
+    .main-title {
+        font-size: 52px;
+    }
+    
+    .question-title {
+        font-size: 26px;
+    }
+    
+    .result-title {
+        font-size: 46px;
+    }
+}
+
+/* ========== 작은 모바일 (iPhone SE 등) ========== */
+@media (max-width: 375px) {
+    .container {
+        padding: 12px;
+    }
+    
+    .home-content,
+    .question-card,
+    .loading-content,
+    .result-content {
+        padding: 30px 18px;
+        border-radius: 18px;
+    }
+    
+    .sparkle {
+        font-size: 40px;
+    }
+    
+    .keywords {
+        gap: 8px;
+    }
+    
+    .keyword-tag {
+        padding: 8px 16px;
+    }
+    
+    .language-selector {
+        top: calc(8px + var(--safe-area-top));
+        right: 8px;
+        gap: 5px;
+    }
+    
+    .lang-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* ========== 가로 모드 (모바일) ========== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .home-content,
+    .loading-content {
+        margin-top: 15px;
+        padding: 30px 20px;
+    }
+    
+    .sparkle {
+        font-size: 35px;
+    }
+    
+    .result-color-display {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .result-content {
+        margin-top: 15px;
+        padding: 30px 20px;
+    }
+}
+
+/* ========== iOS 특수 처리 ========== */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari에서 입력 줌 방지 */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    /* iOS 바운스 스크롤 제거 */
+    body {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .container {
+        height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ========== 접근성 개선 ========== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========== 다크 모드 지원 (선택사항) ========== */
+@media (prefers-color-scheme: dark) {
+    /* 필요시 다크 모드 스타일 추가 */
+}
+
+/* ========== 프린트 최적화 ========== */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .language-selector,
+    .action-buttons,
+    .ad-space,
+    footer {
+        display: none;
+    }
+}
+
+/* ========== 터치 디바이스 최적화 ========== */
+@media (hover: none) and (pointer: coarse) {
+    /* 모든 호버 효과 제거 (터치 디바이스) */
+    .answer-btn:hover,
+    .start-btn:hover,
+    .download-btn:hover,
+    .share-btn:hover,
+    .retry-btn:hover,
+    .lang-btn:hover {
+        transform: none;
+    }
+}

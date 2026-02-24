@@ -1,14 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 최적화 -->
+    <title>2026 Aura Color Test - Discover Your Energy Color</title>
+    <meta name="description" content="Discover your 2026 aura color through psychology-based personality test. Find your energy color in 2 minutes!">
+    <meta name="keywords" content="aura test, personality test, 2026 aura, color personality, energy test">
+    
+    <!-- SNS 공유 최적화 (Open Graph) -->
+    <meta property="og:title" content="2026 Aura Color Test">
+    <meta property="og:description" content="What's your 2026 energy color? Take this 2-minute test!">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- 트위터 카드 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="2026 Aura Color Test">
+    <meta name="twitter:description" content="Discover your energy color!">
+    
+    <!-- 파비콘 (나중에 추가) -->
+    <link rel="icon" href="favicon.ico">
+    
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 구글 애드센스 (승인 후 여기에 코드 추가) -->
+    <!-- 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ID"
+         crossorigin="anonymous"></script>
+    -->
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <!-- 언어 선택 버튼 -->
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')" class="lang-btn">EN</button>
+        <button onclick="changeLanguage('ko')" class="lang-btn">KO</button>
+        <button onclick="changeLanguage('ja')" class="lang-btn">JA</button>
+        <button onclick="changeLanguage('es')" class="lang-btn">ES</button>
+    </div>
+
+    <!-- 컨테이너 -->
+    <div class="container">
+        
+        <!-- 홈 화면 -->
+        <div id="home-screen" class="screen active">
+            <div class="home-content">
+                <div class="sparkle">✨</div>
+                <h1 class="main-title" data-i18n="home.title">2026 Aura Color Test</h1>
+                <p class="subtitle" data-i18n="home.subtitle">Discover your energy color through psychology-based personality analysis</p>
+                
+                <!-- 광고 위치 1: 시작 전 -->
+                <div class="ad-space">
+                    <!-- 구글 애드센스 광고 삽입 위치 -->
+                    <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT_ID" data-ad-format="auto"></ins> -->
+                    <div class="ad-placeholder">Ad Space 1</div>
+                </div>
+                
+                <button class="start-btn" onclick="startTest()" data-i18n="home.startButton">Start Test</button>
+                
+                <div class="info-box">
+                    <p data-i18n="home.info">⏱️ 2 minutes | 📝 15 questions | 🎨 6 color results</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 질문 화면 -->
+        <div id="question-screen" class="screen">
+            <!-- 진행률 바 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-text"><span id="current-question">1</span>/15</div>
+            </div>
+
+            <!-- 질문 카드 -->
+            <div class="question-card">
+                <h2 class="question-title" id="question-title"></h2>
+                <div class="answers-container" id="answers-container"></div>
+            </div>
+
+            <!-- 광고 위치 2: 질문 8번 후 (스크립트에서 제어) -->
+            <div id="mid-ad" class="ad-space" style="display:none; margin-top: 30px;">
+                <div class="ad-placeholder">Ad Space 2</div>
+            </div>
+        </div>
+
+        <!-- 로딩 화면 -->
+        <div id="loading-screen" class="screen">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <h2 class="loading-title" data-i18n="loading.analyzing">Analyzing your aura...</h2>
+                <p class="loading-step" id="loading-step" data-i18n="loading.step1">Extracting energy patterns...</p>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <div class="result-color-display" id="result-color-display"></div>
+                <h1 class="result-title" id="result-title"></h1>
+                <div class="result-subtitle" id="result-subtitle"></div>
+                
+                <!-- 키워드 -->
+                <div class="keywords" id="keywords"></div>
+                
+                <!-- 광고 위치 3: 결과 중간 -->
+                <div class="ad-space">
+                    <div class="ad-placeholder">Ad Space 3</div>
+                </div>
+                
+                <!-- 상세 설명 -->
+                <div class="result-details">
+                    <h3 data-i18n="result.aboutTitle">About Your Aura</h3>
+                    <p id="result-description"></p>
+                    
+                    <h3 data-i18n="result.strengthsTitle">Your Strengths</h3>
+                    <ul id="strengths-list"></ul>
+                    
+                    <h3 data-i18n="result.recommendationsTitle">2026 Recommendations</h3>
+                    <ul id="recommendations-list"></ul>
+                </div>
+
+                <!-- 다운로드 & 공유 버튼 -->
+                <div class="action-buttons">
+                    <button class="download-btn" onclick="downloadResult()" data-i18n="result.downloadButton">📥 Download Image</button>
+                    <button class="share-btn" onclick="shareResult()" data-i18n="result.shareButton">📤 Share Result</button>
+                </div>
+
+                <!-- 광고 위치 4: 결과 하단 -->
+                <div class="ad-space">
+                    <div class="ad-placeholder">Ad Space 4</div>
+                </div>
+
+                <!-- 재시도 버튼 -->
+                <button class="retry-btn" onclick="retryTest()" data-i18n="result.retryButton">🔄 Try Again</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Canvas (이미지 생성용, 화면에 보이지 않음) -->
+    <canvas id="result-canvas" style="display:none;"></canvas>
+
+    <!-- Footer -->
+    <footer>
+    <p>&copy; 2026 Aura Color Test | <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a> | <a href="#" data-i18n="footer.contact">Contact</a></p>
+</footer>
+
+    <!-- JavaScript 파일 로드 -->
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- 구글 애드센스 자동 광고 활성화 (승인 후) -->
+    <!--
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    -->
 </body>
 </html>
