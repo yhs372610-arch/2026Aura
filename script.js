@@ -33,13 +33,11 @@ const colorData = {
 document.addEventListener('DOMContentLoaded', function() {
     const bodyStartLang = document.body.getAttribute('data-start-lang');
     if (bodyStartLang) currentLanguage = bodyStartLang;
-
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
     if (dropdownBtn) {
         dropdownBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('active'); });
     }
-
     document.querySelectorAll('.lang-option').forEach(option => {
         option.addEventListener('click', () => {
             const lang = option.getAttribute('data-lang');
@@ -50,13 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.currentResult) drawResultToCanvas();
         });
     });
-
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
-
     updatePageLanguage();
     const textEl = document.querySelector('.current-lang-text');
     if (textEl) textEl.textContent = currentLanguage.toUpperCase();
-
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
     if (sharedResult && colorData[sharedResult]) setTimeout(() => showResultWithKey(sharedResult), 100);
@@ -165,28 +160,19 @@ function showResultWithKey(resultColor) {
     setTimeout(drawResultToCanvas, 500);
 }
 
-// 캔버스 텍스트 줄바꿈 도우미 함수
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
     const words = text.split(' ');
     let line = '';
     let testLine = '';
-    let lineCount = 0;
-
     for (let n = 0; words.length > n; n++) {
         testLine = line + words[n] + ' ';
-        const metrics = ctx.measureText(testLine);
-        const testWidth = metrics.width;
-        if (testWidth > maxWidth && n > 0) {
+        if (ctx.measureText(testLine).width > maxWidth && n > 0) {
             ctx.fillText(line, x, y);
             line = words[n] + ' ';
             y += lineHeight;
-            lineCount++;
-        } else {
-            line = testLine;
-        }
+        } else { line = testLine; }
     }
     ctx.fillText(line, x, y);
-    return lineCount;
 }
 
 function drawResultToCanvas() {
@@ -200,7 +186,6 @@ function drawResultToCanvas() {
         canvas.width = 1080;
         canvas.height = 1920;
         
-        // 배경 그라데이션
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         const colorThemes = {
             coolBlue: ['#1e3a8a', '#3b82f6'], vampPurple: ['#4c1d95', '#8b5cf6'],
@@ -213,68 +198,71 @@ function drawResultToCanvas() {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // 상단 제목
         ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
         ctx.font = 'bold 50px Arial';
         ctx.textAlign = 'center';
-        const canvasTitle = translations[currentLanguage].canvasTitle || translations['en'].canvasTitle;
-        ctx.fillText(canvasTitle, canvas.width / 2, 180);
+        ctx.fillText(translations[currentLanguage].canvasTitle || translations['en'].canvasTitle, canvas.width / 2, 180);
         
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = function() {
-            // 아우라 이미지 (중앙 배치)
+            const centerX = canvas.width / 2;
+            const centerY = 550;
+            const radius = 320;
+
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.3)';
-            ctx.shadowBlur = 30;
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, 550, 320, 0, Math.PI * 2);
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
             ctx.closePath();
             ctx.clip();
-            ctx.drawImage(img, canvas.width / 2 - 320, 550 - 320, 640, 640);
+            
+            // 비율 유지하며 꽉 채우기 로직 (Aspect Fill)
+            const imgRatio = img.width / img.height;
+            const targetWidth = radius * 2;
+            const targetHeight = radius * 2;
+            let drawWidth, drawHeight, offsetX, offsetY;
+
+            if (imgRatio > 1) { // 가로가 더 긴 경우
+                drawHeight = targetHeight;
+                drawWidth = img.width * (targetHeight / img.height);
+                offsetX = centerX - drawWidth / 2;
+                offsetY = centerY - radius;
+            } else { // 세로가 더 긴 경우
+                drawWidth = targetWidth;
+                drawHeight = img.height * (targetWidth / img.width);
+                offsetX = centerX - radius;
+                offsetY = centerY - drawHeight / 2;
+            }
+
+            ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
             ctx.restore();
             
-            // 흰색 테두리
             ctx.strokeStyle = 'white';
             ctx.lineWidth = 12;
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, 550, 320, 0, Math.PI * 2);
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
             ctx.stroke();
             
-            // 결과 이름
             ctx.fillStyle = 'white';
             ctx.font = 'bold 110px Arial';
-            ctx.fillText(result.name, canvas.width / 2, 980);
-            
-            // 부제목
+            ctx.fillText(result.name, centerX, 980);
             ctx.font = '50px Arial';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.fillText(result.subtitle, canvas.width / 2, 1070);
-            
-            // 키워드 (가로 정렬)
+            ctx.fillText(result.subtitle, centerX, 1070);
             ctx.font = 'bold 45px Arial';
-            const keywordsText = result.keywords.map(k => `#${k}`).join('  ');
-            ctx.fillText(keywordsText, canvas.width / 2, 1180);
+            ctx.fillText(result.keywords.map(k => `#${k}`).join('  '), centerX, 1180);
 
-            // 중앙 구분선
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
             ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(200, 1250);
-            ctx.lineTo(880, 1250);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(200, 1250); ctx.lineTo(880, 1250); ctx.stroke();
 
-            // 설명 (상세 내용 추가)
             ctx.font = '40px Arial';
             ctx.fillStyle = 'white';
-            const description = result.description;
-            wrapText(ctx, description, canvas.width / 2, 1340, 750, 65);
+            wrapText(ctx, result.description, centerX, 1340, 750, 65);
             
-            // 하단 워터마크 및 안내
             ctx.font = '35px Arial';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.fillText('Check your aura at: 2026-aura.pages.dev', canvas.width / 2, canvas.height - 120);
-            
+            ctx.fillText('Check your aura at: 2026-aura.pages.dev', centerX, canvas.height - 120);
             resolve();
         };
         img.src = result.colorInfo.image;
@@ -294,8 +282,7 @@ async function shareResult() {
     const result = window.currentResult;
     const shareUrl = window.location.href;
     await drawResultToCanvas();
-    let shareText = translations[currentLanguage].shareMessage || translations['en'].shareMessage;
-    shareText = shareText.replace('[COLOR]', result.name);
+    let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
     if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         try {
             const canvas = document.getElementById('result-canvas');
