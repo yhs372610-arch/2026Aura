@@ -85,6 +85,13 @@ function displayQuestion() {
         button.onclick = () => selectAnswer(index);
         answersContainer.appendChild(button);
     });
+    
+    // 첫 번째 질문이 아니면 '이전' 버튼 표시
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+    }
+    
     updateProgress();
 }
 
@@ -95,6 +102,17 @@ function selectAnswer(answerIndex) {
     currentQuestion++;
     if (currentQuestion < 15) displayQuestion();
     else showLoadingScreen();
+}
+
+function goBack() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        const lastAnswerIndex = answers.pop();
+        const scoreMap = answerScores[currentQuestion][lastAnswerIndex];
+        // 이전 질문에서 더해졌던 점수 차감
+        for (let color in scoreMap) scores[color] -= scoreMap[color];
+        displayQuestion();
+    }
 }
 
 function updateProgress() {
