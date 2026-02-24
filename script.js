@@ -119,7 +119,7 @@ const answerScores = [
     ]
 ];
 
-// 컬러별 상세 정보 (캐시 방지 버전 유지)
+// 컬러별 상세 정보
 const colorData = {
     coolBlue: { image: 'cool-blue.png?v=2', hex: '#3b82f6' },
     vampPurple: { image: 'vamp-purple.png?v=2', hex: '#8b5cf6' },
@@ -156,12 +156,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 외부 클릭 시 드롭다운 닫기
     document.addEventListener('click', () => {
-        dropdown.classList.remove('active');
+        if (dropdown) dropdown.classList.remove('active');
     });
 
     // 언어 초기화 및 버튼 텍스트 설정
     updatePageLanguage();
-    document.querySelector('.current-lang-text').textContent = currentLanguage.toUpperCase();
+    if (document.querySelector('.current-lang-text')) {
+        document.querySelector('.current-lang-text').textContent = currentLanguage.toUpperCase();
+    }
 
     // URL 파라미터 확인
     const urlParams = new URLSearchParams(window.location.search);
@@ -346,17 +348,15 @@ function downloadResult() {
     link.click();
 }
 
-// ========== 결과 공유 (PC 대응 및 텍스트 최적화) ==========
 async function shareResult() {
     const result = window.currentResult;
     const shareUrl = window.location.href;
     
-    // 텍스트 최적화 (공백 제거 및 자연스러운 문장)
-    const shareText = currentLanguage === 'ko' 
-        ? `나의 2026년 아우라 컬러는 [${result.name}]! ✨ 당신의 에너지 컬러도 지금 확인해보세요!`
-        : `My 2026 Aura Color is [${result.name}]! ✨ Discover your energy color now!`;
+    // 언어별 맞춤 공유 메시지 가져오기
+    let shareText = translations[currentLanguage].shareMessage || translations['en'].shareMessage;
+    // [COLOR] 부분을 실제 결과 이름으로 교체
+    shareText = shareText.replace('[COLOR]', result.name);
 
-    // 모바일/태블릿 등 Web Share API 지원 기기
     if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         try {
             const canvas = document.getElementById('result-canvas');
@@ -372,7 +372,6 @@ async function shareResult() {
             fallbackShare(shareText, shareUrl);
         }
     } else {
-        // PC 브라우저 또는 모바일에서 공유 실패 시 클립보드 복사
         fallbackShare(shareText, shareUrl);
     }
 }
@@ -381,9 +380,8 @@ function fallbackShare(text, url) {
     const fullText = `${text}\n${url}`;
     if (navigator.clipboard) {
         navigator.clipboard.writeText(fullText).then(() => {
-            alert(currentLanguage === 'ko' ? '결과 링크가 복사되었습니다! 친구들에게 공유해보세요.' : 'Result link copied! Share it with your friends.');
+            alert(currentLanguage === 'ko' ? '결과 링크가 복사되었습니다! 친구들에게 공유해보세요.' : (currentLanguage === 'ja' ? '結果リンクがコピーされました！友達に共有してみてください。' : 'Result link copied! Share it with your friends.'));
         }).catch(() => {
-            // 복사 실패 시 구형 방식 시도
             const textArea = document.createElement("textarea");
             textArea.value = fullText;
             document.body.appendChild(textArea);

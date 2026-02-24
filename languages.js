@@ -5,6 +5,7 @@ const translations = {
             title: "What's Your 2026 Aura Color?",
             description: "Discover your energy color through psychology-based personality analysis. Take the 2026 Aura Test!"
         },
+        shareMessage: "My 2026 Aura Color is [COLOR]! ✨ Discover your energy color now!",
         home: {
             title: "2026 Aura Color Test",
             subtitle: "Discover your energy color through psychology-based personality analysis",
@@ -282,6 +283,7 @@ const translations = {
             title: "나의 2026 오라 컬러는?",
             description: "심리학 기반 성격 분석으로 당신의 2026년 에너지 컬러를 찾아보세요!"
         },
+        shareMessage: "나의 2026년 아우라 컬러는 [COLOR]! ✨ 당신의 에너지 컬러도 지금 확인해보세요!",
         home: {
             title: "2026 나의 아우라 컬러",
             subtitle: "심리학 기반 성격 분석으로 당신의 에너지 컬러를 찾아보세요",
@@ -556,11 +558,12 @@ const translations = {
     },
     ja: {
         meta: {
-            title: "あなたの2026年オーラカラーは？",
+            title: "あなたの2026年オー라カラーは？",
             description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
         },
+        shareMessage: "私の2026年のオーラカラーは [COLOR]! ✨ あなたのエネルギーカラーも今すぐチェック！",
         home: {
-            title: "2026 オーラカラーテスト",
+            title: "2026 オー라カラーテスト",
             subtitle: "心理学に基づいた性格分析であなたのエネルギーカラーを発見",
             startButton: "テスト開始",
             info: "⏱️ 2分 | 📝 15問 | 🎨 6色の結果"
@@ -639,7 +642,7 @@ const translations = {
                 ]
             },
             {
-                q: "人々があなたを表現するとき、よく言われるのは？",
+                q: "人々가 あなたを表現するとき、よく言われるのは？",
                 a: [
                     "信頼できて組織的",
                     "思いやりがあり共感力が高い",
@@ -660,7 +663,7 @@ const translations = {
                 q: "変化に直面したとき、あなたは？",
                 a: [
                     "慎重な計画で適応",
-                    "他の人がどう対処しているか確認",
+                    "다른 사람이 어떻게 대처하는지 확인",
                     "興奮して受け入れる",
                     "より深い意味を内省"
                 ]
@@ -720,7 +723,7 @@ const translations = {
             coolBlue: {
                 name: "クールブルー",
                 subtitle: "冷静なストラテジ스트",
-                keywords: ["戦略的", "冷静", "信頼"],
+                keywords: ["戦略적", "冷静", "信頼"],
                 description: "あなたのオーラは冷静で落ち着いたエネルギーを放っています。論理と明晰さで人生に取り組み、自然な問題解決者です。2026年、あなたの安定した存在感が最大の強みになります。",
                 strengths: [
                     "戦略的計画と分析に優れる",
@@ -739,18 +742,18 @@ const translations = {
                 name: "ヴァンプパープル",
                 subtitle: "神秘的なクリエイター",
                 keywords: ["神秘的", "創造的", "強烈"],
-                description: "あなたのオーラは魅惑的で神秘的なエネルギーを持っています。暗闇の中に美を、複雑さの中に深さを見出します。あなたの創造的な強烈さは、他者をあなたの独特な世界に引き込みます。",
+                description: "あなたのオーラは魅惑的で神秘的なエネルギーを持っています。暗闇の中に美を、複雑さの中に深さを見出します.あなたの創造的な強烈さは、他者をあなたの独特な世界に引き込みます。",
                 strengths: [
-                    "深い創造的ビジョンと芸術的才能",
-                    "複雑さとニュアンスに快適",
+                    "深い創造的비전과 예술적 재능",
+                    "복잡함과 뉘앙스에 편안함",
                     "好奇心を刺激する磁気的存在感",
                     "暗闇を美に変換"
                 ],
                 recommendations: [
-                    "独自の創造的スタイルを受け入れる",
-                    "大胆に芸術を世界と共有",
+                    "独自の創造적 스타일 포용",
+                    "Boldly share your art with the world",
                     "インスピレーションを与える雰囲気のある空間を創造",
-                    "ゴシック、ロマンチック、またはドラマチックな美学を探求"
+                    "고딕, 로맨틱, 드라마틱한 미학 탐구"
                 ]
             },
             solarGold: {
@@ -793,7 +796,7 @@ const translations = {
                 name: "ソフトローズ",
                 subtitle: "慈悲深いヒーラー",
                 keywords: ["共感的", "育む", "愛"],
-                description: "あなたのオーラは優しく癒すエネルギーで輝いています。深い共感の稀な才能を持ち、他者が本当に見られ、ケアされていると感じさせます。あなたの存在自体が癒しの形です。",
+                description: "あなたのオーラは優しく癒すエネルギーで輝いています。深い共感の稀な才能を持ち、他者が本当に見られ、ケアされていると感じさせます.あなたの存在自体が癒しの形です。",
                 strengths: [
                     "深い感情的知性と共感能力",
                     "慰め癒す生まれつきの能力",
@@ -836,6 +839,7 @@ const translations = {
             title: "¿Cuál es tu Color de Aura 2026?",
             description: "¡Descubre tu color de energía para el 2026 a través del análisis de personalidad basado en psicología!"
         },
+        shareMessage: "¡Mi color de aura para 2026 es [COLOR]! ✨ ¡Descubre tu color de energía ahora!",
         home: {
             title: "Test de Color de Aura 2026",
             subtitle: "Descubre tu color de energía a través del análisis de personalidad basado en psicología",
@@ -1140,10 +1144,10 @@ function updatePageLanguage() {
         let value = translations[currentLanguage];
         
         keys.forEach(k => {
-            value = value[k];
+            if (value) value = value[k];
         });
         
-        if (value) {
+        if (value && typeof value === 'string') {
             element.textContent = value;
         }
     });
@@ -1152,16 +1156,10 @@ function updatePageLanguage() {
     const metaData = translations[currentLanguage].meta;
     if (metaData) {
         document.title = "2026 Aura Color Test - " + metaData.title;
-        
-        // Open Graph
         updateMetaTag('property', 'og:title', metaData.title);
         updateMetaTag('property', 'og:description', metaData.description);
-        
-        // Twitter
         updateMetaTag('name', 'twitter:title', metaData.title);
         updateMetaTag('name', 'twitter:description', metaData.description);
-        
-        // Primary Meta
         updateMetaTag('name', 'title', "2026 Aura Color Test - " + metaData.title);
         updateMetaTag('name', 'description', metaData.description);
     }
@@ -1173,7 +1171,6 @@ function updateMetaTag(attrName, attrValue, content) {
     if (element) {
         element.setAttribute('content', content);
     } else {
-        // 존재하지 않으면 생성
         element = document.createElement('meta');
         element.setAttribute(attrName, attrValue);
         element.setAttribute('content', content);
@@ -1185,10 +1182,8 @@ function updateMetaTag(attrName, attrValue, content) {
 function t(key) {
     const keys = key.split('.');
     let value = translations[currentLanguage];
-    
     keys.forEach(k => {
-        value = value[k];
+        if (value) value = value[k];
     });
-    
     return value || key;
 }
