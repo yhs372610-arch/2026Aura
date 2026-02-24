@@ -179,7 +179,8 @@ function showResultWithKey(resultColor) {
     populateAuraTabs();
     
     showScreen('result-screen');
-    setTimeout(drawResultToCanvas, 500);
+    // 결과 화면이 뜨자마자 미리 캔버스를 그려둡니다.
+    setTimeout(drawResultToCanvas, 300);
 }
 
 function populateAuraTabs() {
@@ -263,7 +264,6 @@ function drawResultToCanvas() {
         ctx.fillText(translations[currentLanguage].canvasTitle || translations['en'].canvasTitle, canvas.width / 2, 180);
         
         const img = new Image();
-        // img.crossOrigin = "anonymous"; // Removed to prevent CORS issues with local relative paths
         img.onload = function() {
             const centerX = canvas.width / 2;
             const centerY = 550;
@@ -275,18 +275,17 @@ function drawResultToCanvas() {
             ctx.closePath();
             ctx.clip();
             
-            // 비율 유지하며 꽉 채우기 로직 (Aspect Fill)
             const imgRatio = img.width / img.height;
             const targetWidth = radius * 2;
             const targetHeight = radius * 2;
             let drawWidth, drawHeight, offsetX, offsetY;
 
-            if (imgRatio > 1) { // 가로가 더 긴 경우
+            if (imgRatio > 1) {
                 drawHeight = targetHeight;
                 drawWidth = img.width * (targetHeight / img.height);
                 offsetX = centerX - drawWidth / 2;
                 offsetY = centerY - radius;
-            } else { // 세로가 더 긴 경우
+            } else {
                 drawWidth = targetWidth;
                 drawHeight = img.height * (targetWidth / img.width);
                 offsetX = centerX - radius;
@@ -326,10 +325,7 @@ function drawResultToCanvas() {
             ctx.fillText('Check your aura at: 2026-aura.pages.dev', centerX, canvas.height - 120);
             resolve();
         };
-        img.onerror = function() {
-            console.error("Failed to load aura image for canvas");
-            resolve();
-        };
+        img.onerror = () => resolve();
         img.src = result.colorInfo.image;
     });
 }
@@ -343,71 +339,50 @@ async function downloadResult() {
     link.click();
 }
 
-async function shareResult() {
+function shareResult() {
     const result = window.currentResult;
     const shareUrl = window.location.href;
     const canvas = document.getElementById('result-canvas');
     let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
 
-    // 1. 시스템 공유 시도 (모바일 및 일부 데스크탑)
-    if (navigator.share) {
-        try {
-            canvas.toBlob(async (blob) => {
-                if (!blob) return fallbackShare(shareText, shareUrl, canvas);
-                
-                const file = new File([blob], 'my-2026-aura.png', { type: 'image/png' });
-                const shareData = { title: '2026 Aura Color Test', text: shareText, url: shareUrl };
-                
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    shareData.files = [file];
-                }
-                
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    if (err.name !== 'AbortError') fallbackShare(shareText, shareUrl, canvas);
-                }
-            }, 'image/png');
-            return;
-        } catch (err) {
-            console.error("Native share failed:", err);
-        }
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    // 모바일 네이티브 공유
+    if (isMobile && navigator.share) {
+        canvas.toBlob(async (blob) => {
+            if (!blob) return fallbackShare(shareText, shareUrl, canvas);
+            const file = new File([blob], 'my-aura.png', { type: 'image/png' });
+            const shareData = { title: '2026 Aura Color Test', text: shareText, url: shareUrl, files: [file] };
+            if (navigator.canShare && navigator.canShare(shareData)) {
+                try { await navigator.share(shareData); return; } catch (e) { if (e.name === 'AbortError') return; }
+            }
+            fallbackShare(shareText, shareUrl, canvas);
+        }, 'image/png');
+    } else {
+        // 데스크탑: 즉시 클립보드 복사
+        fallbackShare(shareText, shareUrl, canvas);
     }
-    
-    // 2. 폴백 실행 (데스크탑 등)
-    fallbackShare(shareText, shareUrl, canvas);
 }
 
 function fallbackShare(text, url, canvas) {
     const fullText = `${text}\n${url}`;
-    const copiedMsg = translations[currentLanguage].linkCopied || translations['en'].linkCopied;
+    const copiedMsg = translations[currentLanguage].linkCopied || "Copied!";
     
-    // 데스크탑 클립보드 복사 로직 (가장 안정적인 방식)
+    // 크롬 데스크탑 최적화: ClipboardItem + Promise 방식
     if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
-        try {
-            // 클릭 즉시 ClipboardItem을 생성하여 권한 문제 방지
-            const item = new ClipboardItem({
-                "text/plain": new Blob([fullText], { type: "text/plain" }),
-                "image/png": new Promise((resolve) => {
-                    canvas.toBlob((blob) => resolve(blob), 'image/png');
-                })
-            });
+        const item = new ClipboardItem({
+            "text/plain": new Blob([fullText], { type: "text/plain" }),
+            "image/png": new Promise((resolve) => {
+                canvas.toBlob((blob) => resolve(blob), 'image/png');
+            })
+        });
 
-            navigator.clipboard.write([item]).then(() => {
-                alert(currentLanguage === 'ko' ? 
-                    "결과 이미지와 링크가 클립보드에 복사되었습니다!\n대화창(Ctrl+V)에 붙여넣어 공유해보세요." : 
-                    "Result image and link copied! Paste (Ctrl+V) to share.");
-            }).catch(err => {
-                console.error("Clipboard write failed:", err);
-                copyTextOnly(fullText, copiedMsg);
-            });
-            return;
-        } catch (err) {
-            console.error("Clipboard setup failed:", err);
-        }
+        navigator.clipboard.write([item]).then(() => {
+            alert(currentLanguage === 'ko' ? "결과 이미지와 링크가 복사되었습니다!\n채팅창에 붙여넣기(Ctrl+V) 하세요." : "Result copied to clipboard!");
+        }).catch(() => copyTextOnly(fullText, copiedMsg));
+    } else {
+        copyTextOnly(fullText, copiedMsg);
     }
-
-    copyTextOnly(fullText, copiedMsg);
 }
 
 function copyTextOnly(text, msg) {
