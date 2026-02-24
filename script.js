@@ -380,30 +380,41 @@ async function shareResult() {
 
 async function fallbackShare(text, url, canvas) {
     const fullText = `${text}\n${url}`;
-    const copiedMsg = translations[currentLanguage].linkCopied || translations['en'].linkCopied;
-    
-    // 데스크탑 환경: 이미지 클립보드 복사 시도
-    let imageCopied = false;
+    const copiedTextMsg = translations[currentLanguage].linkCopied || "Link copied!";
+
+    // 1. 데스크탑: 이미지 복사 시도 (가장 권장되는 방식)
     if (canvas && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
         try {
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-            const data = [new ClipboardItem({ [blob.type]: blob })];
-            await navigator.clipboard.write(data);
-            imageCopied = true;
+            if (blob) {
+                // 이미지만 담은 아이템 생성 (호환성 극대화)
+                const data = [new ClipboardItem({ [blob.type]: blob })];
+                await navigator.clipboard.write(data);
+                
+                alert(currentLanguage === 'ko' ? 
+                    "결과 이미지가 복사되었습니다! 대화창에 붙여넣기(Ctrl+V) 하세요.\n(링크는 모바일에서 더 편리하게 공유 가능합니다.)" : 
+                    "Result image copied! Paste (Ctrl+V) to share.");
+                return;
+            }
         } catch (err) {
-            console.error("Clipboard image copy failed:", err);
+            console.error("Image copy failed, falling back to text:", err);
         }
     }
 
-    // 텍스트 복사 및 알림
+    // 2. 이미지 복사 실패 시 또는 지원하지 않는 환경: 텍스트만 복사
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(fullText).then(() => {
-            if (imageCopied) {
-                alert(currentLanguage === 'ko' ? "결과 이미지와 링크가 복사되었습니다! 대화창에 붙여넣기(Ctrl+V)하여 공유해보세요." : "Result image and link copied to clipboard!");
-            } else {
-                alert(copiedMsg);
-            }
-        }).catch(() => alert(fullText));
+            alert(copiedTextMsg);
+        }).catch(() => {
+            // 모든 클립보드 API 실패 시 수동 복사 유도
+            const textArea = document.createElement("textarea");
+            textArea.value = fullText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert(copiedTextMsg);
+        });
     } else {
         alert(fullText);
     }
