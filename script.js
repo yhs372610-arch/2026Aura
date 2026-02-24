@@ -131,17 +131,37 @@ const colorData = {
 
 // ========== 페이지 로드 시 초기화 ==========
 document.addEventListener('DOMContentLoaded', function() {
-    // 언어 버튼 이벤트 리스너
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
+    // 드롭다운 토글 제어
+    const dropdown = document.getElementById('language-dropdown');
+    const dropdownBtn = document.getElementById('dropdown-main-btn');
+    
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+    });
+
+    // 언어 옵션 클릭 이벤트
+    document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
             changeLanguage(lang);
+            
+            // 드롭다운 텍스트 업데이트
+            document.querySelector('.current-lang-text').textContent = lang.toUpperCase();
+            dropdown.classList.remove('active');
+            
             if (window.currentResult) drawResultToCanvas();
         });
     });
 
-    // 언어 초기화
+    // 외부 클릭 시 드롭다운 닫기
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('active');
+    });
+
+    // 언어 초기화 및 버튼 텍스트 설정
     updatePageLanguage();
+    document.querySelector('.current-lang-text').textContent = currentLanguage.toUpperCase();
 
     // URL 파라미터 확인
     const urlParams = new URLSearchParams(window.location.search);

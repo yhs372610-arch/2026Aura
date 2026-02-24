@@ -40,44 +40,92 @@ body {
     padding-right: var(--safe-area-right);
 }
 
-/* ========== 언어 선택 버튼 (모바일 최적화) ========== */
-.language-selector {
+/* ========== 언어 선택 드롭다운 (에고그램 스타일) ========== */
+.language-dropdown {
     position: fixed;
-    top: calc(10px + var(--safe-area-top)); /* 노치 고려 */
-    right: 10px;
+    top: calc(15px + var(--safe-area-top));
+    right: 15px;
     z-index: 1000;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    max-width: 180px;
 }
 
-.lang-btn {
-    background: rgba(255, 255, 255, 0.95);
-    border: none;
-    padding: 10px 14px; /* 터치 영역 확보 */
-    border-radius: 20px;
+.dropdown-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e0e7ff;
+    padding: 10px 16px;
+    border-radius: 30px;
     cursor: pointer;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: all 0.3s;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    
-    /* 터치 반응 개선 */
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    
-    /* 최소 터치 영역 (44x44px - Apple 가이드라인) */
-    min-width: 44px;
-    min-height: 44px;
+    backdrop-filter: blur(5px);
 }
 
-.lang-btn:active {
-    transform: scale(0.95);
-    background: #667eea;
-    color: white;
+.dropdown-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
+
+.arrow-down {
+    font-size: 10px;
+    transition: transform 0.3s;
+}
+
+.language-dropdown.active .arrow-down {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    min-width: 140px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: dropdownFadeIn 0.3s ease-out;
+}
+
+.language-dropdown.active .dropdown-content {
+    display: flex;
+}
+
+@keyframes dropdownFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.lang-option:hover {
+    background: #f0f4ff;
+    color: #667eea;
+}
+
+.lang-option:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 기존 .language-selector 및 .lang-btn 관련 스타일 삭제/수정 */
+.lang-btn { display: none; } /* 기존 코드 호환을 위해 숨김 처리 */
 
 /* ========== 컨테이너 (모바일 우선) ========== */
 .container {
