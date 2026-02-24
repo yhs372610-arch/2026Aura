@@ -490,7 +490,7 @@ body {
 
 .result-details p {
     line-height: 1.8;
-    color: #555;
+    color: #1a1a1a;
     margin-bottom: 20px;
     font-size: clamp(14px, 4vw, 16px);
     word-break: keep-all;
@@ -504,9 +504,10 @@ body {
 .result-details li {
     padding: 14px 0;
     border-bottom: 1px solid #f0f0f0;
-    color: #555;
+    color: #111;
     line-height: 1.6;
     font-size: clamp(13px, 3.8vw, 15px);
+    font-weight: 500;
     word-break: keep-all;
 }
 
