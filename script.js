@@ -159,6 +159,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 언어 자동 감지 및 적용
     updatePageLanguage();
+
+    // URL 파라미터 확인 (공유된 결과가 있는지 확인)
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedResult = urlParams.get('r');
+    if (sharedResult && colorData[sharedResult]) {
+        // 결과 화면 바로 표시
+        showResultWithKey(sharedResult);
+    }
 });
 
 // ========== 화면 전환 함수 ==========
@@ -182,6 +190,10 @@ function startTest() {
         softRose: 0,
         midnightBlack: 0
     };
+    
+    // URL에서 결과 파라미터 제거 (테스트 시작 시)
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:newUrl}, '', newUrl);
     
     showScreen('question-screen');
     displayQuestion();
@@ -286,14 +298,21 @@ function showResult() {
         }
     }
     
-    // 결과 데이터 가져오기
+    // URL 업데이트 (공유 가능하도록)
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?r=' + resultColor;
+    window.history.pushState({path:newUrl}, '', newUrl);
+    
+    showResultWithKey(resultColor);
+}
+
+// 특정 키로 결과 표시 (공유 링크 접속 시 사용)
+function showResultWithKey(resultColor) {
     const result = translations[currentLanguage].colors[resultColor];
     const colorInfo = colorData[resultColor];
     
     // 컬러 이미지 표시
     const colorDisplay = document.getElementById('result-color-display');
     colorDisplay.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
-    colorDisplay.style.borderRadius = '50%'; // 원형 유지
     
     // 제목
     document.getElementById('result-title').textContent = result.name;
@@ -348,13 +367,11 @@ function downloadResult() {
     const canvas = document.getElementById('result-canvas');
     const ctx = canvas.getContext('2d');
     
-    // Canvas 크기 설정 (Instagram Story 최적화: 1080x1920)
     canvas.width = 1080;
     canvas.height = 1920;
     
     const result = window.currentResult;
     
-    // 배경 그라데이션
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     if (result.color === 'coolBlue') {
         gradient.addColorStop(0, '#1e3a8a');
@@ -379,16 +396,13 @@ function downloadResult() {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // 상단 텍스트
     ctx.fillStyle = 'white';
     ctx.font = 'bold 60px Arial';
     ctx.textAlign = 'center';
     ctx.fillText('2026 Aura Color', canvas.width / 2, 150);
     
-    // 아우라 이미지 그리기
     const img = new Image();
     img.onload = function() {
-        // 원형 클리핑 효과
         ctx.save();
         ctx.beginPath();
         ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
@@ -398,35 +412,29 @@ function downloadResult() {
         ctx.drawImage(img, canvas.width / 2 - 250, 450 - 250, 500, 500);
         ctx.restore();
         
-        // 흰색 테두리
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 15;
         ctx.beginPath();
         ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
         ctx.stroke();
         
-        // 결과 이름
         ctx.fillStyle = 'white';
         ctx.font = 'bold 90px Arial';
         ctx.fillText(result.name, canvas.width / 2, 820);
         
-        // 부제목
         ctx.font = '45px Arial';
         ctx.fillText(result.subtitle, canvas.width / 2, 900);
         
-        // 키워드
         let yPos = 1050;
         ctx.font = 'bold 55px Arial';
         result.keywords.forEach((keyword, index) => {
             ctx.fillText(`#${keyword}`, canvas.width / 2, yPos + (index * 90));
         });
         
-        // 하단 워터마크
         ctx.font = '35px Arial';
         ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
         ctx.fillText('aura-color-test.com', canvas.width / 2, canvas.height - 100);
         
-        // 다운로드
         const link = document.createElement('a');
         link.download = `my-2026-aura-${result.color}.png`;
         link.href = canvas.toDataURL('image/png');
@@ -435,23 +443,47 @@ function downloadResult() {
     img.src = result.colorInfo.image;
 }
 
-// ========== 결과 공유 ==========
-function shareResult() {
+// ========== 결과 공유 (개인화 메시지 적용) ==========
+async function shareResult() {
     const result = window.currentResult;
-    const shareText = `My 2026 Aura Color is ${result.name}! 🌟 Find yours at aura-color-test.com`;
-    const shareUrl = window.location.href;
+    const shareUrl = window.location.href; // r=color 파라미터가 포함된 현재 주소
     
+    // 언어별 맞춤 공유 메시지
+    let shareText = '';
+    if (currentLanguage === 'ko') {
+        shareText = `나의 2026년 아우라 컬러는 [${result.name}]! ✨\n당신의 에너지 컬러도 확인해보세요.`;
+    } else {
+        shareText = `My 2026 Aura Color is [${result.name}]! ✨\nDiscover your energy color here.`;
+    }
+
+    // 모바일 기기에서 이미지 파일과 함께 공유 시도
     if (navigator.share) {
-        navigator.share({
-            title: '2026 Aura Color Test',
-            text: shareText,
-            url: shareUrl
-        }).then(() => {
-            console.log('공유 성공');
-        }).catch(err => {
-            console.log('공유 취소 또는 오류', err);
+        try {
+            const canvas = document.getElementById('result-canvas');
+            const dataUrl = canvas.toDataURL('image/png');
+            const blob = await (await fetch(dataUrl)).blob();
+            const file = new File([blob], 'my-aura.png', { type: 'image/png' });
+
+            // 파일 공유를 지원하는지 확인
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: '2026 Aura Color Test',
+                    text: shareText,
+                    url: shareUrl
+                });
+            } else {
+                // 파일 공유 미지원 시 텍스트만 공유
+                await navigator.share({
+                    title: '2026 Aura Color Test',
+                    text: shareText,
+                    url: shareUrl
+                });
+            }
+        } catch (err) {
+            console.log('공유 실패:', err);
             fallbackShare(shareText, shareUrl);
-        });
+        }
     } else {
         fallbackShare(shareText, shareUrl);
     }
@@ -462,7 +494,7 @@ function fallbackShare(text, url) {
     const fullText = `${text}\n${url}`;
     if (navigator.clipboard) {
         navigator.clipboard.writeText(fullText).then(() => {
-            alert(t('result.shareButton') + ' - Link copied to clipboard!');
+            alert(currentLanguage === 'ko' ? '결과가 클립보드에 복사되었습니다!' : 'Result copied to clipboard!');
         });
     } else {
         const textArea = document.createElement('textarea');
@@ -471,7 +503,7 @@ function fallbackShare(text, url) {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        alert('Link copied to clipboard!');
+        alert(currentLanguage === 'ko' ? '복사되었습니다!' : 'Copied!');
     }
 }
 
