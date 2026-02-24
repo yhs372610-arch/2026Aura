@@ -583,6 +583,85 @@ body {
     transform: scale(0.98);
 }
 
+/* ========== 모든 아우라 둘러보기 ========== */
+.explore-auras {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px dashed #e0e7ff;
+    text-align: center;
+}
+
+.explore-auras h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: clamp(18px, 5vw, 22px);
+    font-weight: 700;
+}
+
+.aura-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.aura-tab-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    background-size: cover;
+    background-position: center;
+}
+
+.aura-tab-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.aura-tab-btn.active {
+    border-color: #667eea;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.aura-explorer-detail {
+    background: #f8f9ff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.aura-explorer-detail h4 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.aura-explorer-detail p#explorer-subtitle {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.aura-explorer-detail p#explorer-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ========== 광고 공간 (모바일 최적화) ========== */
 .ad-space {
     margin: 25px 0;

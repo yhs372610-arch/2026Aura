@@ -44,7 +44,8 @@ const translations = {
             recommendationsTitle: "2026 Recommendations",
             downloadButton: "📥 Download Image",
             shareButton: "📤 Share Result",
-            retryButton: "🔄 Try Again"
+            retryButton: "🔄 Try Again",
+            exploreTitle: "Explore All Auras"
         },
         colors: {
             coolBlue: { name: "Cool Blue", subtitle: "The Calm Strategist", keywords: ["Strategic", "Calm", "Reliable"], description: "Your aura radiates a cool, composed energy. You approach life with logic and clarity, making you a natural problem-solver. In 2026, your steady presence will be your greatest strength.", strengths: ["Excellent at strategic planning and analysis", "Maintains composure under pressure", "Creates order from chaos"], recommendations: ["Lead projects that require planning", "Share your insights through writing", "Balance logic with creative exploration"] },
@@ -100,7 +101,8 @@ const translations = {
             recommendationsTitle: "2026년 추천 사항",
             downloadButton: "📥 이미지 저장",
             shareButton: "📤 결과 공유",
-            retryButton: "🔄 다시 하기"
+            retryButton: "🔄 다시 하기",
+            exploreTitle: "모든 아우라 둘러보기"
         },
         colors: {
             coolBlue: { name: "쿨 블루", subtitle: "차분한 전략가", keywords: ["전략적", "차분함", "신뢰감"], description: "당신의 아우라는 차분하고 침착한 에너지를 발산합니다. 논리와 명확함으로 삶에 접근하여 자연스러운 문제 해결사입니다. 2026년, 당신의 안정적인 존재감이 가장 큰 강점이 될 것입니다.", strengths: ["전략적 계획과 분석에 뛰어남", "압박 속에서도 침착함 유지", "혼돈에서 질서를 창조"], recommendations: ["신중한 계획이 필요한 프로젝트 주도", "글쓰기나 교육을 통해 통찰력 공유", "논리와 창의적 탐구의 균형"] },
@@ -114,10 +116,10 @@ const translations = {
     },
     ja: {
         meta: {
-            title: "あなたの2026年オー라カラーは？",
+            title: "あなたの2026年オーラカラーは？",
             description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
         },
-        shareMessage: "私の2026年のオーラカラーは [COLOR]! ✨ あなたのエネルギーカラーも今すぐチェック！",
+        shareMessage: "私の2026年のオー라カラーは [COLOR]! ✨ あなたのエネルギーカラーも今すぐチェック！",
         linkCopied: "結果リンクがコピーされました！友達に共有してみてください。",
         canvasTitle: "2026 私のオーラカラー",
         back: "戻る",
@@ -130,16 +132,16 @@ const translations = {
         questions: [
             { q: "2026年の朝、一日を始めるとき最初に思うことは？", a: ["今日はどんな目標を達成しようか？", "平和で穏やかな一日でありますように", "今日は何かワクワクすることがありそう！", "一人の時間が必要"] },
             { q: "ストレスを感じたとき、あなたは？", a: ["問題を論理的に分析する", "親しい人と話し合う", "創作活動に没頭する", "一人の時間が必要"] },
-            { q: "2026年の理想的な週末は？", a: ["個人プロジェクトを計画し実行", "愛する人たちと過ごす", "新しい体験と冒険を探索", "読書、瞑想、 그리고 휴식"] },
+            { q: "2026年の理想的な週末は？", a: ["個人プロジェクトを計画し実行", "愛する人たちと過ごす", "新しい体験と冒険を探索", "読書、瞑想、そして休息"] },
             { q: "決断を下すとき、最も重要なのは？", a: ["論理と実質的な結果", "他人の感情への影響", "直感と情熱に従う", "深い内省と知恵"] },
             { q: "あなたのエネルギーレベルは通常？", a: ["安定して集中的", "温かく思いやりがある", "高く情熱的", "静かで瞑想的"] },
             { q: "社交的な状況で、あなたは？", a: ["観察し戦略的に貢献", "みんなと感情的につながる", "場を盛り上げる", "少数と深い会話を好む"] },
             { q: "あなたを最も動機づけるものは？", a: ["明確で測定可能な目標の達成", "他人を助け変化をもたらす", "創造的表現と革新", "より深い真理を理解する"] },
             { q: "困難への取り組み方は？", a: ["戦略的計画を立てる", "周囲の人々のサポートを求める", "情熱的に飛び込む", "根本原因を理解する時間を取る"] },
-            { q: "人々があなたを表現するとき、よく言われるのは？", a: ["信頼できて組織的", "思いやりがあり共感力が高い", "エネルギッシュでインスピレーションを与える", "賢明で内省적"] },
+            { q: "人々があなたを表現するとき、よく言われるのは？", a: ["信頼できて組織的", "思いやりがあり共感力が高い", "エネルギッシュでインスピレーションを与える", "賢明で内省的"] },
             { q: "理想的な労働環境は？", a: ["明確な目標がある構造化された環境", "協力的で支え合う環境", "ダイナミックでペースが速い", "静かで集中できる環境"] },
             { q: "変化に直面したとき、あなたは？", a: ["慎重な計画で適応", "他の人がどう対処しているか確認", "興奮して受け入れる", "より深い意味を内省"] },
-            { q: "あなたの創造的表現方法は？", a: ["問題解決と戦略", "人々とつながり助ける", "芸術、音楽、またはパフォーマンス", "執筆, 哲学、または瞑想"] },
+            { q: "あなたの創造적表現方法は？", a: ["問題解決と戦略", "人々とつながり助ける", "芸術、音楽、またはパフォーマンス", "執筆, 哲学、または瞑想"] },
             { q: "2026年末に感じたい感情は？", a: ["達成感と成功", "愛されつながっている", "生きていて充実", "平和で賢明"] },
             { q: "自然との関係は？", a: ["秩序とパターンを鑑賞", "最もつながりを感じる場所", "活力とインスピレーションを与える", "内省に不可欠"] },
             { q: "誰かが助けを必要とするとき、あなたは？", a: ["実用的な解決策を提示", "感情的サポートを提供", "楽観とエネルギーをもたらす", "知恵と視点を共有"] }
@@ -156,15 +158,16 @@ const translations = {
             recommendationsTitle: "2026年の推奨事項",
             downloadButton: "📥 画像保存",
             shareButton: "📤 結果共有",
-            retryButton: "🔄 もう一度"
+            retryButton: "🔄 もう一度",
+            exploreTitle: "すべてのオーラを探索"
         },
         colors: {
-            coolBlue: { name: "クールブルー", subtitle: "冷静なストラテジスト", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で落ち着いたエネルギーを放っています。論理と明晰さで人生に取り組み、自然な問題解決者です。2026年、あなたの安定した存在感が最大の強みになります。", strengths: ["戦略적計画と分析に優れる", "プレッシャー下でも冷静さを保つ", "混沌から秩序を創造"], recommendations: ["慎重な計画が必要なプロジェクトをリード", "執筆や教育を通じて洞察を共有", "論理と創造的探求のバランス"] },
-            vampPurple: { name: "ヴァンプパープル", subtitle: "神秘的なクリエイター", keywords: ["神秘的", "創造的", "強烈"], description: "あなたのオーラは魅惑的で神秘的なエネルギーを持っています。暗闇の中に美を、複雑さの中に深さを見出します。あなたの創造的な強烈さは、他者をあなたの独特な世界に引き込みます。", strengths: ["深い創造的ビジョンと芸術的才能", "複雑さとニュアンスに快適", "暗闇を美に変換"], recommendations: ["独自の創造的スタイルを受け入れる", "大胆に芸術を世界と共有", "ドラマチックな美学を探求"] },
+            coolBlue: { name: "クールブルー", subtitle: "冷静なストラテジスト", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で落ち着いたエネルギーを放っています。論理と明晰さで人生に取り組み、自然な問題解決者です。2026年、あなたの安定した存在感が最大の強みになります。", strengths: ["戦略的計画と分析に優れる", "プレッシャー下でも冷静さを保つ", "混沌から秩序を創造"], recommendations: ["慎重な計画が必要なプロジェクトをリード", "執筆や教育を通じて洞察を共有", "論理と創造的探求のバランス"] },
+            vampPurple: { name: "ヴァンプパープル", subtitle: "神秘的なクリエイター", keywords: ["神秘的", "創造적", "強烈"], description: "あなたのオーラは魅惑的で神秘的なエネルギーを持っています。暗闇の中に美を、複雑さの中に深さを見出します。あなたの創造的な強烈さは、他者をあなたの独特な世界に引き込みます。", strengths: ["深い創造적ビジョンと芸術的才能", "複雑さとニュアンスに快適", "暗闇を美に変換"], recommendations: ["独自の創造적スタイルを受け入れる", "大胆に芸術を世界と共有", "ドラマチックな美学を探求"] },
             solarGold: { name: "ソーラーゴールド", subtitle: "輝くリーダー", keywords: ["エネルギッシュ", "インスパイア", "自信"], description: "あなたのオーラは太陽のように輝き、周囲のすべてを照らします。感染性のあるエネルギーと楽観主義で、どこへ行っても温かさをもたらす生まれつきのリーダーです。", strengths: ["生まれつきのカリスマとリーダーシップ能力", "他者に活力と動機を与える", "ダイナミックな環境で繁栄"], recommendations: ["2026年にリーダーシップの役割を担う", "公開スピーチを通じて情熱を共有", "エネルギーを大胆な新しいベンチャーに注ぐ"] },
             forestGreen: { name: "フォレストグリーン", subtitle: "バランスのとれた調和者", keywords: ["バランス", "安定", "平和"], description: "あなたのオーラは自然で調和のとれたエネルギーで流れています。森のように、避難所とバランスを提供します。真の強さは平衡と自然とのつながりから来ることを理解しています。", strengths: ["調和とバランスの創造に卓越", "安定した確かな存在感", "自然とリズムに深くつながる"], recommendations: ["2026年にバランスのとれたルーチンを作る", "定期的に自然で時間を過ごす", "他者が中心を見つけるのを助ける"] },
             softRose: { name: "ソフトローズ", subtitle: "慈悲深いヒーラー", keywords: ["共感的", "育む", "愛"], description: "あなたのオーラは優しく癒すエネルギーで輝いています。深い共感の稀な才能を持ち、他者が本当に見られ、ケアされていると感じさせます. あなたの存在自体が癒しの形です。", strengths: ["深い感情的知性と共感能力", "慰め癒す生まれつきの能力", "脆弱性のための安全な空間を創造"], recommendations: ["援助職業やボランティア活動を追求", "他者をケアしながら健康的な境界を設定", "真剣にセルフケアを実践"] },
-            midnightBlack: { name: "ミッドナイトブラック", subtitle: "深い哲学者", keywords: ["内省的", "賢明", "深遠"], description: "あなたのオーラは真夜中の深さを持ち、そこから最も偉大な洞察が生まれます。表面を超えた意味を求め、瞑想的な性質は他者が見逃す真実を明らかにします。", strengths: ["深遠な哲学的で分析的思考", "他者が見逃すつながりを見る", "深い内省から来る知恵"], recommendations: ["執筆や教育を通じて洞察を共有", "孤独と深い思考のための時間を作る", "哲学, 心理学, またはスピリチュアリティを探求"] }
+            midnightBlack: { name: "ミッドナイトブラック", subtitle: "深い哲学者", keywords: ["内省的", "賢明", "深遠"], description: "あなたのオーラは真夜中の深さを持ち、そこから最も偉大な洞察が生まれます。表面を超えた意味を求め、瞑想的な性質は他者が見逃す真実を明らかにします。", strengths: ["深遠な哲学的で分析적思考", "他者が見逃すつながりを見る", "深い内省から来る知恵"], recommendations: ["執筆や教育を通じて洞察を共有", "孤独と深い思考のための時間を作る", "哲学, 心理学, またはスピリチュアリティを探求"] }
         },
         footer: { privacy: "プライバシーポリシー", contact: "お問い合わせ" }
     },
@@ -193,7 +196,7 @@ const translations = {
             { q: "¿Qué te motiva más?", a: ["Lograr metas claras y medibles", "Ayudar a otros y hacer una diferencia", "Expresión creativa e innovación", "Comprender verdades más profundas"] },
             { q: "Tu enfoque ante desafíos:", a: ["Crear un plan estratégico", "Buscar apoyo de mi círculo", "Saltar con entusiasmo", "Tomar tiempo para entender la causa raíz"] },
             { q: "La gente a menudo te describe como:", a: ["Confiable y organizado", "Cariñoso y empático", "Energético e inspirador", "Sabio e introspectivo"] },
-            { q: "Tu entorno de trabajo ideal:", a: ["Estructurado con objetivos claros", "Colaborativo y de apoyo", "Dinámico y de ritmo rápido", "Tranquilo y enfocado"] },
+            { q: "Tu entorno de trabajo ideal:", a: ["Estructurado con objetivos claros", "Colaborativo y de apoyo", "Dinámico y de ritmo rápido", "Tranquilo y enfocando"] },
             { q: "Al enfrentar cambios, tú:", a: ["Te adaptas con planificación cuidadosa", "Verificas cómo otros están lidiando", "Lo abrazas con emoción", "Reflexionas sobre su significado más profundo"] },
             { q: "Tu salida creativa es:", a: ["Resolución de problemas y estrategia", "Conectar y ayudar a la gente", "Arte, música o actuación", "Escritura, filosofía o meditación"] },
             { q: "Al final de 2026, quieres sentirte:", a: ["Realizado y exitoso", "Amado y conectado", "Vivo y pleno", "Pacífico y sabio"] },
@@ -212,7 +215,8 @@ const translations = {
             recommendationsTitle: "Recomendaciones 2026",
             downloadButton: "📥 Descargar Imagen",
             shareButton: "📤 Compartir Resultado",
-            retryButton: "🔄 Intentar Nuevo"
+            retryButton: "🔄 Intentar Nuevo",
+            exploreTitle: "Explorar todas las auras"
         },
         colors: {
             coolBlue: { name: "Azul Fresco", subtitle: "El Estratega Tranquilo", keywords: ["Estratégico", "Tranquilo", "Confiable"], description: "Tu aura irradia una energía fresca y compuesta. Abordas la vida con lógica y claridad, convirtiéndote en un solucionador de problemas natural. En 2026, tu presencia estable será tu mayor fortaleza.", strengths: ["Excelente en planificación estratégica", "Mantiene la compostura", "Crea orden del caos"], recommendations: ["Lidera proyectos de planificación", "Comparte tus ideas por escrito", "Equilibra lógica y creatividad"] },

@@ -174,8 +174,49 @@ function showResultWithKey(resultColor) {
         result.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recommendationsList.appendChild(li); });
     }
     window.currentResult = { color: resultColor, name: result.name, subtitle: result.subtitle, keywords: result.keywords, description: result.description, colorInfo: colorInfo };
+    
+    // 다른 아우라 둘러보기 탭 초기화
+    populateAuraTabs();
+    
     showScreen('result-screen');
     setTimeout(drawResultToCanvas, 500);
+}
+
+function populateAuraTabs() {
+    const tabsContainer = document.getElementById('aura-tabs');
+    if (!tabsContainer) return;
+    tabsContainer.innerHTML = '';
+    
+    const colors = ['coolBlue', 'vampPurple', 'solarGold', 'forestGreen', 'softRose', 'midnightBlack'];
+    
+    colors.forEach(color => {
+        const btn = document.createElement('button');
+        btn.className = 'aura-tab-btn';
+        btn.style.backgroundImage = `url('${colorData[color].image}')`;
+        btn.onclick = () => showAuraDetail(color);
+        tabsContainer.appendChild(btn);
+    });
+    
+    // 초기에는 상세 정보 숨김
+    document.getElementById('aura-explorer-detail').style.display = 'none';
+}
+
+function showAuraDetail(color) {
+    const detailEl = document.getElementById('aura-explorer-detail');
+    const result = translations[currentLanguage].colors[color];
+    
+    document.getElementById('explorer-name').textContent = result.name;
+    document.getElementById('explorer-subtitle').textContent = result.subtitle;
+    document.getElementById('explorer-description').textContent = result.description;
+    
+    detailEl.style.display = 'block';
+    
+    // 버튼 활성화 표시
+    document.querySelectorAll('.aura-tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    
+    // 상세 정보로 스크롤
+    detailEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
