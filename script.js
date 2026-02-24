@@ -346,18 +346,18 @@ async function downloadResult() {
 async function shareResult() {
     const result = window.currentResult;
     const shareUrl = window.location.href;
-    await drawResultToCanvas();
-    let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
     const canvas = document.getElementById('result-canvas');
+    let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
 
-    // 1. 시스템 공유 시도 (모바일 및 지원하는 데스크탑)
+    // 1. 시스템 공유 시도 (모바일 및 일부 데스크탑)
     if (navigator.share) {
         try {
             canvas.toBlob(async (blob) => {
+                if (!blob) return fallbackShare(shareText, shareUrl, canvas);
+                
                 const file = new File([blob], 'my-2026-aura.png', { type: 'image/png' });
                 const shareData = { title: '2026 Aura Color Test', text: shareText, url: shareUrl };
                 
-                // 파일 공유 가능 여부 체크
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     shareData.files = [file];
                 }
@@ -374,49 +374,55 @@ async function shareResult() {
         }
     }
     
-    // 2. 지원하지 않는 환경일 경우 폴백 실행
+    // 2. 폴백 실행 (데스크탑 등)
     fallbackShare(shareText, shareUrl, canvas);
 }
 
-async function fallbackShare(text, url, canvas) {
+function fallbackShare(text, url, canvas) {
     const fullText = `${text}\n${url}`;
-    const copiedTextMsg = translations[currentLanguage].linkCopied || "Link copied!";
-
-    // 1. 데스크탑: 이미지 복사 시도 (가장 권장되는 방식)
-    if (canvas && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+    const copiedMsg = translations[currentLanguage].linkCopied || translations['en'].linkCopied;
+    
+    // 데스크탑 클립보드 복사 로직 (가장 안정적인 방식)
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
         try {
-            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-            if (blob) {
-                // 이미지만 담은 아이템 생성 (호환성 극대화)
-                const data = [new ClipboardItem({ [blob.type]: blob })];
-                await navigator.clipboard.write(data);
-                
+            // 클릭 즉시 ClipboardItem을 생성하여 권한 문제 방지
+            const item = new ClipboardItem({
+                "text/plain": new Blob([fullText], { type: "text/plain" }),
+                "image/png": new Promise((resolve) => {
+                    canvas.toBlob((blob) => resolve(blob), 'image/png');
+                })
+            });
+
+            navigator.clipboard.write([item]).then(() => {
                 alert(currentLanguage === 'ko' ? 
-                    "결과 이미지가 복사되었습니다! 대화창에 붙여넣기(Ctrl+V) 하세요.\n(링크는 모바일에서 더 편리하게 공유 가능합니다.)" : 
-                    "Result image copied! Paste (Ctrl+V) to share.");
-                return;
-            }
+                    "결과 이미지와 링크가 클립보드에 복사되었습니다!\n대화창(Ctrl+V)에 붙여넣어 공유해보세요." : 
+                    "Result image and link copied! Paste (Ctrl+V) to share.");
+            }).catch(err => {
+                console.error("Clipboard write failed:", err);
+                copyTextOnly(fullText, copiedMsg);
+            });
+            return;
         } catch (err) {
-            console.error("Image copy failed, falling back to text:", err);
+            console.error("Clipboard setup failed:", err);
         }
     }
 
-    // 2. 이미지 복사 실패 시 또는 지원하지 않는 환경: 텍스트만 복사
+    copyTextOnly(fullText, copiedMsg);
+}
+
+function copyTextOnly(text, msg) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fullText).then(() => {
-            alert(copiedTextMsg);
-        }).catch(() => {
-            // 모든 클립보드 API 실패 시 수동 복사 유도
+        navigator.clipboard.writeText(text).then(() => alert(msg)).catch(() => {
             const textArea = document.createElement("textarea");
-            textArea.value = fullText;
+            textArea.value = text;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert(copiedTextMsg);
+            alert(msg);
         });
     } else {
-        alert(fullText);
+        alert(text);
     }
 }
 
