@@ -348,60 +348,27 @@ body {
 }
 
 .result-color-display {
-    width: clamp(200px, 60vw, 280px); /* 크기 대폭 확대 */
-    height: clamp(200px, 60vw, 280px);
+    width: clamp(220px, 65vw, 300px); /* 선명하게 보이도록 크기 유지 및 약간 확대 */
+    height: clamp(220px, 65vw, 300px);
     border-radius: 50%;
     margin: 0 auto 35px;
-    box-shadow: 0 0 50px rgba(102, 126, 234, 0.5); /* 기본 후광 */
-    animation: auraAppear 1.5s ease-out forwards, auraPulse 3s infinite ease-in-out 1.5s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* 부드러운 기본 그림자만 유지 */
+    animation: auraAppear 1.2s ease-out forwards;
     background-size: cover;
     background-position: center;
     position: relative;
-}
-
-/* 아우라 주변에 은은하게 퍼지는 후광 효과 추가 */
-.result-color-display::after {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    border-radius: 50%;
-    background: inherit;
-    filter: blur(25px);
-    opacity: 0.6;
-    z-index: -1;
-    animation: auraRotate 10s linear infinite;
+    border: 4px solid white; /* 이미지를 강조하는 깔끔한 흰색 테두리 */
 }
 
 @keyframes auraAppear {
     from {
         opacity: 0;
-        transform: scale(0.5) rotate(-20deg);
-        filter: brightness(2);
+        transform: scale(0.8);
     }
     to {
         opacity: 1;
-        transform: scale(1) rotate(0deg);
-        filter: brightness(1);
-    }
-}
-
-@keyframes auraPulse {
-    0%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 40px rgba(102, 126, 234, 0.4);
     }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 70px rgba(102, 126, 234, 0.7);
-    }
-}
-
-@keyframes auraRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .result-title {
