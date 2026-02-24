@@ -31,20 +31,13 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. 시작 언어 결정 (HTML의 data-start-lang 우선)
     const bodyStartLang = document.body.getAttribute('data-start-lang');
-    if (bodyStartLang) {
-        currentLanguage = bodyStartLang;
-    }
+    if (bodyStartLang) currentLanguage = bodyStartLang;
 
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
-    
     if (dropdownBtn) {
-        dropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('active');
-        });
+        dropdownBtn.addEventListener('click', (e) => { e.stopPropagation(); dropdown.classList.toggle('active'); });
     }
 
     document.querySelectorAll('.lang-option').forEach(option => {
@@ -58,20 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.addEventListener('click', () => {
-        if (dropdown) dropdown.classList.remove('active');
-    });
+    document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
 
     updatePageLanguage();
     const textEl = document.querySelector('.current-lang-text');
     if (textEl) textEl.textContent = currentLanguage.toUpperCase();
 
-    // URL 파라미터 확인
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
-    if (sharedResult && colorData[sharedResult]) {
-        setTimeout(() => showResultWithKey(sharedResult), 100);
-    }
+    if (sharedResult && colorData[sharedResult]) setTimeout(() => showResultWithKey(sharedResult), 100);
 });
 
 function showScreen(screenId) {
@@ -131,27 +119,16 @@ function showLoadingScreen() {
         stepIndex++;
         if (stepIndex < steps.length) stepElement.textContent = steps[stepIndex];
     }, 1000);
-    setTimeout(() => {
-        clearInterval(stepInterval);
-        showResult();
-    }, 3000);
+    setTimeout(() => { clearInterval(stepInterval); showResult(); }, 3000);
 }
 
 function showResult() {
     let maxScore = 0;
     let resultColor = 'coolBlue';
-    for (let color in scores) {
-        if (scores[color] > maxScore) {
-            maxScore = scores[color];
-            resultColor = color;
-        }
-    }
-    
-    // 현재 언어에 맞는 파일명을 포함하여 URL 업데이트
+    for (let color in scores) { if (scores[color] > maxScore) { maxScore = scores[color]; resultColor = color; } }
     let fileName = currentLanguage === 'ko' ? '' : currentLanguage + '.html';
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname.replace(/\/[^\/]*$/, '/') + fileName + '?r=' + resultColor;
     window.history.pushState({path:newUrl}, '', newUrl);
-    
     showResultWithKey(resultColor);
 }
 
@@ -160,10 +137,8 @@ function showResultWithKey(resultColor) {
     const colorInfo = colorData[resultColor];
     const displayEl = document.getElementById('result-color-display');
     if (displayEl) displayEl.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
-    
     document.getElementById('result-title').textContent = result.name;
     document.getElementById('result-subtitle').textContent = result.subtitle;
-    
     const keywordsContainer = document.getElementById('keywords');
     if (keywordsContainer) {
         keywordsContainer.innerHTML = '';
@@ -174,32 +149,44 @@ function showResultWithKey(resultColor) {
             keywordsContainer.appendChild(tag);
         });
     }
-    
     document.getElementById('result-description').textContent = result.description;
-    
     const strengthsList = document.getElementById('strengths-list');
     if (strengthsList) {
         strengthsList.innerHTML = '';
-        result.strengths.forEach(s => {
-            const li = document.createElement('li');
-            li.textContent = s;
-            strengthsList.appendChild(li);
-        });
+        result.strengths.forEach(s => { const li = document.createElement('li'); li.textContent = s; strengthsList.appendChild(li); });
     }
-    
     const recommendationsList = document.getElementById('recommendations-list');
     if (recommendationsList) {
         recommendationsList.innerHTML = '';
-        result.recommendations.forEach(r => {
-            const li = document.createElement('li');
-            li.textContent = r;
-            recommendationsList.appendChild(li);
-        });
+        result.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recommendationsList.appendChild(li); });
     }
-    
-    window.currentResult = { color: resultColor, name: result.name, subtitle: result.subtitle, keywords: result.keywords, colorInfo: colorInfo };
+    window.currentResult = { color: resultColor, name: result.name, subtitle: result.subtitle, keywords: result.keywords, description: result.description, colorInfo: colorInfo };
     showScreen('result-screen');
     setTimeout(drawResultToCanvas, 500);
+}
+
+// 캔버스 텍스트 줄바꿈 도우미 함수
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    let testLine = '';
+    let lineCount = 0;
+
+    for (let n = 0; words.length > n; n++) {
+        testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+            lineCount++;
+        } else {
+            line = testLine;
+        }
+    }
+    ctx.fillText(line, x, y);
+    return lineCount;
 }
 
 function drawResultToCanvas() {
@@ -213,6 +200,7 @@ function drawResultToCanvas() {
         canvas.width = 1080;
         canvas.height = 1920;
         
+        // 배경 그라데이션
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         const colorThemes = {
             coolBlue: ['#1e3a8a', '#3b82f6'], vampPurple: ['#4c1d95', '#8b5cf6'],
@@ -225,40 +213,68 @@ function drawResultToCanvas() {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 60px Arial';
+        // 상단 제목
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.font = 'bold 50px Arial';
         ctx.textAlign = 'center';
         const canvasTitle = translations[currentLanguage].canvasTitle || translations['en'].canvasTitle;
-        ctx.fillText(canvasTitle, canvas.width / 2, 150);
+        ctx.fillText(canvasTitle, canvas.width / 2, 180);
         
         const img = new Image();
         img.crossOrigin = "anonymous";
         img.onload = function() {
+            // 아우라 이미지 (중앙 배치)
             ctx.save();
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 30;
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
+            ctx.arc(canvas.width / 2, 550, 320, 0, Math.PI * 2);
             ctx.closePath();
             ctx.clip();
-            ctx.drawImage(img, canvas.width / 2 - 250, 450 - 250, 500, 500);
+            ctx.drawImage(img, canvas.width / 2 - 320, 550 - 320, 640, 640);
             ctx.restore();
+            
+            // 흰색 테두리
             ctx.strokeStyle = 'white';
-            ctx.lineWidth = 15;
+            ctx.lineWidth = 12;
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, 450, 250, 0, Math.PI * 2);
+            ctx.arc(canvas.width / 2, 550, 320, 0, Math.PI * 2);
             ctx.stroke();
+            
+            // 결과 이름
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 90px Arial';
-            ctx.fillText(result.name, canvas.width / 2, 820);
-            ctx.font = '45px Arial';
-            ctx.fillText(result.subtitle, canvas.width / 2, 900);
-            let yPos = 1050;
-            ctx.font = 'bold 55px Arial';
-            result.keywords.forEach((keyword, index) => {
-                ctx.fillText(`#${keyword}`, canvas.width / 2, yPos + (index * 90));
-            });
+            ctx.font = 'bold 110px Arial';
+            ctx.fillText(result.name, canvas.width / 2, 980);
+            
+            // 부제목
+            ctx.font = '50px Arial';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillText(result.subtitle, canvas.width / 2, 1070);
+            
+            // 키워드 (가로 정렬)
+            ctx.font = 'bold 45px Arial';
+            const keywordsText = result.keywords.map(k => `#${k}`).join('  ');
+            ctx.fillText(keywordsText, canvas.width / 2, 1180);
+
+            // 중앙 구분선
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200, 1250);
+            ctx.lineTo(880, 1250);
+            ctx.stroke();
+
+            // 설명 (상세 내용 추가)
+            ctx.font = '40px Arial';
+            ctx.fillStyle = 'white';
+            const description = result.description;
+            wrapText(ctx, description, canvas.width / 2, 1340, 750, 65);
+            
+            // 하단 워터마크 및 안내
             ctx.font = '35px Arial';
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.fillText('2026-aura.pages.dev', canvas.width / 2, canvas.height - 100);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText('Check your aura at: 2026-aura.pages.dev', canvas.width / 2, canvas.height - 120);
+            
             resolve();
         };
         img.src = result.colorInfo.image;
@@ -276,14 +292,10 @@ async function downloadResult() {
 
 async function shareResult() {
     const result = window.currentResult;
-    // 현재 주소(언어별 HTML 파일 경로가 포함됨)를 공유
     const shareUrl = window.location.href;
-    
     await drawResultToCanvas();
-    
     let shareText = translations[currentLanguage].shareMessage || translations['en'].shareMessage;
     shareText = shareText.replace('[COLOR]', result.name);
-
     if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         try {
             const canvas = document.getElementById('result-canvas');
@@ -294,9 +306,7 @@ async function shareResult() {
                 await navigator.share(shareData);
             });
         } catch (err) { fallbackShare(shareText, shareUrl); }
-    } else {
-        fallbackShare(shareText, shareUrl);
-    }
+    } else fallbackShare(shareText, shareUrl);
 }
 
 function fallbackShare(text, url) {
