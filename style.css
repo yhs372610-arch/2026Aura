@@ -663,7 +663,8 @@ body {
     font-size: 14px;
     color: #555;
     line-height: 1.6;
-    word-break: keep-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 @keyframes fadeIn {
