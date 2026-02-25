@@ -227,6 +227,63 @@ const translations = {
             midnightBlack: { name: "Negro Medianoche", subtitle: "El Filósofo Profundo", keywords: ["Introspectivo", "Sabio", "Profundo"], description: "Tu aura sostiene la profundidad de medianoche, donde emergen las mayores ideas. Buscas significado más allá de la superficie, y tu naturaleza contemplativa revela verdades que otros pierden.", strengths: ["Pensamiento filosófico profundo", "Ve conexiones ocultas", "Sabiduría de la reflexión"], recommendations: ["Comparte ideas por escrito", "Crea tiempo para la soledad", "Explora la psicología o espiritualidad"] }
         },
         footer: { privacy: "Política de Privacidad", contact: "Contacto" }
+    },
+    pt: {
+        meta: {
+            title: "Qual é a sua Cor de Aura 2026?",
+            description: "Descubra a sua cor de energia para 2026 através de uma análise de personalidade baseada em psicologia!"
+        },
+        shareMessage: "A minha cor de aura para 2026 é [COLOR]! ✨ Descubra a sua cor de energia agora!",
+        linkCopied: "Link do resultado copiado! Partilhe com os seus amigos.",
+        canvasTitle: "Sua Aura 2026",
+        back: "Voltar",
+        home: {
+            title: "Teste de Cor de Aura 2026",
+            subtitle: "Descubra a sua cor de energia através de uma análise de personalidade baseada em psicologia",
+            startButton: "Iniciar Teste",
+            info: "⏱️ 2 minutos | 📝 15 perguntas | 🎨 6 cores"
+        },
+        questions: [
+            { q: "Ao começar o seu dia em 2026, qual é o seu primeiro pensamento?", a: ["Que metas vou alcançar hoje?", "Espero que hoje traga paz e calma", "Vejamos que coisas emocionantes acontecem!", "Preciso de tempo para recarregar sozinho"] },
+            { q: "Como lida com o stress?", a: ["Analiso o problema logicamente", "Converso com amigos próximos", "Mergulho em atividades criativas", "Preciso de solidão para processar"] },
+            { q: "Qual é o seu fim de semana ideal em 2026?", a: ["Planear e executar um projeto pessoal", "Passar tempo de qualidade com entes queridos", "Explorar novas experiências e aventuras", "Ler, refletir e descansar"] },
+            { q: "Ao tomar decisões, você prioriza:", a: ["Lógica e resultados práticos", "Como isso afeta os sentimentos dos outros", "Seguir a minha intuição e paixão", "Reflexão profunda e sabedoria"] },
+            { q: "O seu nível de energia costuma ser:", a: ["Estável e focado", "Quente e acolhedor", "Alto e entusiasta", "Tranquilo e contemplativo"] },
+            { q: "Em situações sociais, você tende a:", a: ["Observar e contribuir estrategicamente", "Conectar-se emocionalmente com todos", "Ser a alma da festa", "Preferir conversas pequenas e significativas"] },
+            { q: "O que mais o motiva?", a: ["Alcançar metas claras e mensuráveis", "Ajudar os outros e fazer a diferença", "Expressão criativa e inovação", "Comprender verdades mais profundas"] },
+            { q: "A sua abordagem aos desafios:", a: ["Criar um plano estratégico", "Procurar apoio no meu círculo", "Saltar com entusiasmo", "Tirar um tempo para entender a causa raiz"] },
+            { q: "As pessoas costumam descrevê-lo como:", a: ["Confiável e organizado", "Carinhoso e empático", "Enérgico e inspirador", "Sábio e introspectivo"] },
+            { q: "O seu ambiente de trabalho ideal:", a: ["Estruturado com objetivos claros", "Colaborativo e de apoio", "Dinâmico e de ritmo acelerado", "Tranquilo e focado"] },
+            { q: "Ao enfrentar mudanças, você:", a: ["Adapto-me com planeamento cuidadoso", "Verifico como os outros estão a lidar", "Abraço-a com entusiasmo", "Reflito sobre o seu significado mais profundo"] },
+            { q: "A sua saída criativa é:", a: ["Resolução de problemas e estratégia", "Conectar e ajudar pessoas", "Arte, música ou atuação", "Escrita, filosofia ou meditação"] },
+            { q: "No final de 2026, como quer se sentir?", a: ["Realizado e bem-sucedido", "Amado e conectado", "Vivo e pleno", "Pacífico e sábio"] },
+            { q: "A sua relação com a natureza:", a: ["Aprecio a sua ordem e padrões", "É onde me sinto mais conectado", "Energiza-me e inspira-me", "É essencial para a minha reflexão"] },
+            { q: "Quando alguém precisa de ajuda, você:", a: ["Ofereço soluções práticas", "Dou apoio emocional", "Trago otimismo e energia", "Partilho sabedoria e perspetiva"] }
+        ],
+        loading: {
+            analyzing: "Analisando a sua aura...",
+            step1: "Extraindo padrões de energia...",
+            step2: "Mapeando frequências de color...",
+            step3: "Revelando a sua aura 2026..."
+        },
+        result: {
+            aboutTitle: "Sobre a Sua Aura",
+            strengthsTitle: "Seus Pontos Fortes",
+            recommendationsTitle: "Recomendações 2026",
+            downloadButton: "📸 Guardar Imagem",
+            shareButton: "🔗 Partilhar Resultado",
+            retryButton: "🔄 Tentar Novamente",
+            exploreTitle: "Explorar todas as auras"
+        },
+        colors: {
+            coolBlue: { name: "Azul Fresco", subtitle: "O Estratega Calmo", keywords: ["Estratégico", "Calmo", "Confiável"], description: "A sua aura irradia uma energia fresca e composta. Aborda a vida com lógica e clareza, tornando-se um solucionador de problemas natural. Em 2026, a sua presença estável será a sua maior força.", strengths: ["Excelente em planeamento estratégico e análise", "Mantém a compostura sob pressão", "Cria ordem no caos"], recommendations: ["Lidere projetos que exijam planeamento", "Partilhe as suas ideias através da escrita", "Equilibre a lógica com a exploração criativa"] },
+            vampPurple: { name: "Roxo Vamp", subtitle: "O Criador Místico", keywords: ["Misterioso", "Criativo", "Intenso"], description: "A sua aura carrega uma energia encantadora e misteriosa. Vê beleza na escuridão e profundidade na complexidade. A sua intensidade criativa atrai os outros para o seu mundo único.", strengths: ["Visão criativa profunda e talento artístico", "Confortável com a complexidade", "Presença magnética que intriga os outros"], recommendations: ["Abrace o seu estilo criativo único", "Partilhe a sua arte com o mundo audaciosamente", "Explore estéticas dramáticas"] },
+            solarGold: { name: "Ouro Solar", subtitle: "O Líder Radiante", keywords: ["Enérgico", "Inspirador", "Confiante"], description: "A sua aura brilha como o sol, iluminando tudo ao seu redor. A sua energia contagiante e otimismo tornam-no um líder natural que traz calor por onde passa.", strengths: ["Carisma natural e liderança", "Energiza e motiva os outros", "Prospera em ambientes dinâmicos"], recommendations: ["Assuma papéis de liderança em 2026", "Partilhe o seu entusiasmo", "Canalize energia em novos empreendimentos"] },
+            forestGreen: { name: "Verde Floresta", subtitle: "O Harmonizador Equilibrado", keywords: ["Equilibrado", "Centrado", "Pacífico"], description: "A sua aura flui com energia natural e harmoniosa. Como uma floresta, você oferece refúgio e equilíbrio. Entende que a verdadeira força vem do equilíbrio e da conexão com a natureza.", strengths: ["Excecional a criar harmonia", "Presença centrada e estável", "Profundamente conectado com a natureza"], recommendations: ["Crie rotinas equilibradas em 2026", "Passe tempo regular na natureza", "Ajude os outros a encontrar o seu centro"] },
+            softRose: { name: "Rosa Suave", subtitle: "O Curador Compassivo", keywords: ["Empático", "Nutritivo", "Amoroso"], description: "A sua aura brilha com energia suave e curativa. Possui um raro dom de empatia profunda, fazendo com que os outros se sintam verdadeiramente vistos e cuidados. A sua presença em si é uma forma de cura.", strengths: ["Profunda inteligência emocional", "Habilidade natural para confortar e curar", "Cria espaços seguros para a vulnerabilidade"], recommendations: ["Persiga trabalho voluntário ou de ajuda", "Estabeleça limites saudáveis enquanto cuida", "Pratique o autocuidado dedicado"] },
+            midnightBlack: { name: "Preto Meia-Noite", subtitle: "O Filósofo Profundo", keywords: ["Introspetivo", "Sábio", "Profundo"], description: "A sua aura detém a profundidade da meia-noite, onde emergem as maiores ideias. Procura significado além da superfície, e a sua natureza contemplativa revela verdades que outros perdem.", strengths: ["Pensamento filosófico profundo", "Vê conexões que outros ignoram", "Sabedoria da reflexão profunda"], recommendations: ["Partilhe ideias através da escrita", "Crie tempo para la solidão e reflexão", "Explore a filosofia ou psicologia"] }
+        },
+        footer: { privacy: "Política de Privacidade", contact: "Contacto" }
     }
 };
 
@@ -239,6 +296,7 @@ function detectLanguage() {
     if (browserLang.startsWith('ko')) return 'ko';
     if (browserLang.startsWith('ja')) return 'ja';
     if (browserLang.startsWith('es')) return 'es';
+    if (browserLang.startsWith('pt')) return 'pt';
     return 'en';
 }
 

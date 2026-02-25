@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('click', () => {
             const lang = option.getAttribute('data-lang');
             changeLanguage(lang);
-            const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES' };
+            const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES', pt: '🇵🇹 PT' };
             const textEl = document.querySelector('.current-lang-text');
             if (textEl) textEl.textContent = langMap[lang] || lang.toUpperCase();
             dropdown.classList.remove('active');
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
     updatePageLanguage();
-    const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES' };
+    const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES', pt: '🇵🇹 PT' };
     const textEl = document.querySelector('.current-lang-text');
     if (textEl) textEl.textContent = langMap[currentLanguage] || currentLanguage.toUpperCase();
     const urlParams = new URLSearchParams(window.location.search);
