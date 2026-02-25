@@ -716,27 +716,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ========== 광고 공간 (모바일 최적화) ========== */
-.ad-space {
-    margin: 25px 0;
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.ad-placeholder {
-    background: #f0f0f0;
-    padding: 30px 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: #999;
-    border: 2px dashed #ddd;
-    width: 100%;
-    font-size: clamp(12px, 3.5vw, 14px);
-}
-
 /* ========== Footer (모바일 최적화) ========== */
 footer {
     text-align: center;
