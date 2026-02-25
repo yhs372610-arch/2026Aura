@@ -57,16 +57,18 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('click', () => {
             const lang = option.getAttribute('data-lang');
             changeLanguage(lang);
+            const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES' };
             const textEl = document.querySelector('.current-lang-text');
-            if (textEl) textEl.textContent = lang.toUpperCase();
+            if (textEl) textEl.textContent = langMap[lang] || lang.toUpperCase();
             dropdown.classList.remove('active');
             if (window.currentResult) drawResultToCanvas();
         });
     });
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
     updatePageLanguage();
+    const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES' };
     const textEl = document.querySelector('.current-lang-text');
-    if (textEl) textEl.textContent = currentLanguage.toUpperCase();
+    if (textEl) textEl.textContent = langMap[currentLanguage] || currentLanguage.toUpperCase();
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
     if (sharedResult && colorData[sharedResult]) setTimeout(() => showResultWithKey(sharedResult), 100);
