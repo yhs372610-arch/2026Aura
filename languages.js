@@ -42,8 +42,8 @@ const translations = {
             aboutTitle: "About Your Aura",
             strengthsTitle: "Your Strengths",
             recommendationsTitle: "2026 Recommendations",
-            downloadButton: "📥 Download Image",
-            shareButton: "📤 Share Result",
+            downloadButton: "📸 Download Image",
+            shareButton: "🔗 Share Result",
             retryButton: "🔄 Try Again",
             exploreTitle: "Explore All Auras"
         },
@@ -99,8 +99,8 @@ const translations = {
             aboutTitle: "당신의 아우라",
             strengthsTitle: "강점",
             recommendationsTitle: "2026년 추천 사항",
-            downloadButton: "📥 이미지 저장",
-            shareButton: "📤 결과 공유",
+            downloadButton: "📸 이미지 저장",
+            shareButton: "🔗 결과 공유",
             retryButton: "🔄 테스트하기",
             exploreTitle: "모든 아우라 둘러보기"
         },
@@ -156,8 +156,8 @@ const translations = {
             aboutTitle: "あなたのオーラについて",
             strengthsTitle: "あなたの強み",
             recommendationsTitle: "2026年の推奨事項",
-            downloadButton: "📥 画像保存",
-            shareButton: "📤 結果共有",
+            downloadButton: "📸 画像保存",
+            shareButton: "🔗 結果共有",
             retryButton: "🔄 もう一度",
             exploreTitle: "すべてのオーラを探索"
         },
@@ -213,8 +213,8 @@ const translations = {
             aboutTitle: "Sobre Tu Aura",
             strengthsTitle: "Tus Fortalezas",
             recommendationsTitle: "Recomendaciones 2026",
-            downloadButton: "📥 Descargar Imagen",
-            shareButton: "📤 Compartir Resultado",
+            downloadButton: "📸 Descargar Imagen",
+            shareButton: "🔗 Compartir Resultado",
             retryButton: "🔄 Intentar Nuevo",
             exploreTitle: "Explorar todas las auras"
         },
