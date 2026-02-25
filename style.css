@@ -484,26 +484,16 @@ body {
 .result-details {
     text-align: left;
     margin-top: 30px;
-    padding: 0;
+    padding: 0 5px;
 }
 
 .result-details h3 {
-    color: #4c1d95; /* 더 깊은 퍼플 톤으로 변경 */
-    margin: 35px 0 15px 0;
-    font-size: clamp(18px, 5.5vw, 22px);
+    color: #333;
+    margin: 40px 0 15px 0;
+    font-size: clamp(17px, 5.5vw, 20px);
     font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.result-details h3::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 20px;
-    background: linear-gradient(to bottom, #667eea, #764ba2);
-    border-radius: 10px;
+    border-bottom: 1.5px solid #eee;
+    padding-bottom: 10px;
 }
 
 .result-details p {
@@ -511,9 +501,7 @@ body {
     color: #444;
     margin-bottom: 25px;
     font-size: clamp(15px, 4.2vw, 17px);
-    background: #f8f9ff;
-    padding: 20px;
-    border-radius: 15px;
+    padding: 5px 0;
     word-break: break-word;
     overflow-wrap: break-word;
 }
@@ -521,18 +509,12 @@ body {
 .result-details ul {
     list-style: none;
     padding-left: 0;
-    background: #ffffff;
-    border: 1px solid #f0f0f0;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
 .result-details li {
-    padding: 16px 20px;
-    border-bottom: 1px solid #f5f5f5;
+    padding: 14px 0;
     color: #333;
-    line-height: 1.6;
+    line-height: 1.7;
     font-size: clamp(14px, 4vw, 16px);
     font-weight: 500;
     display: flex;
@@ -540,6 +522,7 @@ body {
     gap: 12px;
     word-break: break-word;
     overflow-wrap: break-word;
+    border-bottom: 1px solid #f8f8f8;
 }
 
 .result-details li:last-child {
@@ -547,8 +530,9 @@ body {
 }
 
 .result-details li::before {
-    content: "✨";
-    font-size: 16px;
+    content: "✦";
+    color: #667eea;
+    font-size: 14px;
     flex-shrink: 0;
     margin-top: 2px;
 }
