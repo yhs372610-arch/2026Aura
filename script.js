@@ -374,7 +374,11 @@ function shareResult() {
         canvas.toBlob(async (blob) => {
             if (!blob) return fallbackShare(shareText, shareUrl, canvas);
             const file = new File([blob], 'my-aura.png', { type: 'image/png' });
-            const shareData = { title: '2026 Aura Color Test', text: shareText, url: shareUrl, files: [file] };
+            
+            // 제목도 현재 언어에 맞춰 동적 설정
+            const shareTitle = translations[currentLanguage].meta.title || '2026 Aura Color Test';
+            const shareData = { title: shareTitle, text: shareText, url: shareUrl, files: [file] };
+            
             if (navigator.canShare && navigator.canShare(shareData)) {
                 try { await navigator.share(shareData); return; } catch (e) { if (e.name === 'AbortError') return; }
             }
