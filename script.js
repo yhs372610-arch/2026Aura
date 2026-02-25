@@ -37,12 +37,12 @@ const answerScores = [
 ];
 
 const colorData = {
-    coolBlue: { image: 'cool-blue.png?v=2', hex: '#3b82f6' },
+    coolBlue: { image: 'cool-blue.png?v=3', hex: '#3b82f6' },
     vampPurple: { image: 'vamp-purple.png?v=2', hex: '#8b5cf6' },
     solarGold: { image: 'solar-gold.png?v=2', hex: '#fbbf24' },
     forestGreen: { image: 'forest-green.png?v=2', hex: '#10b981' },
     softRose: { image: 'soft-rose.png?v=2', hex: '#f472b6' },
-    midnightBlack: { image: 'midnight-black.png?v=2', hex: '#334155' }
+    midnightBlack: { image: 'midnight-black.png?v=3', hex: '#334155' }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
