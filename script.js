@@ -4,21 +4,36 @@ let answers = [];
 let scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softRose: 0, midnightBlack: 0 };
 
 const answerScores = [
-    [ {coolBlue: 3, solarGold: 2}, {forestGreen: 3, softRose: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, vampPurple: 2} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, forestGreen: 2}, {vampPurple: 3, solarGold: 1}, {midnightBlack: 3, forestGreen: 1} ],
-    [ {coolBlue: 3, solarGold: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, forestGreen: 1} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 1} ],
-    [ {coolBlue: 3, forestGreen: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, vampPurple: 1} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, solarGold: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, vampPurple: 2} ],
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {vampPurple: 3, solarGold: 2}, {midnightBlack: 3, coolBlue: 1} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, forestGreen: 1} ],
-    [ {coolBlue: 3, forestGreen: 2}, {softRose: 3, forestGreen: 1}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, vampPurple: 1} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, forestGreen: 1} ],
-    [ {coolBlue: 3, forestGreen: 2}, {softRose: 3, forestGreen: 1}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, vampPurple: 1} ],
-    [ {coolBlue: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2}, {vampPurple: 3, solarGold: 2}, {midnightBlack: 3, vampPurple: 1} ],
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, forestGreen: 1} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {forestGreen: 3, softRose: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, forestGreen: 2} ],
-    [ {coolBlue: 3, midnightBlack: 1}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 1}, {midnightBlack: 3, coolBlue: 1} ]
+    // Q1: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
+    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    // Q2: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    // Q3: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    // Q4: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
+    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    // Q5: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    // Q6: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    // Q7: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
+    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    // Q8: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    // Q9: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    // Q10: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
+    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    // Q11: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    // Q12: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    // Q13: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
+    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    // Q14: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    // Q15: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ]
 ];
 
 const colorData = {
