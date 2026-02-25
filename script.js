@@ -360,7 +360,12 @@ function shareResult() {
     const result = window.currentResult;
     const shareUrl = window.location.href;
     const canvas = document.getElementById('result-canvas');
-    let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', result.name);
+    
+    // 현재 선택된 언어에 맞춰 색상 이름 재추출
+    const currentColorData = translations[currentLanguage].colors[result.color];
+    const colorName = currentColorData ? currentColorData.name : result.name;
+    
+    let shareText = (translations[currentLanguage].shareMessage || translations['en'].shareMessage).replace('[COLOR]', colorName);
 
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -395,7 +400,7 @@ function fallbackShare(text, url, canvas) {
         });
 
         navigator.clipboard.write([item]).then(() => {
-            alert(currentLanguage === 'ko' ? "결과 이미지와 링크가 복사되었습니다!\n채팅창에 붙여넣기(Ctrl+V) 하세요." : "Result copied to clipboard!");
+            alert(copiedMsg);
         }).catch(() => copyTextOnly(fullText, copiedMsg));
     } else {
         copyTextOnly(fullText, copiedMsg);
