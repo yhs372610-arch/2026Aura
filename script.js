@@ -1,39 +1,39 @@
 // ========== 전역 변수 ==========
 let currentQuestion = 0;
 let answers = [];
-let scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softRose: 0, midnightBlack: 0 };
+let scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softPink: 0, midnightBlack: 0 };
 
 const answerScores = [
     // Q1: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    [ {coolBlue: 3, solarGold: 2}, {softPink: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
     // Q2: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
-    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
     // Q3: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
-    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, midnightBlack: 2}, {softPink: 3, forestGreen: 2} ],
     // Q4: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    [ {coolBlue: 3, solarGold: 2}, {softPink: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
     // Q5: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
-    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
     // Q6: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
-    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, midnightBlack: 2}, {softPink: 3, forestGreen: 2} ],
     // Q7: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    [ {coolBlue: 3, solarGold: 2}, {softPink: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
     // Q8: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
-    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
     // Q9: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
-    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, midnightBlack: 2}, {softPink: 3, forestGreen: 2} ],
     // Q10: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    [ {coolBlue: 3, solarGold: 2}, {softPink: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
     // Q11: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
-    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
     // Q12: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
-    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ],
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, midnightBlack: 2}, {softPink: 3, forestGreen: 2} ],
     // Q13: A(CB/SG), B(SR/FG), C(SG/VP), D(MB/CB)
-    [ {coolBlue: 3, solarGold: 2}, {softRose: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
+    [ {coolBlue: 3, solarGold: 2}, {softPink: 3, forestGreen: 2}, {solarGold: 3, vampPurple: 2}, {midnightBlack: 3, coolBlue: 2} ],
     // Q14: A(SG/CB), B(FG/SR), C(VP/SG), D(CB/MB)
-    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
+    [ {solarGold: 3, coolBlue: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, solarGold: 2}, {coolBlue: 3, midnightBlack: 2} ],
     // Q15: A(MB/VP), B(FG/SR), C(VP/MB), D(SR/FG)
-    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softRose: 2}, {vampPurple: 3, midnightBlack: 2}, {softRose: 3, forestGreen: 2} ]
+    [ {midnightBlack: 3, vampPurple: 2}, {forestGreen: 3, softPink: 2}, {vampPurple: 3, midnightBlack: 2}, {softPink: 3, forestGreen: 2} ]
 ];
 
 const colorData = {
@@ -41,7 +41,7 @@ const colorData = {
     vampPurple: { image: 'vamp-purple.png?v=2', hex: '#8b5cf6' },
     solarGold: { image: 'solar-gold.png?v=2', hex: '#fbbf24' },
     forestGreen: { image: 'forest-green.png?v=2', hex: '#10b981' },
-    softRose: { image: 'soft-rose.png?v=2', hex: '#f472b6' },
+    softPink: { image: 'soft-pink.png?v=2', hex: '#f472b6' },
     midnightBlack: { image: 'midnight-black.png?v=3', hex: '#334155' }
 };
 
@@ -83,7 +83,7 @@ function showScreen(screenId) {
 function startTest() {
     currentQuestion = 0;
     answers = [];
-    scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softRose: 0, midnightBlack: 0 };
+    scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softPink: 0, midnightBlack: 0 };
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.pushState({path:newUrl}, '', newUrl);
     showScreen('question-screen');
@@ -205,7 +205,7 @@ function populateAuraTabs() {
     if (!tabsContainer) return;
     tabsContainer.innerHTML = '';
     
-    const colors = ['coolBlue', 'vampPurple', 'solarGold', 'forestGreen', 'softRose', 'midnightBlack'];
+    const colors = ['coolBlue', 'vampPurple', 'solarGold', 'forestGreen', 'softPink', 'midnightBlack'];
     
     colors.forEach(color => {
         const btn = document.createElement('button');
@@ -267,7 +267,7 @@ function drawResultToCanvas() {
         const colorThemes = {
             coolBlue: ['#1e3a8a', '#3b82f6'], vampPurple: ['#4c1d95', '#8b5cf6'],
             solarGold: ['#b45309', '#fbbf24'], forestGreen: ['#064e3b', '#10b981'],
-            softRose: ['#9d174d', '#f472b6'], midnightBlack: ['#0f172a', '#334155']
+            softPink: ['#9d174d', '#f472b6'], midnightBlack: ['#0f172a', '#334155']
         };
         const theme = colorThemes[result.color];
         gradient.addColorStop(0, theme[0]);
