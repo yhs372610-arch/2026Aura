@@ -31,12 +31,12 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 초기 언어 설정
-    if (window.location.pathname.endsWith('en.html')) window.currentLanguage = 'en';
-    else if (window.location.pathname.endsWith('es.html')) window.currentLanguage = 'es';
-    else if (window.location.pathname.endsWith('ja.html')) window.currentLanguage = 'ja';
-    else if (window.location.pathname.endsWith('pt.html')) window.currentLanguage = 'pt';
-    else window.currentLanguage = 'ko';
+    const path = window.location.pathname;
+    if (path.endsWith('en.html')) window.currentLanguage = 'en';
+    else if (path.endsWith('es.html')) window.currentLanguage = 'es';
+    else if (path.endsWith('ja.html')) window.currentLanguage = 'ja';
+    else if (path.endsWith('pt.html')) window.currentLanguage = 'pt';
+    else window.currentLanguage = 'ko'; // 기본 한국어 강제 고정
     
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
@@ -87,35 +87,26 @@ function startTest() {
 }
 
 function displayQuestion() {
-    let langData = translations[window.currentLanguage] || translations['ko'];
-    const data = langData.questions[currentQuestion];
+    const lang = window.currentLanguage || 'ko';
+    const langData = translations[lang] || translations['ko'];
+    const data = langData.questions[currentQuestion] || translations['en'].questions[currentQuestion];
     
-    if (!data) { // 만약 해당 언어 데이터가 없으면 영어로 대체
-        const fallback = translations['en'].questions[currentQuestion];
-        document.getElementById('question-title').textContent = fallback.q;
-        renderAnswers(fallback.a);
-    } else {
-        document.getElementById('question-title').textContent = data.q;
-        renderAnswers(data.a);
-    }
-    
-    const backBtn = document.getElementById('back-btn');
-    if (backBtn) backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
-    const progress = ((currentQuestion + 1) / 15) * 100;
-    document.getElementById('progress-bar').style.width = progress + '%';
-    document.getElementById('current-question').textContent = currentQuestion + 1;
-}
-
-function renderAnswers(aArray) {
+    document.getElementById('question-title').textContent = data.q;
     const container = document.getElementById('answers-container');
     container.innerHTML = '';
-    aArray.forEach((answer, index) => {
+    data.a.forEach((answer, index) => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
         btn.textContent = answer;
         btn.onclick = () => selectAnswer(index);
         container.appendChild(btn);
     });
+    
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+    const progress = ((currentQuestion + 1) / 15) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    document.getElementById('current-question').textContent = currentQuestion + 1;
 }
 
 function selectAnswer(index) {
@@ -159,7 +150,8 @@ function calculateResult() {
 
 function showResultWithKey(resultKey) {
     window.currentResultKey = resultKey;
-    const langData = translations[window.currentLanguage] || translations['ko'];
+    const lang = window.currentLanguage || 'ko';
+    const langData = translations[lang] || translations['ko'];
     const data = langData.colors[resultKey] || translations['en'].colors[resultKey];
     const info = colorData[resultKey];
     
@@ -195,7 +187,8 @@ function populateAuraTabs() {
 }
 
 function showAuraDetail(key) {
-    const langData = translations[window.currentLanguage] || translations['ko'];
+    const lang = window.currentLanguage || 'ko';
+    const langData = translations[lang] || translations['ko'];
     const detail = langData.colors[key] || translations['en'].colors[key];
     const container = document.getElementById('aura-explorer-detail');
     if (!container) return;
@@ -218,7 +211,7 @@ function downloadResult() {
 async function shareResult() {
     const resKey = window.currentResultKey;
     const canvas = document.getElementById('result-canvas');
-    const lang = window.currentLanguage;
+    const lang = window.currentLanguage || 'ko';
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
     
     let file = 'index.html';
@@ -236,16 +229,13 @@ async function shareResult() {
         try {
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
             const fileObj = new File([blob], `Aura2026-${lang}.png`, { type: 'image/png' });
-
             if (navigator.canShare && navigator.canShare({ files: [fileObj] })) {
                 await navigator.share({ files: [fileObj], title: '2026 Aura Color', text: text, url: url });
             } else {
                 await navigator.share({ title: '2026 Aura Color', text: text, url: url });
             }
             return;
-        } catch (e) {
-            console.log('Native share failed, using clipboard');
-        }
+        } catch (e) { console.log('Share failed'); }
     }
     copyToClipboard(url);
 }
@@ -267,7 +257,8 @@ function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResultKey) return;
     const ctx = canvas.getContext('2d');
-    const langData = translations[window.currentLanguage] || translations['ko'];
+    const lang = window.currentLanguage || 'ko';
+    const langData = translations[lang] || translations['ko'];
     const data = langData.colors[window.currentResultKey] || translations['en'].colors[window.currentResultKey];
     
     canvas.width = 1080; canvas.height = 1350;
