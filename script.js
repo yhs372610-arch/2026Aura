@@ -267,39 +267,41 @@ function downloadResult() {
 }
 
 async function shareResult() {
-    const resultKey = window.currentResult;
+    const resultKey = typeof window.currentResult === 'string' ? window.currentResult : window.currentResult.color;
     const canvas = document.getElementById('result-canvas');
-    const url = `${window.location.origin}${window.location.pathname}?r=${resultKey}`;
-    const colorName = translations[window.currentLanguage].colors[resultKey].name;
+    const currentLang = window.currentLanguage;
+    
+    // 현재 언어에 맞는 파일 경로 설정 (상대방이 해당 언어로 접속하게 함)
+    let langFile = 'index.html';
+    if (currentLang === 'en') langFile = 'en.html';
+    else if (currentLang === 'es') langFile = 'es.html';
+    else if (currentLang === 'ja') langFile = 'ja.html';
+    
+    const url = `${window.location.origin}/${langFile}?r=${resultKey}`;
+    const colorName = translations[currentLang].colors[resultKey].name;
     const shareText = t('shareMessage').replace('[COLOR]', colorName);
 
     try {
-        // 캔버스를 파일로 변환 (공유용)
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-        const file = new File([blob], `2026-Aura-${resultKey}.png`, { type: 'image/png' });
+        const file = new File([blob], `2026-Aura-${resultKey}-${currentLang}.png`, { type: 'image/png' });
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            // 이미지 파일, 제목, 텍스트, URL을 함께 공유
             await navigator.share({
                 files: [file],
                 title: '2026 Aura Color Test',
                 text: shareText,
                 url: url
             });
+        } else if (navigator.share) {
+            await navigator.share({
+                title: '2026 Aura Color Test',
+                text: shareText,
+                url: url
+            });
         } else {
-            // 파일 공유를 지원하지 않는 경우 (기존 방식 + 텍스트)
-            if (navigator.share) {
-                await navigator.share({
-                    title: '2026 Aura Color Test',
-                    text: shareText,
-                    url: url
-                });
-            } else {
-                throw new Error('Share not supported');
-            }
+            throw new Error('Share not supported');
         }
     } catch (err) {
-        // 공유 실패 시 링크 복사
         copyToClipboard(url);
     }
 }
