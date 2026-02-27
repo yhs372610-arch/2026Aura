@@ -32,11 +32,11 @@ const colorData = {
 
 document.addEventListener('DOMContentLoaded', function() {
     const path = window.location.pathname;
-    if (path.endsWith('en.html')) window.currentLanguage = 'en';
-    else if (path.endsWith('es.html')) window.currentLanguage = 'es';
-    else if (path.endsWith('ja.html')) window.currentLanguage = 'ja';
-    else if (path.endsWith('pt.html')) window.currentLanguage = 'pt';
-    else window.currentLanguage = 'ko';
+    if (path.endsWith('en.html')) currentLanguage = 'en';
+    else if (path.endsWith('es.html')) currentLanguage = 'es';
+    else if (path.endsWith('ja.html')) currentLanguage = 'ja';
+    else if (path.endsWith('pt.html')) currentLanguage = 'pt';
+    else currentLanguage = 'ko';
     
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
     
     updatePageLanguage();
-    updateLangButtonText(window.currentLanguage);
+    updateLangButtonText(currentLanguage);
     
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
@@ -88,7 +88,7 @@ function startTest() {
 
 function displayQuestion() {
     // 데이터 유실 방지: 현재 언어에 데이터가 없으면 영어(en)를 대체 데이터로 사용
-    let langData = translations[window.currentLanguage];
+    let langData = translations[currentLanguage];
     if (!langData || !langData.questions[currentQuestion]) {
         langData = translations['en'];
     }
@@ -153,7 +153,7 @@ function calculateResult() {
 function showResultWithKey(resultKey) {
     window.currentResultKey = resultKey;
     // 결과 출력 시에도 데이터 유실 대비 예외 처리
-    let langData = translations[window.currentLanguage];
+    let langData = translations[currentLanguage];
     if (!langData || !langData.colors[resultKey]) langData = translations['en'];
     
     const data = langData.colors[resultKey];
@@ -191,7 +191,7 @@ function populateAuraTabs() {
 }
 
 function showAuraDetail(key) {
-    let langData = translations[window.currentLanguage];
+    let langData = translations[currentLanguage];
     if (!langData || !langData.colors[key]) langData = translations['en'];
     const detail = langData.colors[key];
     const container = document.getElementById('aura-explorer-detail');
@@ -215,7 +215,7 @@ function downloadResult() {
 async function shareResult() {
     const resKey = window.currentResultKey;
     const canvas = document.getElementById('result-canvas');
-    const lang = window.currentLanguage;
+    const lang = currentLanguage;
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
     let file = lang === 'ko' ? 'index.html' : lang + '.html';
     const url = `${baseUrl}/${file}?r=${resKey}`;
@@ -250,7 +250,7 @@ function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResultKey) return;
     const ctx = canvas.getContext('2d');
-    let langData = translations[window.currentLanguage];
+    let langData = translations[currentLanguage];
     if (!langData || !langData.colors[window.currentResultKey]) langData = translations['en'];
     const data = langData.colors[window.currentResultKey];
     
@@ -270,6 +270,7 @@ function drawResultToCanvas() {
         if (aspect > 1) { h = size; w = size * aspect; }
         ctx.drawImage(img, 540 - (w / 2), 420 - (h / 2), w, h);
         ctx.restore();
+        
         ctx.textAlign = 'center'; ctx.fillStyle = '#1a1a1a'; ctx.font = '900 85px sans-serif';
         ctx.fillText(data.name, 540, 750);
         const subW = ctx.measureText(data.subtitle).width + 60;
