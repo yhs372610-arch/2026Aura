@@ -309,6 +309,52 @@ function updatePageLanguage() {
         }
     });
 
+    // 결과 화면 텍스트 업데이트 (테스트 완료 후 언어 변경 시 대응)
+    if (window.currentResult) {
+        const resultKey = typeof window.currentResult === 'string' ? window.currentResult : window.currentResult.color;
+        const resData = translations[currentLanguage].colors[resultKey];
+        if (resData) {
+            const titleEl = document.getElementById('result-title');
+            const subtitleEl = document.getElementById('result-subtitle');
+            const descEl = document.getElementById('result-description');
+            if (titleEl) titleEl.textContent = resData.name;
+            if (subtitleEl) subtitleEl.textContent = resData.subtitle;
+            if (descEl) descEl.textContent = resData.description;
+
+            // 키워드 업데이트
+            const keywordsContainer = document.getElementById('keywords');
+            if (keywordsContainer) {
+                keywordsContainer.innerHTML = '';
+                resData.keywords.forEach(keyword => {
+                    const tag = document.createElement('div');
+                    tag.className = 'keyword-tag';
+                    tag.textContent = keyword;
+                    keywordsContainer.appendChild(tag);
+                });
+            }
+
+            // 강점 및 추천 리스트 업데이트
+            const strengthsList = document.getElementById('strengths-list');
+            if (strengthsList) {
+                strengthsList.innerHTML = '';
+                resData.strengths.forEach(s => {
+                    const li = document.createElement('li');
+                    li.textContent = s;
+                    strengthsList.appendChild(li);
+                });
+            }
+            const recommendationsList = document.getElementById('recommendations-list');
+            if (recommendationsList) {
+                recommendationsList.innerHTML = '';
+                resData.recommendations.forEach(r => {
+                    const li = document.createElement('li');
+                    li.textContent = r;
+                    recommendationsList.appendChild(li);
+                });
+            }
+        }
+    }
+
     // 푸터 SEO 섹션 업데이트 (접이식 구조 대응)
     const seoData = translations[currentLanguage].seo;
     if (seoData) {

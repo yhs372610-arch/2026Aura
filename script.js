@@ -46,8 +46,15 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    const bodyStartLang = document.body.getAttribute('data-start-lang');
-    if (bodyStartLang) currentLanguage = bodyStartLang;
+    // index.html에서 로드된 경우 기본 언어를 한국어(ko)로 설정
+    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.includes('aura2026')) {
+        currentLanguage = 'ko';
+    } else {
+        const bodyStartLang = document.body.getAttribute('data-start-lang');
+        if (bodyStartLang) currentLanguage = bodyStartLang;
+        else currentLanguage = detectLanguage();
+    }
+    
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
     if (dropdownBtn) {
@@ -195,7 +202,9 @@ function showResultWithKey(resultColor) {
         recommendationsList.innerHTML = '';
         result.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recommendationsList.appendChild(li); });
     }
-    window.currentResult = { color: resultColor, name: result.name, subtitle: result.subtitle, keywords: result.keywords, description: result.description, colorInfo: colorInfo };
+    
+    // 현재 결과 키 저장 (언어 변경 시 업데이트를 위함)
+    window.currentResult = resultColor;
     
     // 다른 아우라 둘러보기 탭 초기화
     populateAuraTabs();
