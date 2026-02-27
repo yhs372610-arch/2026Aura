@@ -320,36 +320,111 @@ function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResult) return;
     const ctx = canvas.getContext('2d');
-    const resKey = window.currentResult;
+    const resKey = typeof window.currentResult === 'string' ? window.currentResult : window.currentResult.color;
     const data = translations[window.currentLanguage].colors[resKey];
-    canvas.width = 800; canvas.height = 1000;
-    const grad = ctx.createLinearGradient(0, 0, 0, 1000);
-    grad.addColorStop(0, '#667eea'); grad.addColorStop(1, '#764ba2');
-    ctx.fillStyle = grad; ctx.fillRect(0, 0, 800, 1000);
-    ctx.fillStyle = 'white'; ctx.beginPath(); ctx.roundRect(50, 50, 700, 900, 40); ctx.fill();
-    const img = new Image(); img.src = colorData[resKey].image;
+    
+    // 고해상도 설정 (카드 뉴스 규격 1080x1350)
+    canvas.width = 1080;
+    canvas.height = 1350;
+    
+    // 1. 배경 그라데이션
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1350);
+    grad.addColorStop(0, '#667eea');
+    grad.addColorStop(1, '#764ba2');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1350);
+    
+    // 2. 메인 카드 박스
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.roundRect(80, 80, 920, 1190, 60);
+    ctx.fill();
+    
+    // 3. 상단 헤더
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#667eea';
+    ctx.font = 'bold 40px sans-serif';
+    ctx.fillText('2026 AURA COLOR TEST', 540, 160);
+    
+    // 4. 아우라 이미지 그리기 (비율 유지 로직)
+    const img = new Image();
+    img.src = colorData[resKey].image;
     img.onload = () => {
-        ctx.save(); ctx.beginPath(); ctx.arc(400, 300, 180, 0, Math.PI * 2); ctx.clip();
-        ctx.drawImage(img, 220, 120, 360, 360); ctx.restore();
-        ctx.textAlign = 'center'; ctx.fillStyle = '#333'; ctx.font = 'bold 60px sans-serif';
-        ctx.fillText(data.name, 400, 560); ctx.fillStyle = '#666'; ctx.font = '32px sans-serif';
-        ctx.fillText(data.subtitle, 400, 610); ctx.font = 'bold 24px sans-serif';
-        const kwText = data.keywords.join(' · '); ctx.fillStyle = '#667eea';
-        ctx.fillText(kwText, 400, 670); ctx.fillStyle = '#555'; ctx.font = '24px sans-serif';
-        wrapText(ctx, data.description, 400, 740, 600, 35);
-        ctx.fillStyle = '#999'; ctx.font = '20px sans-serif';
-        ctx.fillText('2026aura.pages.dev', 400, 910);
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(540, 420, 220, 0, Math.PI * 2);
+        ctx.strokeStyle = '#f0f4ff';
+        ctx.lineWidth = 15;
+        ctx.stroke();
+        ctx.clip();
+        
+        // Image Aspect Ratio Correction (Cover)
+        const imgAspect = img.width / img.height;
+        const radius = 220;
+        const drawSize = radius * 2;
+        let drawW, drawH, drawX, drawY;
+        
+        if (imgAspect > 1) {
+            drawH = drawSize;
+            drawW = drawSize * imgAspect;
+        } else {
+            drawW = drawSize;
+            drawH = drawSize / imgAspect;
+        }
+        drawX = 540 - (drawW / 2);
+        drawY = 420 - (drawH / 2);
+        
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        ctx.restore();
+        
+        // 5. 결과 텍스트 섹션
+        ctx.fillStyle = '#1a1a1a';
+        ctx.font = '900 85px sans-serif';
+        ctx.fillText(data.name, 540, 750);
+        
+        ctx.font = 'bold 38px sans-serif';
+        const subTitle = data.subtitle;
+        const subWidth = ctx.measureText(subTitle).width + 60;
+        ctx.fillStyle = '#f8f9ff';
+        ctx.beginPath();
+        ctx.roundRect(540 - (subWidth / 2), 790, subWidth, 65, 30);
+        ctx.fill();
+        ctx.fillStyle = '#667eea';
+        ctx.fillText(subTitle, 540, 835);
+        
+        ctx.fillStyle = '#999';
+        ctx.font = 'bold 32px sans-serif';
+        ctx.fillText(data.keywords.join('  •  '), 540, 910);
+        
+        ctx.strokeStyle = '#eee';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(200, 960); ctx.lineTo(880, 960); ctx.stroke();
+        
+        ctx.fillStyle = '#444';
+        ctx.font = '34px sans-serif';
+        wrapText(ctx, data.description, 540, 1030, 750, 50);
+        
+        ctx.fillStyle = '#ccc';
+        ctx.font = 'bold 28px sans-serif';
+        ctx.fillText('2026aura.pages.dev', 540, 1220);
     };
 }
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
-    const words = text.split(' '); let line = '';
+    const isCjk = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|ぁ-ん|ァ-ヶ|ー|々|〆|〤]/.test(text);
+    const words = isCjk ? text.split('') : text.split(' ');
+    let line = '';
+
     for (let n = 0; n < words.length; n++) {
-        const testLine = line + words[n] + ' ';
+        const testLine = line + words[n] + (isCjk ? '' : ' ');
         const metrics = context.measureText(testLine);
         if (metrics.width > maxWidth && n > 0) {
-            context.fillText(line, x, y); line = words[n] + ' '; y += lineHeight;
-        } else line = testLine;
+            context.fillText(line, x, y);
+            line = words[n] + (isCjk ? '' : ' ');
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
     }
     context.fillText(line, x, y);
 }
