@@ -87,7 +87,13 @@ function startTest() {
 }
 
 function displayQuestion() {
-    const data = translations[window.currentLanguage].questions[currentQuestion] || translations['en'].questions[0];
+    // 데이터 유실 방지: 현재 언어에 데이터가 없으면 영어(en)를 대체 데이터로 사용
+    let langData = translations[window.currentLanguage];
+    if (!langData || !langData.questions[currentQuestion]) {
+        langData = translations['en'];
+    }
+    
+    const data = langData.questions[currentQuestion];
     document.getElementById('question-title').textContent = data.q;
     const container = document.getElementById('answers-container');
     container.innerHTML = '';
@@ -106,6 +112,7 @@ function displayQuestion() {
 }
 
 function selectAnswer(index) {
+    answers.push(index);
     const scoreMap = answerScores[currentQuestion][index];
     for (let color in scoreMap) scores[color] += scoreMap[color];
     currentQuestion++;
@@ -117,7 +124,8 @@ function goBack() {
     if (currentQuestion > 0) {
         currentQuestion--;
         const lastAns = answers.pop();
-        // 점수 차감 로직 생략 (간결화)
+        const scoreMap = answerScores[currentQuestion][lastAns];
+        for (let color in scoreMap) scores[color] -= scoreMap[color];
         displayQuestion();
     }
 }
@@ -144,7 +152,11 @@ function calculateResult() {
 
 function showResultWithKey(resultKey) {
     window.currentResultKey = resultKey;
-    const data = translations[window.currentLanguage].colors[resultKey];
+    // 결과 출력 시에도 데이터 유실 대비 예외 처리
+    let langData = translations[window.currentLanguage];
+    if (!langData || !langData.colors[resultKey]) langData = translations['en'];
+    
+    const data = langData.colors[resultKey];
     const info = colorData[resultKey];
     
     const displayEl = document.getElementById('result-color-display');
@@ -154,9 +166,7 @@ function showResultWithKey(resultKey) {
         displayEl.setAttribute('aria-label', `${data.name} - ${data.subtitle}`);
     }
     
-    // 강제 데이터 업데이트
     updatePageLanguage();
-    
     populateAuraTabs();
     showScreen('result-screen');
     setTimeout(drawResultToCanvas, 300);
@@ -181,7 +191,9 @@ function populateAuraTabs() {
 }
 
 function showAuraDetail(key) {
-    const detail = translations[window.currentLanguage].colors[key];
+    let langData = translations[window.currentLanguage];
+    if (!langData || !langData.colors[key]) langData = translations['en'];
+    const detail = langData.colors[key];
     const container = document.getElementById('aura-explorer-detail');
     if (!container) return;
     container.style.display = 'block';
@@ -207,11 +219,14 @@ async function shareResult() {
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
     let file = lang === 'ko' ? 'index.html' : lang + '.html';
     const url = `${baseUrl}/${file}?r=${resKey}`;
-    const text = t('shareMessage').replace('[COLOR]', translations[lang].colors[resKey].name);
+    
+    let langData = translations[lang];
+    if (!langData || !langData.colors[resKey]) langData = translations['en'];
+    const text = t('shareMessage').replace('[COLOR]', langData.colors[resKey].name);
 
     if (navigator.share) {
         try {
-            const blob = await new Promise(r => canvas.toBlob(resolve, 'image/png'));
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
             const f = new File([blob], `Aura2026.png`, { type: 'image/png' });
             await navigator.share({ files: [f], title: '2026 Aura', text: text, url: url });
         } catch (e) { copyToClipboard(url); }
@@ -219,49 +234,49 @@ async function shareResult() {
 }
 
 function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => alert(t('linkCopied'))).catch(() => {
-        const input = document.createElement('input');
-        document.body.appendChild(input); input.value = text; input.select();
-        document.execCommand('copy'); document.body.removeChild(input);
-        alert(t('linkCopied'));
-    });
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => alert(t('linkCopied'))).catch(() => fallbackCopy(text));
+    } else fallbackCopy(text);
+}
+
+function fallbackCopy(text) {
+    const input = document.createElement('input');
+    document.body.appendChild(input); input.value = text; input.select();
+    document.execCommand('copy'); document.body.removeChild(input);
+    alert(t('linkCopied'));
 }
 
 function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResultKey) return;
     const ctx = canvas.getContext('2d');
-    const data = translations[window.currentLanguage].colors[window.currentResultKey];
-    canvas.width = 1080; canvas.height = 1350;
+    let langData = translations[window.currentLanguage];
+    if (!langData || !langData.colors[window.currentResultKey]) langData = translations['en'];
+    const data = langData.colors[window.currentResultKey];
     
+    canvas.width = 1080; canvas.height = 1350;
     const grad = ctx.createLinearGradient(0, 0, 1080, 1350);
     grad.addColorStop(0, '#667eea'); grad.addColorStop(1, '#764ba2');
     ctx.fillStyle = grad; ctx.fillRect(0, 0, 1080, 1350);
-    
     ctx.fillStyle = 'white'; ctx.beginPath(); ctx.roundRect(80, 80, 920, 1190, 60); ctx.fill();
     
     const img = new Image(); img.src = colorData[window.currentResultKey].image;
     img.onload = () => {
         ctx.save(); ctx.beginPath(); ctx.arc(540, 420, 220, 0, Math.PI * 2);
         ctx.strokeStyle = '#f0f4ff'; ctx.lineWidth = 15; ctx.stroke(); ctx.clip();
-        
         const aspect = img.width / img.height;
         const size = 440;
         let w = size, h = size / aspect;
         if (aspect > 1) { h = size; w = size * aspect; }
         ctx.drawImage(img, 540 - (w / 2), 420 - (h / 2), w, h);
         ctx.restore();
-        
         ctx.textAlign = 'center'; ctx.fillStyle = '#1a1a1a'; ctx.font = '900 85px sans-serif';
         ctx.fillText(data.name, 540, 750);
-        
         const subW = ctx.measureText(data.subtitle).width + 60;
         ctx.fillStyle = '#f8f9ff'; ctx.beginPath(); ctx.roundRect(540 - (subW / 2), 790, subW, 65, 30); ctx.fill();
         ctx.fillStyle = '#667eea'; ctx.font = 'bold 38px sans-serif'; ctx.fillText(data.subtitle, 540, 835);
-        
         ctx.fillStyle = '#999'; ctx.font = 'bold 32px sans-serif'; ctx.fillText(data.keywords.join('  •  '), 540, 910);
         ctx.strokeStyle = '#eee'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(200, 960); ctx.lineTo(880, 960); ctx.stroke();
-        
         ctx.fillStyle = '#444'; ctx.font = '34px sans-serif';
         wrapText(ctx, data.description, 540, 1030, 750, 50);
         ctx.fillStyle = '#ccc'; ctx.font = 'bold 28px sans-serif'; ctx.fillText('2026aura.pages.dev', 540, 1220);
@@ -269,7 +284,7 @@ function drawResultToCanvas() {
 }
 
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-    const isCjk = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+    const isCjk = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|ぁ-ん|ァ-ヶ]/.test(text);
     const words = isCjk ? text.split('') : text.split(' ');
     let line = '';
     for (let n = 0; n < words.length; n++) {
