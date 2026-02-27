@@ -225,7 +225,8 @@ async function shareResult() {
     const resData = langData.colors[resKey] || translations['en'].colors[resKey];
     const text = t('shareMessage').replace('[COLOR]', resData.name);
 
-    if (navigator.share) {
+    // 모바일 기기 감지 (이미지 + 텍스트 + 링크 공유 시도)
+    if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         try {
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
             const fileObj = new File([blob], `Aura2026-${lang}.png`, { type: 'image/png' });
@@ -235,8 +236,10 @@ async function shareResult() {
                 await navigator.share({ title: '2026 Aura Color', text: text, url: url });
             }
             return;
-        } catch (e) { console.log('Share failed'); }
+        } catch (e) { console.log('Mobile share failed'); }
     }
+    
+    // 웹(데스크탑) 환경: URL만 깔끔하게 클립보드 복사
     copyToClipboard(url);
 }
 
