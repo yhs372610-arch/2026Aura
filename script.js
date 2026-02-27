@@ -220,9 +220,15 @@ async function shareResult() {
     const canvas = document.getElementById('result-canvas');
     const lang = window.currentLanguage;
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
-    let file = lang === 'ko' ? 'index.html' : lang + '.html';
-    const url = `${baseUrl}/${file}?r=${resKey}`;
     
+    // 다국어 파일 경로 매핑 (pt 추가 및 구조화)
+    let file = 'index.html';
+    if (lang === 'en') file = 'en.html';
+    else if (lang === 'es') file = 'es.html';
+    else if (lang === 'ja') file = 'ja.html';
+    else if (lang === 'pt') file = 'pt.html';
+    
+    const url = `${baseUrl}/${file}?r=${resKey}`;
     const langData = translations[lang] || translations['ko'];
     const resData = langData.colors[resKey] || translations['en'].colors[resKey];
     const text = t('shareMessage').replace('[COLOR]', resData.name);
@@ -230,8 +236,8 @@ async function shareResult() {
     if (navigator.share) {
         try {
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-            const f = new File([blob], `Aura2026.png`, { type: 'image/png' });
-            await navigator.share({ files: [f], title: '2026 Aura', text: text, url: url });
+            const f = new File([blob], `Aura2026-${lang}.png`, { type: 'image/png' });
+            await navigator.share({ files: [f], title: '2026 Aura Color', text: text, url: url });
         } catch (e) { copyToClipboard(url); }
     } else copyToClipboard(url);
 }
