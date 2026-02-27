@@ -57,11 +57,12 @@ const translations = {
         },
         footer: { privacy: "Privacy Policy", contact: "Contact" },
         seo: {
+            learnMore: "✨ Learn more about the test",
             title: "2026 Aura Color Test: Why take this test?",
-            description: "The 2026 Aura Color Test uses a psychology-based algorithm updated for the year 2026. By answering 15 behavioral questions, you can discover your core energy color among 6 unique profiles: Midnight Black, Cool Blue, Forest Green, Solar Gold, Vamp Purple, and Soft Pink. This test is designed for those seeking clarity and positive energy for the upcoming year.",
-            item1: "2026 Trending: Discover why certain colors resonate with your energy in 2026.",
-            item2: "Personal Insights: Get actionable advice and strengths analysis based on your aura.",
-            item3: "Updated Algorithms: Reflecting the latest social and psychological trends of 2026."
+            description: "The 2026 Aura Color Test uses a psychology-based algorithm updated for the year 2026. Discover your energy color through psychology-based personality analysis.",
+            item1_desc: "Discover why certain colors resonate with your energy in 2026.",
+            item2_desc: "Get actionable advice and strengths analysis based on your aura.",
+            item3_desc: "Reflecting the latest social and psychological trends of 2026."
         }
     },
     ko: {
@@ -121,11 +122,12 @@ const translations = {
         },
         footer: { privacy: "개인정보처리방침", contact: "문의하기" },
         seo: {
+            learnMore: "✨ 테스트에 대해 더 알아보기",
             title: "2026 오라 컬러 테스트: 왜 이 테스트를 해야 할까요?",
-            description: "2026 오라 컬러 테스트는 2026년의 최신 심리 트렌드를 반영한 알고리즘을 사용합니다. 15가지 질문을 통해 미드나잇 블랙, 쿨 블루, 포레스트 그린, 솔라 골드, 뱀프 퍼플, 소프트 핑크 등 6가지 유니크한 에너지 컬러 중 당신의 핵심 컬러를 찾아보세요.",
-            item1: "2026 트렌딩: 2026년 당신의 에너지와 공명하는 컬러를 발견하세요.",
-            item2: "개인별 인사이트: 아우라 분석을 통해 실질적인 조언과 강점 분석을 제공합니다.",
-            item3: "최신 알고리즘: 2026년의 사회적, 심리학적 트렌드를 완벽하게 반영했습니다."
+            description: "2026 오라 컬러 테스트는 2026년의 최신 심리 트렌드를 반영한 알고리즘을 사용합니다. 심리학 기반 성격 분석을 통해 당신의 에너지 컬러를 찾아보세요.",
+            item1_desc: "2026년 당신의 에너지와 공명하는 컬러를 발견하세요.",
+            item2_desc: "아우라 분석을 통해 실질적인 조언과 강점 분석을 제공합니다.",
+            item3_desc: "2026년의 사회적, 심리학적 트렌드를 완벽하게 반영했습니다."
         }
     },
     es: {
@@ -145,7 +147,6 @@ const translations = {
         },
         questions: [
             { q: "Al empezar tu día en 2026, ¿cuál es tu primer pensamiento?", a: ["¿Qué metas lograré hoy?", "Espero que hoy traiga paz", "¡A ver qué cosas emocionantes pasan!", "Necesito tiempo para recargar solo"] }
-            // ... (추가 질문 생략 또는 보충 가능)
         ],
         loading: {
             analyzing: "Analizando tu aura...",
@@ -163,29 +164,29 @@ const translations = {
             exploreTitle: "Explorar todas"
         },
         colors: {
-            coolBlue: { name: "Cool Blue", subtitle: "El Estratega Calmo", keywords: ["Estratégico", "Calmo", "Confiable"], description: "Tu aura irradia una energía fresca y compuesta. Abordas la vida con lógica y claridad. En 2026, tu presencia estable será tu mayor fortaleza.", strengths: ["Excelente planificación estratégica", "Mantiene la calma bajo presión", "Crea orden en el caos"], recommendations: ["Lidera proyectos de planificación", "Comparte ideas por escrito", "Equilibra lógica y creatividad"] }
-            // ... (추가 컬러 생략 또는 보충)
+            coolBlue: { name: "Cool Blue", subtitle: "El Estratega Calmo", keywords: ["Estratégico", "Calmo", "Confiable"], description: "Tu aura irradia una energía fresca y compuesta. En 2026, tu presencia estable será tu mayor fortaleza.", strengths: ["Excelente planificación estratégica", "Mantiene la calma bajo presión", "Crea orden en el caos"], recommendations: ["Lidera proyectos de planificación", "Comparte ideas por escrito", "Equilibra lógica y creatividad"] }
         },
         footer: { privacy: "Política de Privacidad", contact: "Contacto" },
         seo: {
+            learnMore: "✨ Más información sobre el test",
             title: "Test de Color de Aura 2026: ¿Por qué hacer este test?",
-            description: "El Test de Color de Aura 2026 utiliza un algoritmo basado en psicología actualizado para el año 2026. Descubre tu color de energía principal entre 6 perfiles únicos.",
-            item1: "Tendencias 2026: Descubre por qué ciertos colores resuenan con tu energía.",
-            item2: "Insights personales: Obtén consejos y análisis de fortalezas.",
-            item3: "Algoritmos actualizados: Reflejando las tendencias de 2026."
+            description: "El Test de Color de Aura 2026 utiliza un algoritmo basado en psicología actualizado para el año 2026. Descubre tu color de energía principal.",
+            item1_desc: "Descubre por qué ciertos colores resuenan con tu energía.",
+            item2_desc: "Obtén consejos y análisis de fortalezas.",
+            item3_desc: "Reflejando las tendencias de 2026."
         }
     },
     ja: {
         meta: {
-            title: "あなたの2026年オーラカラーは?",
+            title: "あなたの2026年オー라カラーは?",
             description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
         },
         shareMessage: "私の2026年オーラカラーは [COLOR]! ✨ 今すぐチェック！",
         linkCopied: "リンクをコピーしました！友達にシェアしましょう。",
-        canvasTitle: "2026年 オーラカラー",
+        canvasTitle: "2026年 オー라カラー",
         back: "戻る",
         home: {
-            title: "2026年 オーラカラー診断",
+            title: "2026年 オー라カラー診断",
             subtitle: "心理学に基づいた性格分析で、あなたのエネルギーカラーを見つけましょう",
             startButton: "診断を始める",
             info: "⏱️ 2分 | 📝 15の質問 | 🎨 6つのカラー"
@@ -194,10 +195,10 @@ const translations = {
             { q: "2026年の朝、一日を始めるときに最初に思うことは？", a: ["今日はどんな目標を達成しようか？", "今日が平和で穏やかでありますように", "今日はどんなワクワクすることが起きるかな？", "自分だけの充電時間が必要だ"] }
         ],
         loading: {
-            analyzing: "オーラを分析中...",
+            analyzing: "オー라を分析中...",
             step1: "エネルギーパターンを抽出中...",
             step2: "カラー周波数をマッピング中...",
-            step3: "2026年のオーラを公開中..."
+            step3: "2026年のオー라を公開中..."
         },
         result: {
             aboutTitle: "あなたのオーラについて",
@@ -209,15 +210,16 @@ const translations = {
             exploreTitle: "すべてのオーラを見る"
         },
         colors: {
-            coolBlue: { name: "Cool Blue", subtitle: "冷静な戦略家", keywords: ["戦略的", "冷静", "信頼できる"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。2026年、あなたの揺るぎない平穏さは最大の強みとなるでしょう。", strengths: ["緻密な戦略立案能力", "プレッシャー下でも冷静", "秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導", "洞察を共有", "バランスを保つ"] }
+            coolBlue: { name: "Cool Blue", subtitle: "冷静な戦略家", keywords: ["戦略적", "冷静", "信頼できる"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。2026年、あなたの揺るぎない平穏さは最大の強みとなるでしょう。", strengths: ["緻密な戦略立案能力", "プレッシャー下でも冷静", "秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導", "洞察を共有", "バランスを保つ"] }
         },
         footer: { privacy: "プライバシーポリシー", contact: "お問い合わせ" },
         seo: {
-            title: "2026年オーラカラー診断：なぜこの診断を受けるべきなのですか？",
-            description: "2026年オーラカラー診断は、2026年の最新トレンドを反映したアルゴリズムを使用しています。6つのカラーからあなたのコアカラーを見つけましょう。",
-            item1: "2026年のトレンド：なぜ特定の色があなたのエネルギーと共鳴するのか発見しましょう。",
-            item2: "パーソナルインサイト：強み分析とアドバイスを提供します。",
-            item3: "最新アルゴリズム：2026年の社会・心理トレンドを反映。"
+            learnMore: "✨ 診断について詳しく知る",
+            title: "2026年オー라カラー診断：なぜこの診断を受けるべきなのですか？",
+            description: "2026年オー라カラー診断は、2026年の最新トレンド를 반영한 알고리즘을 사용합니다. 6つのカラーからあなたのコアカラーを見つけましょう。",
+            item1_desc: "2026年のトレンド：なぜ特定の色があなたのエネルギーと共鳴するのか発見しましょう。",
+            item2_desc: "パーソ널インサイト：強み分析とアドバイスを提供します。",
+            item3_desc: "最新アルゴリズム：2026年の社会・心理トレンドを反映。"
         }
     },
     pt: {
@@ -258,11 +260,12 @@ const translations = {
         },
         footer: { privacy: "Política de Privacidade", contact: "Contacto" },
         seo: {
+            learnMore: "✨ Saiba mais sobre o teste",
             title: "Teste de Aura 2026: Por que fazer este teste?",
             description: "O Teste de Aura 2026 utiliza um algoritmo baseado em psicologia para 2026. Descubra a sua cor de energia principal.",
-            item1: "Tendências 2026: Descubra por que certas cores ressoam com a sua energia.",
-            item2: "Insights pessoais: Receba conselhos e análise de pontos fortes.",
-            item3: "Algoritmos atualizados: Refletindo as tendências de 2026."
+            item1_desc: "Tendências 2026: Descubra por que certas cores ressoam com a sua energia.",
+            item2_desc: "Insights pessoais: Receba conselhos e análise de pontos fortes.",
+            item3_desc: "Algoritmos atualizados: Refletindo as tendências de 2026."
         }
     }
 };
@@ -306,21 +309,22 @@ function updatePageLanguage() {
         }
     });
 
-    // 푸터 SEO 섹션 업데이트 추가
+    // 푸터 SEO 섹션 업데이트 (접이식 구조 대응)
     const seoData = translations[currentLanguage].seo;
     if (seoData) {
-        const seoTitle = document.querySelector('h2[data-i18n="seo.title"]');
-        const seoDesc = document.querySelector('p[data-i18n="seo.description"]');
-        const seoItems = document.querySelectorAll('footer ul li strong');
-        const seoTexts = document.querySelectorAll('footer ul li');
+        const seoLearnMore = document.querySelector('[data-i18n="seo.learnMore"]');
+        const seoTitle = document.querySelector('[data-i18n="seo.title"]');
+        const seoDesc = document.querySelector('[data-i18n="seo.description"]');
+        const seoItem1 = document.querySelector('[data-i18n="seo.item1_desc"]');
+        const seoItem2 = document.querySelector('[data-i18n="seo.item2_desc"]');
+        const seoItem3 = document.querySelector('[data-i18n="seo.item3_desc"]');
 
+        if (seoLearnMore) seoLearnMore.textContent = seoData.learnMore;
         if (seoTitle) seoTitle.textContent = seoData.title;
         if (seoDesc) seoDesc.textContent = seoData.description;
-        if (seoTexts.length >= 3) {
-            seoTexts[0].innerHTML = `<strong>${seoData.item1.split(':')[0]}:</strong> ${seoData.item1.split(':')[1]}`;
-            seoTexts[1].innerHTML = `<strong>${seoData.item2.split(':')[0]}:</strong> ${seoData.item2.split(':')[1]}`;
-            seoTexts[2].innerHTML = `<strong>${seoData.item3.split(':')[0]}:</strong> ${seoData.item3.split(':')[1]}`;
-        }
+        if (seoItem1) seoItem1.textContent = seoData.item1_desc;
+        if (seoItem2) seoItem2.textContent = seoData.item2_desc;
+        if (seoItem3) seoItem3.textContent = seoData.item3_desc;
     }
 
     // 메타 태그 업데이트 (SNS 공유용)
