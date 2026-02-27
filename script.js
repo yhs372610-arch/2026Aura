@@ -31,12 +31,12 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    const path = window.location.pathname;
-    if (path.endsWith('en.html')) currentLanguage = 'en';
-    else if (path.endsWith('es.html')) currentLanguage = 'es';
-    else if (path.endsWith('ja.html')) currentLanguage = 'ja';
-    else if (path.endsWith('pt.html')) currentLanguage = 'pt';
-    else currentLanguage = 'ko';
+    // 초기 언어 설정
+    if (window.location.pathname.endsWith('en.html')) window.currentLanguage = 'en';
+    else if (window.location.pathname.endsWith('es.html')) window.currentLanguage = 'es';
+    else if (window.location.pathname.endsWith('ja.html')) window.currentLanguage = 'ja';
+    else if (window.location.pathname.endsWith('pt.html')) window.currentLanguage = 'pt';
+    else window.currentLanguage = 'ko';
     
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
     
     updatePageLanguage();
-    updateLangButtonText(currentLanguage);
+    updateLangButtonText(window.currentLanguage);
     
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
@@ -87,28 +87,35 @@ function startTest() {
 }
 
 function displayQuestion() {
-    // 데이터 유실 방지: 현재 언어에 데이터가 없으면 영어(en)를 대체 데이터로 사용
-    let langData = translations[currentLanguage];
-    if (!langData || !langData.questions[currentQuestion]) {
-        langData = translations['en'];
+    let langData = translations[window.currentLanguage] || translations['ko'];
+    const data = langData.questions[currentQuestion];
+    
+    if (!data) { // 만약 해당 언어 데이터가 없으면 영어로 대체
+        const fallback = translations['en'].questions[currentQuestion];
+        document.getElementById('question-title').textContent = fallback.q;
+        renderAnswers(fallback.a);
+    } else {
+        document.getElementById('question-title').textContent = data.q;
+        renderAnswers(data.a);
     }
     
-    const data = langData.questions[currentQuestion];
-    document.getElementById('question-title').textContent = data.q;
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+    const progress = ((currentQuestion + 1) / 15) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    document.getElementById('current-question').textContent = currentQuestion + 1;
+}
+
+function renderAnswers(aArray) {
     const container = document.getElementById('answers-container');
     container.innerHTML = '';
-    data.a.forEach((answer, index) => {
+    aArray.forEach((answer, index) => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
         btn.textContent = answer;
         btn.onclick = () => selectAnswer(index);
         container.appendChild(btn);
     });
-    const backBtn = document.getElementById('back-btn');
-    if (backBtn) backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
-    const progress = ((currentQuestion + 1) / 15) * 100;
-    document.getElementById('progress-bar').style.width = progress + '%';
-    document.getElementById('current-question').textContent = currentQuestion + 1;
 }
 
 function selectAnswer(index) {
@@ -152,11 +159,8 @@ function calculateResult() {
 
 function showResultWithKey(resultKey) {
     window.currentResultKey = resultKey;
-    // 결과 출력 시에도 데이터 유실 대비 예외 처리
-    let langData = translations[currentLanguage];
-    if (!langData || !langData.colors[resultKey]) langData = translations['en'];
-    
-    const data = langData.colors[resultKey];
+    const langData = translations[window.currentLanguage] || translations['ko'];
+    const data = langData.colors[resultKey] || translations['en'].colors[resultKey];
     const info = colorData[resultKey];
     
     const displayEl = document.getElementById('result-color-display');
@@ -191,9 +195,8 @@ function populateAuraTabs() {
 }
 
 function showAuraDetail(key) {
-    let langData = translations[currentLanguage];
-    if (!langData || !langData.colors[key]) langData = translations['en'];
-    const detail = langData.colors[key];
+    const langData = translations[window.currentLanguage] || translations['ko'];
+    const detail = langData.colors[key] || translations['en'].colors[key];
     const container = document.getElementById('aura-explorer-detail');
     if (!container) return;
     container.style.display = 'block';
@@ -215,14 +218,14 @@ function downloadResult() {
 async function shareResult() {
     const resKey = window.currentResultKey;
     const canvas = document.getElementById('result-canvas');
-    const lang = currentLanguage;
+    const lang = window.currentLanguage;
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
     let file = lang === 'ko' ? 'index.html' : lang + '.html';
     const url = `${baseUrl}/${file}?r=${resKey}`;
     
-    let langData = translations[lang];
-    if (!langData || !langData.colors[resKey]) langData = translations['en'];
-    const text = t('shareMessage').replace('[COLOR]', langData.colors[resKey].name);
+    const langData = translations[lang] || translations['ko'];
+    const resData = langData.colors[resKey] || translations['en'].colors[resKey];
+    const text = t('shareMessage').replace('[COLOR]', resData.name);
 
     if (navigator.share) {
         try {
@@ -250,9 +253,8 @@ function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResultKey) return;
     const ctx = canvas.getContext('2d');
-    let langData = translations[currentLanguage];
-    if (!langData || !langData.colors[window.currentResultKey]) langData = translations['en'];
-    const data = langData.colors[window.currentResultKey];
+    const langData = translations[window.currentLanguage] || translations['ko'];
+    const data = langData.colors[window.currentResultKey] || translations['en'].colors[window.currentResultKey];
     
     canvas.width = 1080; canvas.height = 1350;
     const grad = ctx.createLinearGradient(0, 0, 1080, 1350);
