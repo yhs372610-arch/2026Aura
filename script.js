@@ -46,14 +46,13 @@ const colorData = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    // index.html에서 로드된 경우 기본 언어를 한국어(ko)로 설정
-    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.includes('aura2026')) {
-        window.currentLanguage = 'ko';
-    } else {
-        const bodyStartLang = document.body.getAttribute('data-start-lang');
-        if (bodyStartLang) window.currentLanguage = bodyStartLang;
-        else window.currentLanguage = detectLanguage();
-    }
+    // 초기 언어 설정 로직 개선
+    const path = window.location.pathname;
+    if (path.endsWith('en.html')) window.currentLanguage = 'en';
+    else if (path.endsWith('es.html')) window.currentLanguage = 'es';
+    else if (path.endsWith('ja.html')) window.currentLanguage = 'ja';
+    else if (path.endsWith('pt.html')) window.currentLanguage = 'pt';
+    else window.currentLanguage = 'ko'; // 기본값 한국어
     
     const dropdown = document.getElementById('language-dropdown');
     const dropdownBtn = document.getElementById('dropdown-main-btn');
@@ -64,9 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         option.addEventListener('click', () => {
             const lang = option.getAttribute('data-lang');
             changeLanguage(lang);
-            const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES', pt: '🇵🇹 PT' };
-            const textEl = document.querySelector('.current-lang-text');
-            if (textEl) textEl.textContent = langMap[lang] || lang.toUpperCase();
+            updateLangButtonText(lang);
             dropdown.classList.remove('active');
             if (window.currentResult) drawResultToCanvas();
         });
@@ -74,15 +71,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', () => { if (dropdown) dropdown.classList.remove('active'); });
     
     updatePageLanguage();
-    
-    const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES', pt: '🇵🇹 PT' };
-    const textEl = document.querySelector('.current-lang-text');
-    if (textEl) textEl.textContent = langMap[window.currentLanguage] || window.currentLanguage.toUpperCase();
+    updateLangButtonText(window.currentLanguage);
     
     const urlParams = new URLSearchParams(window.location.search);
     const sharedResult = urlParams.get('r');
     if (sharedResult && colorData[sharedResult]) setTimeout(() => showResultWithKey(sharedResult), 100);
 });
+
+function updateLangButtonText(lang) {
+    const langMap = { ko: '🇰🇷 KO', en: '🇺🇸 EN', ja: '🇯🇵 JA', es: '🇪🇸 ES', pt: '🇵🇹 PT' };
+    const textEl = document.querySelector('.current-lang-text');
+    if (textEl) textEl.textContent = langMap[lang] || lang.toUpperCase();
+}
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
@@ -94,10 +94,12 @@ function startTest() {
     currentQuestion = 0;
     answers = [];
     scores = { coolBlue: 0, vampPurple: 0, solarGold: 0, forestGreen: 0, softPink: 0, midnightBlack: 0 };
+    
+    // URL 정리
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.pushState({path:newUrl}, '', newUrl);
     
-    // 시작 시 언어 상태를 다시 한번 업데이트 (안정성 확보)
+    // 언어 상태 강제 업데이트
     updatePageLanguage();
     
     showScreen('question-screen');
@@ -106,6 +108,8 @@ function startTest() {
 
 function displayQuestion() {
     const questionData = translations[window.currentLanguage].questions[currentQuestion];
+    if (!questionData) return;
+    
     document.getElementById('question-title').textContent = questionData.q;
     const answersContainer = document.getElementById('answers-container');
     answersContainer.innerHTML = '';
@@ -117,11 +121,8 @@ function displayQuestion() {
         answersContainer.appendChild(button);
     });
     
-    // 첫 번째 질문이 아니면 '이전' 버튼 표시
     const backBtn = document.getElementById('back-btn');
-    if (backBtn) {
-        backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
-    }
+    if (backBtn) backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
     
     updateProgress();
 }
@@ -140,7 +141,6 @@ function goBack() {
         currentQuestion--;
         const lastAnswerIndex = answers.pop();
         const scoreMap = answerScores[currentQuestion][lastAnswerIndex];
-        // 이전 질문에서 더해졌던 점수 차감
         for (let color in scoreMap) scores[color] -= scoreMap[color];
         displayQuestion();
     }
@@ -181,17 +181,20 @@ function calculateResult() {
 }
 
 function showResultWithKey(resultColor) {
-    const result = translations[window.currentLanguage].colors[resultColor];
+    const langData = translations[window.currentLanguage];
+    const result = langData.colors[resultColor];
     const colorInfo = colorData[resultColor];
+    
     const displayEl = document.getElementById('result-color-display');
     if (displayEl) {
         displayEl.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
-        // AI Optimization: Contextual ARIA label for image background
         displayEl.setAttribute('role', 'img');
-        displayEl.setAttribute('aria-label', `2026 Aura Color Result: ${result.name} - ${result.subtitle}. ${result.description}`);
+        displayEl.setAttribute('aria-label', `${result.name} - ${result.subtitle}. ${result.description}`);
     }
+    
     document.getElementById('result-title').textContent = result.name;
     document.getElementById('result-subtitle').textContent = result.subtitle;
+    
     const keywordsContainer = document.getElementById('keywords');
     if (keywordsContainer) {
         keywordsContainer.innerHTML = '';
@@ -202,26 +205,24 @@ function showResultWithKey(resultColor) {
             keywordsContainer.appendChild(tag);
         });
     }
+    
     document.getElementById('result-description').textContent = result.description;
+    
     const strengthsList = document.getElementById('strengths-list');
     if (strengthsList) {
         strengthsList.innerHTML = '';
         result.strengths.forEach(s => { const li = document.createElement('li'); li.textContent = s; strengthsList.appendChild(li); });
     }
+    
     const recommendationsList = document.getElementById('recommendations-list');
     if (recommendationsList) {
         recommendationsList.innerHTML = '';
         result.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recommendationsList.appendChild(li); });
     }
     
-    // 현재 결과 키 저장 (언어 변경 시 업데이트를 위함)
     window.currentResult = resultColor;
-    
-    // 다른 아우라 둘러보기 탭 초기화
     populateAuraTabs();
-    
     showScreen('result-screen');
-    // 결과 화면이 뜨자마자 미리 캔버스를 그려둡니다.
     setTimeout(drawResultToCanvas, 300);
 }
 
@@ -229,7 +230,6 @@ function populateAuraTabs() {
     const tabsContainer = document.getElementById('aura-tabs');
     if (!tabsContainer) return;
     tabsContainer.innerHTML = '';
-    
     for (let key in colorData) {
         const btn = document.createElement('button');
         btn.className = 'aura-tab-btn';
@@ -254,9 +254,7 @@ function showAuraDetail(key) {
     document.getElementById('explorer-description').textContent = detail.description;
 }
 
-function retryTest() {
-    startTest();
-}
+function retryTest() { startTest(); }
 
 function downloadResult() {
     const canvas = document.getElementById('result-canvas');
@@ -269,18 +267,14 @@ function downloadResult() {
 function shareResult() {
     const resultKey = window.currentResult;
     const url = `${window.location.origin}${window.location.pathname}?r=${resultKey}`;
-    
+    const colorName = translations[window.currentLanguage].colors[resultKey].name;
     if (navigator.share) {
         navigator.share({
             title: '2026 Aura Color Test',
-            text: t('shareMessage').replace('[COLOR]', translations[window.currentLanguage].colors[resultKey].name),
+            text: t('shareMessage').replace('[COLOR]', colorName),
             url: url
-        }).catch(err => {
-            copyToClipboard(url);
-        });
-    } else {
-        copyToClipboard(url);
-    }
+        }).catch(() => copyToClipboard(url));
+    } else copyToClipboard(url);
 }
 
 function copyToClipboard(text) {
@@ -296,84 +290,37 @@ function copyToClipboard(text) {
 function drawResultToCanvas() {
     const canvas = document.getElementById('result-canvas');
     if (!canvas || !window.currentResult) return;
-    
     const ctx = canvas.getContext('2d');
     const resKey = window.currentResult;
     const data = translations[window.currentLanguage].colors[resKey];
-    
-    // 캔버스 크기 설정 (공유용 고해상도)
-    canvas.width = 800;
-    canvas.height = 1000;
-    
-    // 배경 그라데이션
+    canvas.width = 800; canvas.height = 1000;
     const grad = ctx.createLinearGradient(0, 0, 0, 1000);
-    grad.addColorStop(0, '#667eea');
-    grad.addColorStop(1, '#764ba2');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 800, 1000);
-    
-    // 흰색 라운드 박스
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.roundRect(50, 50, 700, 900, 40);
-    ctx.fill();
-    
-    // 이미지 그리기
-    const img = new Image();
-    img.src = colorData[resKey].image;
+    grad.addColorStop(0, '#667eea'); grad.addColorStop(1, '#764ba2');
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, 800, 1000);
+    ctx.fillStyle = 'white'; ctx.beginPath(); ctx.roundRect(50, 50, 700, 900, 40); ctx.fill();
+    const img = new Image(); img.src = colorData[resKey].image;
     img.onload = () => {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(400, 300, 180, 0, Math.PI * 2);
-        ctx.clip();
-        ctx.drawImage(img, 220, 120, 360, 360);
-        ctx.restore();
-        
-        // 텍스트 그리기
-        ctx.textAlign = 'center';
-        
-        // 제목
-        ctx.fillStyle = '#333';
-        ctx.font = 'bold 60px sans-serif';
-        ctx.fillText(data.name, 400, 560);
-        
-        // 부제목
-        ctx.fillStyle = '#666';
-        ctx.font = '32px sans-serif';
-        ctx.fillText(data.subtitle, 400, 610);
-        
-        // 키워드
-        ctx.font = 'bold 24px sans-serif';
-        const kwText = data.keywords.join(' · ');
-        ctx.fillStyle = '#667eea';
-        ctx.fillText(kwText, 400, 670);
-        
-        // 설명 (줄바꿈 처리)
-        ctx.fillStyle = '#555';
-        ctx.font = '24px sans-serif';
+        ctx.save(); ctx.beginPath(); ctx.arc(400, 300, 180, 0, Math.PI * 2); ctx.clip();
+        ctx.drawImage(img, 220, 120, 360, 360); ctx.restore();
+        ctx.textAlign = 'center'; ctx.fillStyle = '#333'; ctx.font = 'bold 60px sans-serif';
+        ctx.fillText(data.name, 400, 560); ctx.fillStyle = '#666'; ctx.font = '32px sans-serif';
+        ctx.fillText(data.subtitle, 400, 610); ctx.font = 'bold 24px sans-serif';
+        const kwText = data.keywords.join(' · '); ctx.fillStyle = '#667eea';
+        ctx.fillText(kwText, 400, 670); ctx.fillStyle = '#555'; ctx.font = '24px sans-serif';
         wrapText(ctx, data.description, 400, 740, 600, 35);
-        
-        // 하단 도메인
-        ctx.fillStyle = '#999';
-        ctx.font = '20px sans-serif';
+        ctx.fillStyle = '#999'; ctx.font = '20px sans-serif';
         ctx.fillText('2026aura.pages.dev', 400, 910);
     };
 }
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
-    const words = text.split(' ');
-    let line = '';
+    const words = text.split(' '); let line = '';
     for (let n = 0; n < words.length; n++) {
         const testLine = line + words[n] + ' ';
         const metrics = context.measureText(testLine);
-        const testWidth = metrics.width;
-        if (testWidth > maxWidth && n > 0) {
-            context.fillText(line, x, y);
-            line = words[n] + ' ';
-            y += lineHeight;
-        } else {
-            line = testLine;
-        }
+        if (metrics.width > maxWidth && n > 0) {
+            context.fillText(line, x, y); line = words[n] + ' '; y += lineHeight;
+        } else line = testLine;
     }
     context.fillText(line, x, y);
 }
