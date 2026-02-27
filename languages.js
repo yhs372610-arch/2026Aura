@@ -60,9 +60,9 @@ const translations = {
             learnMore: "✨ Learn more about the test",
             title: "2026 Aura Color Test: Why take this test?",
             description: "The 2026 Aura Color Test uses a psychology-based algorithm updated for the year 2026. Discover your energy color through psychology-based personality analysis.",
-            item1_desc: "Discover why certain colors resonate with your energy in 2026.",
-            item2_desc: "Get actionable advice and strengths analysis based on your aura.",
-            item3_desc: "Reflecting the latest social and psychological trends of 2026."
+            item1: "<strong>2026 Trending:</strong> Discover why certain colors resonate with your energy in 2026.",
+            item2: "<strong>Personal Insights:</strong> Get actionable advice and strengths analysis based on your aura.",
+            item3: "<strong>Updated Algorithms:</strong> Reflecting the latest social and psychological trends of 2026."
         }
     },
     ko: {
@@ -125,9 +125,9 @@ const translations = {
             learnMore: "✨ 테스트에 대해 더 알아보기",
             title: "2026 오라 컬러 테스트: 왜 이 테스트를 해야 할까요?",
             description: "2026 오라 컬러 테스트는 2026년의 최신 심리 트렌드를 반영한 알고리즘을 사용합니다. 심리학 기반 성격 분석을 통해 당신의 에너지 컬러를 찾아보세요.",
-            item1_desc: "2026년 당신의 에너지와 공명하는 컬러를 발견하세요.",
-            item2_desc: "아우라 분석을 통해 실질적인 조언과 강점 분석을 제공합니다.",
-            item3_desc: "2026년의 사회적, 심리학적 트렌드를 완벽하게 반영했습니다."
+            item1: "<strong>2026 트렌딩:</strong> 2026년 당신의 에너지와 공명하는 컬러를 발견하세요.",
+            item2: "<strong>개인별 인사이트:</strong> 아우라 분석을 통해 실질적인 조언과 강점 분석을 제공합니다.",
+            item3: "<strong>최신 알고리즘:</strong> 2026년의 사회적, 심리학적 트렌드를 완벽하게 반영했습니다."
         }
     },
     es: {
@@ -171,18 +171,18 @@ const translations = {
             learnMore: "✨ Más información sobre el test",
             title: "Test de Color de Aura 2026: ¿Por qué hacer este test?",
             description: "El Test de Color de Aura 2026 utiliza un algoritmo basado en psicología actualizado para el año 2026. Descubre tu color de energía principal.",
-            item1_desc: "Descubre por qué ciertos colores resuenan con tu energía.",
-            item2_desc: "Obtén consejos y análisis de fortalezas.",
-            item3_desc: "Reflejando las tendencias de 2026."
+            item1: "<strong>Tendencias 2026:</strong> Descubre por qué ciertos colores resuenan con tu energía.",
+            item2: "<strong>Insights personales:</strong> Obtén consejos y análisis de fortalezas.",
+            item3: "<strong>Algoritmos actualizados:</strong> Reflejando las tendencias de 2026."
         }
     },
     ja: {
         meta: {
-            title: "あなたの2026年オー라カラーは?",
+            title: "あなたの2026년オー라カラーは?",
             description: "心理学に基づいた性格分析で、あなたの2026年のエネルギーカラーを見つけましょう！"
         },
         shareMessage: "私の2026年オーラカラーは [COLOR]! ✨ 今すぐチェック！",
-        linkCopied: "リンクをコピーしました！友達にシェアしましょう。",
+        linkCopied: "リンク를 복사했습니다! 友達에 シェア합시다.",
         canvasTitle: "2026年 オー라カラー",
         back: "戻る",
         home: {
@@ -210,16 +210,16 @@ const translations = {
             exploreTitle: "すべてのオーラを見る"
         },
         colors: {
-            coolBlue: { name: "Cool Blue", subtitle: "冷静な戦略家", keywords: ["戦略적", "冷静", "信頼できる"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。2026年、あなたの揺るぎない平穏さは最大の強みとなるでしょう。", strengths: ["緻密な戦略立案能力", "プレッシャー下でも冷静", "秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導", "洞察を共有", "バランスを保つ"] }
+            coolBlue: { name: "Cool Blue", subtitle: "冷静な戦略家", keywords: ["戦略적", "冷静", "信頼できる"], description: "あなたのオーラは冷静で整ったエネルギーを放っています. 2026年, あなたの揺るぎない平穏さは最大の強みとなるでしょう.", strengths: ["緻密な戦略立案能力", "プレッシャー下でも冷静", "秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導", "洞察を共有", "バランスを保つ"] }
         },
         footer: { privacy: "プライバシーポリシー", contact: "お問い合わせ" },
         seo: {
             learnMore: "✨ 診断について詳しく知る",
             title: "2026年オー라カラー診断：なぜこの診断を受けるべきなのですか？",
-            description: "2026年オー라カラー診断は、2026年の最新トレンド를 반영한 알고리즘을 사용합니다. 6つのカラーからあなたのコアカラーを見つけましょう。",
-            item1_desc: "2026年のトレンド：なぜ特定の色があなたのエネルギーと共鳴するのか発見しましょう。",
-            item2_desc: "パーソ널インサイト：強み分析とアドバイスを提供します。",
-            item3_desc: "最新アルゴリズム：2026年の社会・心理トレンドを反映。"
+            description: "2026年オー라カラー診断は、2026年の最新トレンド를 반영한 알고리즘을 사용합니다. 6つのカラーからあなたのコアカラーを見つけましょう.",
+            item1: "<strong>2026年のトレンド:</strong> なぜ特定の色があなたのエネルギーと共鳴するのか発見しましょう.",
+            item2: "<strong>パーソ널インサイト:</strong> 強み分析とアドバイスを提供します.",
+            item3: "<strong>最新アルゴリズム:</strong> 2026年の社会・心理トレンドを反映."
         }
     },
     pt: {
@@ -238,7 +238,7 @@ const translations = {
             info: "⏱️ 2 minutos | 📝 15 perguntas | 🎨 6 cores"
         },
         questions: [
-            { q: "Ao começar o seu dia em 2026, qual é o seu primeiro pensamento?", a: ["Que metas vou alcançar hoje?", "Espero que hoje traga paz e calma", "Vejamos que coisas emocionantes acontecem!", "Preciso de tempo para recarregar sozinho"] }
+            { q: "Ao começar o seu dia em 2026, qual é o seu primeiro pensamento?", a: ["Que metas vou alcançar hoje?", "Espero que hoje traga paz e calma", "Vejamos que coisas emocionantes acontecem!", "Preciso de tempo para recارregar sozinho"] }
         ],
         loading: {
             analyzing: "Analisando a sua aura...",
@@ -263,15 +263,17 @@ const translations = {
             learnMore: "✨ Saiba mais sobre o teste",
             title: "Teste de Aura 2026: Por que fazer este teste?",
             description: "O Teste de Aura 2026 utiliza um algoritmo baseado em psicologia para 2026. Descubra a sua cor de energia principal.",
-            item1_desc: "Tendências 2026: Descubra por que certas cores ressoam com a sua energia.",
-            item2_desc: "Insights pessoais: Receba conselhos e análise de pontos fortes.",
-            item3_desc: "Algoritmos atualizados: Refletindo as tendências de 2026."
+            item1: "<strong>Tendências 2026:</strong> Descubra por que certas cores ressoam com a sua energia.",
+            item2: "<strong>Insights pessoais:</strong> Receba conselhos e análise de pontos fortes.",
+            item3: "<strong>Algoritmos atualizados:</strong> Refletindo as tendências de 2026."
         }
     }
 };
 
-// 현재 언어 (기본값: 브라우저 언어 자동 감지)
-let currentLanguage = 'en';
+// 현재 언어 관리 (전역 변수로 통합)
+if (typeof currentLanguage === 'undefined') {
+    window.currentLanguage = 'en';
+}
 
 // 언어 감지 함수
 function detectLanguage() {
@@ -283,36 +285,40 @@ function detectLanguage() {
     return 'en';
 }
 
-// 페이지 로드 시 자동 언어 감지
-currentLanguage = detectLanguage();
-
 // 언어 변경 함수
 function changeLanguage(lang) {
-    currentLanguage = lang;
+    window.currentLanguage = lang;
     updatePageLanguage();
 }
 
 // 페이지 텍스트 업데이트
 function updatePageLanguage() {
+    const lang = window.currentLanguage;
+    
     // data-i18n 속성이 있는 모든 요소 업데이트
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         const keys = key.split('.');
-        let value = translations[currentLanguage];
+        let value = translations[lang];
         
         keys.forEach(k => {
             if (value) value = value[k];
         });
         
         if (value && typeof value === 'string') {
-            element.textContent = value;
+            // SEO 리스트 항목은 HTML 태그가 포함되어 있으므로 innerHTML 사용
+            if (key.startsWith('seo.item')) {
+                element.innerHTML = value;
+            } else {
+                element.textContent = value;
+            }
         }
     });
 
     // 결과 화면 텍스트 업데이트 (테스트 완료 후 언어 변경 시 대응)
     if (window.currentResult) {
         const resultKey = typeof window.currentResult === 'string' ? window.currentResult : window.currentResult.color;
-        const resData = translations[currentLanguage].colors[resultKey];
+        const resData = translations[lang].colors[resultKey];
         if (resData) {
             const titleEl = document.getElementById('result-title');
             const subtitleEl = document.getElementById('result-subtitle');
@@ -321,7 +327,6 @@ function updatePageLanguage() {
             if (subtitleEl) subtitleEl.textContent = resData.subtitle;
             if (descEl) descEl.textContent = resData.description;
 
-            // 키워드 업데이트
             const keywordsContainer = document.getElementById('keywords');
             if (keywordsContainer) {
                 keywordsContainer.innerHTML = '';
@@ -333,7 +338,6 @@ function updatePageLanguage() {
                 });
             }
 
-            // 강점 및 추천 리스트 업데이트
             const strengthsList = document.getElementById('strengths-list');
             if (strengthsList) {
                 strengthsList.innerHTML = '';
@@ -355,26 +359,8 @@ function updatePageLanguage() {
         }
     }
 
-    // 푸터 SEO 섹션 업데이트 (접이식 구조 대응)
-    const seoData = translations[currentLanguage].seo;
-    if (seoData) {
-        const seoLearnMore = document.querySelector('[data-i18n="seo.learnMore"]');
-        const seoTitle = document.querySelector('[data-i18n="seo.title"]');
-        const seoDesc = document.querySelector('[data-i18n="seo.description"]');
-        const seoItem1 = document.querySelector('[data-i18n="seo.item1_desc"]');
-        const seoItem2 = document.querySelector('[data-i18n="seo.item2_desc"]');
-        const seoItem3 = document.querySelector('[data-i18n="seo.item3_desc"]');
-
-        if (seoLearnMore) seoLearnMore.textContent = seoData.learnMore;
-        if (seoTitle) seoTitle.textContent = seoData.title;
-        if (seoDesc) seoDesc.textContent = seoData.description;
-        if (seoItem1) seoItem1.textContent = seoData.item1_desc;
-        if (seoItem2) seoItem2.textContent = seoData.item2_desc;
-        if (seoItem3) seoItem3.textContent = seoData.item3_desc;
-    }
-
     // 메타 태그 업데이트 (SNS 공유용)
-    const metaData = translations[currentLanguage].meta;
+    const metaData = translations[lang].meta;
     if (metaData) {
         document.title = "2026 Aura Color Test - " + metaData.title;
         updateMetaTag('property', 'og:title', metaData.title);
@@ -402,7 +388,7 @@ function updateMetaTag(attrName, attrValue, content) {
 // 현재 언어의 번역 가져오기
 function t(key) {
     const keys = key.split('.');
-    let value = translations[currentLanguage];
+    let value = translations[window.currentLanguage];
     keys.forEach(k => {
         if (value) value = value[k];
     });
