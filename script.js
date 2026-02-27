@@ -271,49 +271,73 @@ async function shareResult() {
     const canvas = document.getElementById('result-canvas');
     const currentLang = window.currentLanguage;
     
-    // 현재 언어에 맞는 파일 경로 설정 (상대방이 해당 언어로 접속하게 함)
+    // 현재 페이지의 기초 URL 생성 (서브디렉토리 고려)
+    const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
+    
     let langFile = 'index.html';
     if (currentLang === 'en') langFile = 'en.html';
     else if (currentLang === 'es') langFile = 'es.html';
     else if (currentLang === 'ja') langFile = 'ja.html';
     
-    const url = `${window.location.origin}/${langFile}?r=${resultKey}`;
+    const url = `${baseUrl}/${langFile}?r=${resultKey}`;
     const colorName = translations[currentLang].colors[resultKey].name;
     const shareText = t('shareMessage').replace('[COLOR]', colorName);
 
-    try {
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-        const file = new File([blob], `2026-Aura-${resultKey}-${currentLang}.png`, { type: 'image/png' });
+    // 1. 모바일 API 지원 여부 확인
+    if (navigator.share) {
+        try {
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            const file = new File([blob], `2026-Aura-${resultKey}-${currentLang}.png`, { type: 'image/png' });
 
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-                files: [file],
-                title: '2026 Aura Color Test',
-                text: shareText,
-                url: url
-            });
-        } else if (navigator.share) {
-            await navigator.share({
-                title: '2026 Aura Color Test',
-                text: shareText,
-                url: url
-            });
-        } else {
-            throw new Error('Share not supported');
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: '2026 Aura Color Test',
+                    text: shareText,
+                    url: url
+                });
+                return; // 공유 성공
+            } else {
+                await navigator.share({
+                    title: '2026 Aura Color Test',
+                    text: shareText,
+                    url: url
+                });
+                return; // 텍스트 공유 성공
+            }
+        } catch (err) {
+            console.error('Share failed:', err);
         }
-    } catch (err) {
-        copyToClipboard(url);
     }
+
+    // 2. 데스크탑 또는 API 미지원 시: 클립보드 복사
+    copyToClipboard(url);
 }
 
 function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(t('linkCopied'));
+        }).catch(err => {
+            fallbackCopy(text);
+        });
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
     const dummy = document.createElement('input');
     document.body.appendChild(dummy);
     dummy.value = text;
     dummy.select();
-    document.execCommand('copy');
+    try {
+        document.execCommand('copy');
+        alert(t('linkCopied'));
+    } catch (err) {
+        alert('Copy failed. Please copy manually: ' + text);
+    }
     document.body.removeChild(dummy);
-    alert(t('linkCopied'));
 }
 
 function drawResultToCanvas() {
