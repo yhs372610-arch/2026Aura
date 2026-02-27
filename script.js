@@ -166,7 +166,12 @@ function showResultWithKey(resultColor) {
     const result = translations[currentLanguage].colors[resultColor];
     const colorInfo = colorData[resultColor];
     const displayEl = document.getElementById('result-color-display');
-    if (displayEl) displayEl.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
+    if (displayEl) {
+        displayEl.style.background = `url('${colorInfo.image}') center/cover no-repeat`;
+        // AI Optimization: Contextual ARIA label for image background
+        displayEl.setAttribute('role', 'img');
+        displayEl.setAttribute('aria-label', `2026 Aura Color Result: ${result.name} - ${result.subtitle}. ${result.description}`);
+    }
     document.getElementById('result-title').textContent = result.name;
     document.getElementById('result-subtitle').textContent = result.subtitle;
     const keywordsContainer = document.getElementById('keywords');
