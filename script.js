@@ -221,7 +221,6 @@ async function shareResult() {
     const lang = window.currentLanguage;
     const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
     
-    // 다국어 파일 경로 매핑 (pt 추가 및 구조화)
     let file = 'index.html';
     if (lang === 'en') file = 'en.html';
     else if (lang === 'es') file = 'es.html';
@@ -236,10 +235,19 @@ async function shareResult() {
     if (navigator.share) {
         try {
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-            const f = new File([blob], `Aura2026-${lang}.png`, { type: 'image/png' });
-            await navigator.share({ files: [f], title: '2026 Aura Color', text: text, url: url });
-        } catch (e) { copyToClipboard(url); }
-    } else copyToClipboard(url);
+            const fileObj = new File([blob], `Aura2026-${lang}.png`, { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [fileObj] })) {
+                await navigator.share({ files: [fileObj], title: '2026 Aura Color', text: text, url: url });
+            } else {
+                await navigator.share({ title: '2026 Aura Color', text: text, url: url });
+            }
+            return;
+        } catch (e) {
+            console.log('Native share failed, using clipboard');
+        }
+    }
+    copyToClipboard(url);
 }
 
 function copyToClipboard(text) {
