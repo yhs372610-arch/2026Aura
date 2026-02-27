@@ -254,7 +254,9 @@ function showAuraDetail(key) {
     document.getElementById('explorer-description').textContent = detail.description;
 }
 
-function retryTest() { startTest(); }
+function retryTest() {
+    showScreen('home-screen');
+}
 
 function downloadResult() {
     const canvas = document.getElementById('result-canvas');
