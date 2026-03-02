@@ -1,4 +1,4 @@
-// 다국어 번역 데이터 - 최종 무결성 버전
+// 다국어 번역 데이터 - 최종 무결성 버전 (모든 언어 15질문 & 6컬러 포함)
 const translations = {
     ko: {
         meta: { title: "나의 2026 오라 컬러는?", description: "간단한 질문으로 나의 2026년 에너지 컬러를 알아보세요! 재미있는 성격 테스트" },
@@ -73,38 +73,107 @@ const translations = {
     ja: {
         meta: { title: "あなたの2026年オーラカラーは?", description: "心理学に基づいた性格分析で2026年のエネルギーカラーを見つけましょう！" },
         shareMessage: "私の2026年オーラカラーは [COLOR]! ✨ 今すぐチェック！",
-        linkCopied: "リンクをコピーしました！", canvasTitle: "2026 オー라カラー", back: "戻る",
+        linkCopied: "リンクをコピーしました！", canvasTitle: "2026 オーラカラー", back: "戻る",
         home: { title: "2026年 オーラカラー診断", subtitle: "性格分析であなたのエネルギーカラーを発見", startButton: "診断を始める", info: "⏱️ 2分 | 📝 15の質問 | 🎨 6つのカラー" },
-        questions: [{ q: "2026年の朝、最初に思うことは？", a: ["今日の目標は？", "平和な一日を", "ワクワクすることが起きるかな？", "充電が必要だ"] }],
-        loading: { analyzing: "分析中...", step1: "パターン抽出...", step2: "マッピング...", step3: "公開中..." },
-        result: { aboutTitle: "あなたのオーラ", strengthsTitle: "あなたの強み", recommendationsTitle: "2026年の推奨", downloadButton: "📸 画像保存", shareButton: "🔗 シェア", retryButton: "🔄 もう一度", exploreTitle: "すべてのオーラ" },
-        colors: { coolBlue: { name: "クールブルー", subtitle: "冷静な戦略家", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で整ったエネルギーを放っています.", strengths: ["戦略立案", "冷静さ", "秩序創造"], recommendations: ["計画主導", "洞察共有", "バランス"] } },
-        footer: { privacy: "プライバシー", contact: "お問い合わせ" },
-        seo: { learnMore: "✨ 詳細を見る", title: "2026 オーラ診断", description: "エネルギーを発見.", item1: "<strong>トレンド:</strong> 共鳴.", item2: "<strong>インサイト:</strong> 分析.", item3: "<strong>ロジック:</strong> 2026最新." }
+        questions: [
+            { q: "2026年の朝、一日を始める時に最初に思うことは？", a: ["今日はどんな目標を達成しようか？", "今日も一日、平和で穏やかでありますように", "今日はどんなワクワクすることが起きるかな？", "自分一人のための充電時間が必要だ"] },
+            { q: "ストレスを感じた時、どのように対処しますか？", a: ["問題を論理的に分析して解決する", "親しい人と話をして気持ちを落ち着かせる", "創作活動に没頭してストレスを忘れる", "一人の時間を持って気持ちを整理する"] },
+            { q: "2026年に夢見る理想的な週末は？", a: ["個人プロジェクトを計画して実行する", "愛する人たちと大切な時間を過ごす", "新しい場所を探検して冒険を楽しむ", "静かに読書や思索をして休息する"] },
+            { q: "重要な決定を下す際、優先する価値観は？", a: ["論理的な根拠と実質的な結果", "自分の決定が他人の感情に与える影響", "自分の直感と熱い情熱", "深い思索の末に得た知恵"] },
+            { q: "普段のエネルギーレベルは？", a: ["一定で集中力が高い状態", "温かく周囲を気遣う状態", "高く活気に満ち溢れた状態", "落ち着いて内面を見つめる状態"] },
+            { q: "人々と一緒にいる時、あなたは？", a: ["状況を観察しながら戦略的に行動する", "人々と感情的に交流し、つながりを持つ", "雰囲気を主導し、活気を与える", "少数の人々と深い会話を楽しむ"] },
+            { q: "あなたを動かす最大の原動力は？", a: ["明確な目標を達成した時の快感", "誰かの助けになり、変化を作るやりがい", "新しいものを創造し、革新する楽しさ", "世界の象徴的な真理を理解すること"] },
+            { q: "困難な課題に直面した時のスタイルは？", a: ["綿密で戦略的な計画を立てる", "周囲に助言や支持を求める", "自信を持って情熱的に飛び込む", "原因を根本的に理解するために時間をかける"] },
+            { q: "他人が言うあなたのイメージは？", a: ["信頼できる計画的な人", "温かく共感能力に優れた人", "エネルギーに溢れ、インスピレーションを与える人", "賢明で考えが深い人"] },
+            { q: "最も効率的に働ける環境は？", a: ["目標が明確で構造化された環境", "互いに助け合い協力する温かい環境", "変化が速くダイナミックな環境", "静かで一人で集中できる環境"] },
+            { q: "突然の変化に直面した時、あなたは？", a: ["徹底的に計画を立てて適応する", "他の人がどう感じているかまず確認する", "新しい機会だと考えて楽しく受け入れる", "その変化が人生に与える深い意味を考える"] },
+            { q: "どのような方法で創造性を表現しますか？", a: ["複雑な問題を解決する戦略を立てる", "人々と深く交流し助けを与える", "芸術、音楽、公演などの感覚的な活動", "執筆、哲学、瞑想などの思索的な活動"] },
+            { q: "2026年が終わる時、どんな気分でいたいですか？", a: ["大きな成果を成し遂げた達成感", "多くの愛を分かち合った充実感", "毎瞬間が生きていると感じた満足感", "平和で賢明になった平穏さ"] },
+            { q: "あなたにとって自然とは？", a: ["自然の中の秩序と調和を鑑賞する場所", "自分が世界と最もつながっていると感じる場所", "新しい活力とインスピレーションを得る源", "自分自身を振り返る省察の空間"] },
+            { q: "助けが必要な人を見た時、あなたは？", a: ["実用的で役立つ解決策を提案する", "心からの共感と情緒的な慰めを与える", "肯定的なエネルギーで活力を吹き込む", "洞察力のある助言と知恵を共有する"] }
+        ],
+        loading: { analyzing: "オーラ分析中...", step1: "エネルギーパターン抽出中...", step2: "カラー周波数マッピング中...", step3: "2026年のオーラ公開中..." },
+        result: { aboutTitle: "あなたのオーラ", strengthsTitle: "あなたの強み", recommendationsTitle: "2026年の推奨", downloadButton: "📸 画像を保存する", shareButton: "🔗 結果を共有する", retryButton: "🔄 もう一度診断する", exploreTitle: "すべてのオーラを見る" },
+        colors: {
+            coolBlue: { name: "クールブルー", subtitle: "冷静な戦略家", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。論理と明確さを持って人生にアプローチし、生まれながらの問題解決者の役割を果たします。2026年、あなたの揺るぎない平穏は最大の強みとなるでしょう。", strengths: ["綿密な戦略立案と分析能力", "プレッシャーの中でも沈着冷静", "混乱の中で秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導してください", "文章を通じて自分の洞察を共有してください", "論理と創造的な探求のバランスをとってください"] },
+            vampPurple: { name: "ヴァンプパープル", subtitle: "神秘的な創造者", keywords: ["神秘的", "創造的", "強烈"], description: "あなたのオーラは魅惑的で神秘的なエネルギーを秘めています。暗闇の中に美しさを見出し、複雑さの中に深みを見つけます。あなたの創造的な強烈さは、人々をあなた独自の独特な世界へと引き込みます。", strengths: ["深い創造的ビジョンと芸術的才能", "複雑な状況での柔軟性", "他人の好奇心を刺激する魅力的な存在感"], recommendations: ["あなた独自の創造的なスタイルを受け入れてください", "自分の芸術を世の中に堂々と発信してください", "劇的な美学を探求してみてください"] },
+            solarGold: { name: "ソーラーゴールド", subtitle: "輝くリーダー", keywords: ["活気ある", "インスピレーション", "自信"], description: "あなたのオーラは太陽のように輝き、周囲のすべてを明るく照らします。あなたの伝染性のあるエネルギーと楽観主義は、あなたをどこでも温かさを伝える生まれながらのリーダーにします。", strengths: ["天性のカリスマ性とリーダーシップ", "他人にエネルギーを与え動機付ける", "ダイナミックな環境で能力を発揮する"], recommendations: ["2026年はリーダーの役割を引き受けてみてください", "講演や発表を通じて情熱を共有してください", "エネルギーを大胆な新しい冒険に注いでください"] },
+            forestGreen: { name: "フォレストグリーン", subtitle: "調和のとれた平和主義者", keywords: ["バランス", "安定的", "平和"], description: "あなたのオーラは自然的で調和のとれたエネルギーで流れています。森のように、あなたは周囲に安らぎとバランスを提供します。真の力は平穏と自然とのつながりから来ることをよく知っています。", strengths: ["調和を作り出す卓越した能力", "冷静で安定した存在感", "自然との深い絆"], recommendations: ["2026年はバランスのとれたルーチンを作ってください", "定期的に自然の中で時間を過ごしてください", "他人が内面の中心を見つけるのを助けてあげてください"] },
+            softPink: { name: "ソフトピンク", subtitle: "慈愛に満ちた癒し手", keywords: ["共感", "世話好き", "愛らしい"], description: "あなたのオーラは柔らかく癒しのエネルギーで輝いています。あなたは深い共感能力を備えており、他人が真に理解され、大切にされていると感じさせます。あなたの存在自体が一つの癒しです。", strengths: ["高い心の知能指数(EQ)", "他人を慰め癒す天性の能力", "脆弱さを見せても安全な空間を作る"], recommendations: ["奉仕活動や分かち合いに参加してみてください", "他人を世話しつつも、健康的な境界線を引いてください", "自分のための献身的なセルフケアを実践してください"] },
+            midnightBlack: { name: "ミッドナイトブラック", subtitle: "深い思索家", keywords: ["内省的", "賢明", "深遠"], description: "あなたのオーラは、偉大な洞察が湧き出る真夜中の深さを保持しています。表面の向こうの意味を探し、あなたの思索的な態度は他人が見逃す真実を明らかにします。", strengths: ["深遠な哲学的思考能力", "他人が見落とすつながりを見つけ出す", "深い省察から生まれる知恵"], recommendations: ["執筆を通じて自分の洞察を共有してください", "孤独と思索のための時間を確保してください", "哲学や心理学の分野を探求してみてください"] }
+        },
+        footer: { privacy: "プライバシーポリシー", contact: "お問い合わせ" },
+        seo: { learnMore: "✨ 診断について詳しく知る", title: "2026年オーラカラー診断：なぜこの診断を受けるべきか？", description: "2026年の最新心理トレンドを反映したアルゴリズムを使用しています。", item1: "<strong>2026トレンド：</strong> 2026年のあなたのエネルギーと共鳴するカラーを発見。", item2: "<strong>個人別インサイト：</strong> 実質的なアドバイスを提供します。", item3: "<strong>最新ロジック：</strong> 2026年の社会・心理トレンドを反映。" }
     },
     es: {
-        meta: { title: "¿Cuál es tu Color?", description: "¡Descubre tu color 2026!" },
-        shareMessage: "¡Mi color 2026 es [COLOR]! ✨",
-        linkCopied: "¡Copiado!", canvasTitle: "Aura 2026", back: "Volver",
-        home: { title: "Test Aura 2026", subtitle: "Análisis de personalidad", startButton: "Empezar", info: "⏱️ 2 min | 📝 15 preg | 🎨 6 colores" },
-        questions: [{ q: "Empezando 2026...", a: ["¿Metas?", "Paz", "¡Emoción!", "Soledad"] }],
-        loading: { analyzing: "Analizando...", step1: "Patrones...", step2: "Mapeo...", step3: "Revelando..." },
-        result: { aboutTitle: "Tu Aura", strengthsTitle: "Fortalezas", recommendationsTitle: "Consejos 2026", downloadButton: "📸 Guardar", shareButton: "🔗 Compartir", retryButton: "🔄 Reintentar", exploreTitle: "Explorar" },
-        colors: { coolBlue: { name: "Azul Fresco", subtitle: "Estratega", keywords: ["Estratégico", "Calma", "Fiel"], description: "Radias calma y lógica.", strengths: ["Planes", "Foco", "Orden"], recommendations: ["Liderar", "Escribir", "Equilibrio"] } },
-        footer: { privacy: "Privacidad", contact: "Contacto" },
-        seo: { learnMore: "✨ Saber más", title: "Test Aura 2026", description: "Tu energía.", item1: "<strong>Tendencias:</strong> 2026.", item2: "<strong>Insights:</strong> Análisis.", item3: "<strong>Nuevo:</strong> 2026." }
+        meta: { title: "¿Cuál es tu Color de Aura 2026?", description: "¡Descubre tu color de energía para el 2026 a través del análisis de personalidad basado en psicología!" },
+        shareMessage: "¡Mi color de aura 2026 es [COLOR]! ✨ ¡Descubre el tuyo ahora!",
+        linkCopied: "¡Enlace copiado!", canvasTitle: "Mi Aura 2026", back: "Volver",
+        home: { title: "Test de Aura 2026", subtitle: "Descubre tu color de energía a través del análisis de personalidad basado en psicología", startButton: "Empezar Test", info: "⏱️ 2 min | 📝 15 preguntas | 🎨 6 colores" },
+        questions: [
+            { q: "En la mañana de 2026, ¿cuál es tu primer pensamiento al empezar el día?", a: ["¿Qué metas voy a alcanzar hoy?", "Espero que hoy sea un día tranquilo y en paz", "¿Qué cosas emocionantes pasarán hoy?", "Necesito tiempo de recarga solo para mí"] },
+            { q: "¿Cómo manejas el estrés?", a: ["Analizo el problema lógicamente para resolverlo", "Hablo con personas cercanas para desahogarme", "Me sumerjo en actividades creativas y olvido el estrés", "Paso tiempo a solas para organizar mis pensamientos"] },
+            { q: "¿Cuál es tu fin de semana ideal en 2026?", a: ["Planear y ejecutar proyectos personales", "Pasar tiempo de calidad con mis seres queridos", "Explorar lugares nuevos y disfrutar de la aventura", "Descansar tranquilamente leyendo o reflexionando"] },
+            { q: "Al tomar decisiones importantes, ¿qué valor priorizas?", a: ["Bases lógicas y resultados prácticos", "El impacto de mi decisión en los sentimientos de otros", "Mi intuición y mi gran pasión", "La sabiduría obtenida tras una profunda reflexión"] },
+            { q: "¿Cómo suele ser tu nivel de energía?", a: ["Constante y con alta concentración", "Cálido y preocupado por los demás", "Alto, vibrante y lleno de vitalidad", "Calmado y observando mi interior"] },
+            { q: "Cuando estás en grupo, ¿tú...?", a: ["Observas la situación y actúas estratégicamente", "Conectas emocionalmente con las personas", "Lideras el ambiente y aportas vitalidad", "Disfrutas de conversaciones profundas con pocos"] },
+            { q: "¿Cuál es tu mayor motor para actuar?", a: ["El placer de lograr metas claras", "La satisfacción de ayudar y crear cambios", "El gusto de crear e innovar cosas nuevas", "Comprender las verdades esenciales del mundo"] },
+            { q: "Ante un desafío difícil, ¿cuál es tu estilo?", a: ["Hago un plan minucioso y estratégico", "Busco consejo y apoyo en los que me rodean", "Me lanzo con confianza y entusiasmo", "Me tomo tiempo para entender la causa raíz"] },
+            { q: "¿Cómo describen otros tu imagen?", a: ["Persona confiable y organizada", "Persona cálida y con gran empatía", "Persona llena de energía e inspiradora", "Persona sabia y de pensamiento profundo"] },
+            { q: "¿En qué entorno trabajas con más eficiencia?", a: ["Entorno con metas claras y estructurado", "Entorno cálido de ayuda mutua y colaboración", "Entorno dinámico y de cambios rápidos", "Entorno silencioso donde pueda concentrarme solo"] },
+            { q: "Ante un cambio repentino, ¿tú...?", a: ["Hago un plan estricto para adaptarme", "Observo primero cómo se sienten los demás", "Lo tomo como una nueva oportunidad con alegría", "Pienso en el significado profundo que el cambio trae"] },
+            { q: "¿De qué forma expresas tu creatividad?", a: ["Creando estrategias para resolver problemas complejos", "Conectando profundamente y ayudando a otros", "Actividades sensoriales como arte, música o teatro", "Actividades reflexivas como escribir o meditar"] },
+            { q: "Al final de 2026, ¿cómo quieres sentirte?", a: ["Satisfacción por haber logrado grandes éxitos", "Plenitud por haber dado y recibido mucho amor", "Satisfacción de sentir que viví cada momento", "Tranquilidad por haberme vuelto más sabio"] },
+            { q: "¿Qué significa la naturaleza para ti?", a: ["Lugar para apreciar el orden y la armonía", "Donde me siento más conectado con el mundo", "Fuente de nueva vitalidad e inspiración", "Espacio de reflexión para mirarme a mí mismo"] },
+            { q: "Cuando ves a alguien que necesita ayuda, ¿tú...?", a: ["Buscas una solución práctica que le sirva", "Ofreces empatía sincera y consuelo emocional", "Aportas vitalidad con energía positiva", "Compartes consejos sabios y tu visión"] }
+        ],
+        loading: { analyzing: "Analizando tu aura...", step1: "Extrayendo patrones de energía...", step2: "Mapeando frecuencias de color...", step3: "Revelando tu aura 2026..." },
+        result: { aboutTitle: "Tu Aura", strengthsTitle: "Tus Fortalezas", recommendationsTitle: "Recomendaciones 2026", downloadButton: "📸 Guardar Imagen", shareButton: "🔗 Compartir Resultado", retryButton: "🔄 Repetir Test", exploreTitle: "Explorar Todas las Auras" },
+        colors: {
+            coolBlue: { name: "Azul Frío", subtitle: "Estratega Imperturbable", keywords: ["Estratégico", "Calmado", "Confiable"], description: "Tu aura emana una energía serena y organizada. Abordas la vida con lógica y claridad, actuando como un solucionador de problemas natural. En 2026, tu calma inquebrantable será tu mayor fortaleza.", strengths: ["Capacidad de análisis y estrategia minuciosa", "Mantiene la calma bajo presión", "Crea orden en medio del caos"], recommendations: ["Lidera proyectos que requieran planificación", "Comparte tus visiones a través de la escritura", "Equilibra la lógica con la exploración creativa"] },
+            vampPurple: { name: "Púrpura Vamp", subtitle: "Creador Misterioso", keywords: ["Misterioso", "Creativo", "Intenso"], description: "Tu aura contiene una energía fascinante y misteriosa. Encuentras belleza en la oscuridad y profundidad en la complejidad. Tu intensidad creativa atrae a los demás hacia tu mundo único.", strengths: ["Visión creativa profunda y talento artístico", "Flexibilidad en situaciones complejas", "Presencia magnética que despierta curiosidad"], recommendations: ["Abraza tu estilo creativo único", "Muestra tu arte al mundo con confianza", "Explora estéticas dramáticas"] },
+            solarGold: { name: "Oro Solar", subtitle: "Líder Radiante", keywords: ["Vibrante", "Inspirador", "Seguro"], description: "Tu aura brilla como el sol, iluminando todo a tu alrededor. Tu energía contagiosa y optimismo te convierten en un líder natural que brinda calidez a donde quiera que vaya.", strengths: ["Carisma y liderazgo naturales", "Energiza y motiva a los demás", "Destaca en entornos dinámicos"], recommendations: ["Asume roles de liderazgo en 2026", "Comparte tu pasión en charlas o presentaciones", "Enfoca tu energía en nuevas y audaces aventuras"] },
+            forestGreen: { name: "Verde Bosque", subtitle: "Armonizador Equilibrado", keywords: ["Equilibrado", "Estable", "Pacífico"], description: "Tu aura fluye con una energía natural y armoniosa. Como un bosque, brindas refugio y equilibrio a quienes te rodean. Sabes bien que el verdadero poder viene de la paz y la conexión con la naturaleza.", strengths: ["Capacidad excepcional para crear armonía", "Presencia calmada y estable", "Vínculo profundo con la naturaleza"], recommendations: ["Crea rutinas equilibradas en 2026", "Pasa tiempo en la naturaleza regularmente", "Ayuda a otros a encontrar su centro interior"] },
+            softPink: { name: "Rosa Suave", subtitle: "Sanador Compasivo", keywords: ["Empático", "Protector", "Adorable"], description: "Tu aura brilla con una energía suave y sanadora. Posees una gran empatía que hace que los demás se sientan comprendidos y cuidados. Tu sola presencia es una forma de sanación.", strengths: ["Alta inteligencia emocional (EQ)", "Capacidad natural para consolar y sanar", "Crea espacios seguros para mostrar vulnerabilidad"], recommendations: ["Participa en actividades de voluntariado", "Cuida a los demás pero pon límites saludables", "Practica un autocuidado dedicado para ti mismo"] },
+            midnightBlack: { name: "Negro Medianoche", subtitle: "Pensador Profundo", keywords: ["Introspectivo", "Sabio", "Profundo"], description: "Tu aura guarda la profundidad de la medianoche, donde brotan las grandes visiones. Buscas el significado más allá de la superficie, y tu actitud reflexiva revela verdades que otros pasan por alto.", strengths: ["Capacidad de pensamiento filosófico profundo", "Encuentra conexiones que otros ignoran", "Sabiduría que nace de la reflexión profunda"], recommendations: ["Comparte tus visiones escribiendo", "Asegura tiempo para la soledad y la reflexión", "Explora campos como la filosofía o la psicología"] }
+        },
+        footer: { privacy: "Política de Privacidad", contact: "Contacto" },
+        seo: { learnMore: "✨ Saber más sobre el test", title: "¿Por qué hacer este test?", description: "Usa un algoritmo que refleja las tendencias psicológicas de 2026.", item1: "<strong>Tendencias 2026:</strong> Descubre tu resonancia.", item2: "<strong>Insights:</strong> Consejos prácticos.", item3: "<strong>Algoritmo:</strong> Actualizado para 2026." }
     },
     pt: {
-        meta: { title: "¿Tu Color?", description: "Descubra sua cor!" },
-        shareMessage: "Minha cor 2026 é [COLOR]!",
-        linkCopied: "Copiado!", canvasTitle: "Aura 2026", back: "Voltar",
-        home: { title: "Teste Aura 2026", subtitle: "Personalidade", startButton: "Começar", info: "⏱️ 2 min | 📝 15 preg | 🎨 6 cores" },
-        questions: [{ q: "Começando 2026...", a: ["Metas", "Paz", "Festa", "Sossego"] }],
-        loading: { analyzing: "Analizando...", step1: "Patterns...", step2: "Cores...", step3: "Fim..." },
-        result: { aboutTitle: "Sua Aura", strengthsTitle: "Força", recommendationsTitle: "Dicas", downloadButton: "📸 Salvar", shareButton: "🔗 Partilhar", retryButton: "🔄 De novo", exploreTitle: "Tudo" },
-        colors: { coolBlue: { name: "Azul", subtitle: "Foco", keywords: ["Paz", "Luz", "Foco"], description: "Você é foco.", strengths: ["Paz", "Luz", "Ordem"], recommendations: ["Paz", "Luz", "Ordem"] } },
+        meta: { title: "Qual é a sua Cor de Aura 2026?", description: "Descubra a sua cor de energia para 2026 através de uma análise de personalidade baseada em psicologia!" },
+        shareMessage: "Minha cor de aura 2026 é [COLOR]! ✨ Descubra a sua agora!",
+        linkCopied: "Link copiado!", canvasTitle: "Minha Aura 2026", back: "Voltar",
+        home: { title: "Teste de Aura 2026", subtitle: "Descubra sua cor de energia através de uma análise de personalidade baseada em psicologia", startButton: "Começar Teste", info: "⏱️ 2 min | 📝 15 perguntas | 🎨 6 cores" },
+        questions: [
+            { q: "Na manhã de 2026, qual o seu primeiro pensamento ao começar o dia?", a: ["Quais metas vou alcançar hoje?", "Espero que hoje seja um dia calmo e tranquilo", "Que coisas emocionantes vão acontecer hoje?", "Preciso de tempo para recarregar sozinho"] },
+            { q: "Como você lida com o estresse?", a: ["Analiso o problema logicamente para resolver", "Converso com pessoas próximas para desabafar", "Mergulho em atividades criativas e esqueço o estresse", "Passo um tempo sozinho para organizar os pensamentos"] },
+            { q: "Qual o seu fim de semana ideal em 2026?", a: ["Planejar e executar projetos pessoais", "Passar tempo de qualidade com quem amo", "Explorar lugares novos e curtir a aventura", "Descansar calmamente lendo ou refletindo"] },
+            { q: "Ao tomar decisões importantes, qual valor você prioriza?", a: ["Bases lógicas e resultados práticos", "O impacto da decisão nos sentimentos alheios", "Minha intuição e grande paixão", "Sabedoria após profunda reflexão"] },
+            { q: "Como costuma ser o seu nível de energia?", a: ["Constante e com alta concentração", "Caloroso e preocupado com os outros", "Alto, vibrante e cheio de vitalidade", "Calmo e observando meu interior"] },
+            { q: "Quando está em grupo, você...?", a: ["Observa a situação e age estrategicamente", "Conecta-se emocionalmente com as pessoas", "Lidera o ambiente e traz vitalidade", "Curte conversas profundas com poucos"] },
+            { q: "Qual o seu maior motor para agir?", a: ["O prazer de atingir metas claras", "A satisfação de ajudar e criar mudanças", "O gosto de criar e inovar coisas novas", "Compreender as verdades essenciais do mundo"] },
+            { q: "Diante de um desafio difícil, qual o seu estilo?", a: ["Faço um plano minucioso e estratégico", "Busco conselho e apoio ao meu redor", "Lanço-me com confiança e entusiasmo", "Tomo tempo para entender a causa raiz"] },
+            { q: "Como os outros descrevem a sua imagem?", a: ["Pessoa confiável e organizada", "Pessoa calorosa e com grande empatia", "Pessoa cheia de energia e inspiradora", "Pessoa sábia e de pensamento profundo"] },
+            { q: "Em qual ambiente você trabalha com mais eficiência?", a: ["Ambiente com metas claras e estruturado", "Ambiente caloroso de ajuda mútua", "Ambiente dinâmico e de mudanças rápidas", "Ambiente silencioso onde posso focar sozinho"] },
+            { q: "Perante uma mudança repentina, você...?", a: ["Faço um plano rigoroso para me adaptar", "Observo primeiro como os outros se sentem", "Vejo como uma nova oportunidade com alegria", "Penso no significado profundo da mudança"] },
+            { q: "De que forma você expressa sua criatividade?", a: ["Criando estratégias para problemas complexos", "Conectando-se profundamente e ajudando outros", "Artes, música ou teatro", "Escrevendo, filosofia ou meditação"] },
+            { q: "No final de 2026, como você quer se sentir?", a: ["Realização por grandes sucessos", "Plenitude por ter dado e recebido muito amor", "Satisfação de ter vivido cada momento", "Tranquilidade por ter ficado mais sábio"] },
+            { q: "O que a natureza significa para você?", a: ["Lugar para apreciar a ordem e harmonia", "Onde me sinto mais conectado com o mundo", "Fonte de nova vitalidade e inspiração", "Espaço de reflexão para olhar para mim mesmo"] },
+            { q: "Quando vê alguém que precisa de ajuda, você...?", a: ["Busca uma solução prática que sirva", "Oferece empatia e consolo emocional", "Traz vitalidade com energia positiva", "Compartilha conselhos sábios e visão"] }
+        ],
+        loading: { analyzing: "Analisando sua aura...", step1: "Extraindo padrões...", step2: "Mapeando frequências...", step3: "Revelando sua aura 2026..." },
+        result: { aboutTitle: "Sua Aura", strengthsTitle: "Seus Pontos Fortes", recommendationsTitle: "Dicas para 2026", downloadButton: "📸 Salvar Imagem", shareButton: "🔗 Partilhar", retryButton: "🔄 De novo", exploreTitle: "Explorar todas" },
+        colors: {
+            coolBlue: { name: "Azul Frio", subtitle: "Estrategista Calmo", keywords: ["Estratégico", "Calmo", "Confiável"], description: "Sua aura emana uma energia serena e organizada. Você aborda a vida com lógica e clareza. Em 2026, sua calma será sua força.", strengths: ["Análise minuciosa", "Calma sob pressão", "Cria ordem"], recommendations: ["Lidere planejamentos", "Compartilhe insights", "Equilibre lógica e criação"] },
+            vampPurple: { name: "Púrpura Vamp", subtitle: "Criador Misterioso", keywords: ["Misterioso", "Criativo", "Intenso"], description: "Sua aura tem energia fascinante. Você vê beleza no escuro e profundidade no complexo.", strengths: ["Visão criativa", "Flexibilidade", "Presença magnética"], recommendations: ["Assuma seu estilo", "Mostre sua arte", "Explore o dramático"] },
+            solarGold: { name: "Ouro Solar", subtitle: "Líder Radiante", keywords: ["Vibrante", "Inspirador", "Seguro"], description: "Sua aura brilha como o sol. Seu otimismo faz de você um líder natural.", strengths: ["Carisma", "Motiva os outros", "Foca no dinâmico"], recommendations: ["Lidere em 2026", "Compartilhe paixão", "Tente novas aventuras"] },
+            forestGreen: { name: "Verde Floresta", subtitle: "Harmonizador Equilibrado", keywords: ["Equilibrado", "Estável", "Pacífico"], description: "Sua aura flui com harmonia. Como uma floresta, você traz equilíbrio.", strengths: ["Cria harmonia", "Presença estável", "Ligação com a natureza"], recommendations: ["Crie rotinas", "Vá à natureza", "Ajude outros no centro"] },
+            softPink: { name: "Rosa Suave", subtitle: "Curador Compassivo", keywords: ["Empático", "Cuidador", "Amável"], description: "Sua aura brilha com cura. Sua empatia faz os outros se sentirem cuidados.", strengths: ["Inteligência emocional", "Consolo natural", "Cria segurança"], recommendations: ["Faça voluntariado", "Ponha limites", "Pratique autocuidado"] },
+            midnightBlack: { name: "Preto Meia-noite", subtitle: "Pensador Profundo", keywords: ["Introspectivo", "Sábio", "Profundo"], description: "Sua aura tem a profundidade da noite. Você busca significados além do óbvio.", strengths: ["Pensamento filosófico", "Vê conexões", "Sabedoria reflexiva"], recommendations: ["Escreva insights", "Tenha tempo só", "Estude filosofia"] }
+        },
         footer: { privacy: "Privacidade", contact: "Contato" },
-        seo: { learnMore: "✨ Ver mais", title: "Aura 2026", description: "Energia.", item1: "<strong>2026:</strong> Luz.", item2: "<strong>Dicas:</strong> Amor.", item3: "<strong>Novo:</strong> Paz." }
+        seo: { learnMore: "✨ Saiba mais", title: "Por que fazer?", description: "Reflete tendências de 2026.", item1: "<strong>2026:</strong> Descubra sua cor.", item2: "<strong>Dicas:</strong> Conselhos práticos.", item3: "<strong>Novo:</strong> Tendências sociais." }
     }
 };
 
@@ -120,6 +189,18 @@ function detectLanguage() {
 function changeLanguage(lang) {
     window.currentLanguage = lang;
     updatePageLanguage();
+    // 질문 화면이면 현재 질문 갱신
+    if (typeof displayQuestion === 'function' && document.getElementById('question-screen').classList.contains('active')) {
+        displayQuestion();
+    }
+    // 결과 화면이면 캔버스 및 탭 갱신
+    if (window.currentResultKey) {
+        if (typeof drawResultToCanvas === 'function') drawResultToCanvas();
+        if (typeof populateAuraTabs === 'function') populateAuraTabs();
+        if (typeof showAuraDetail === 'function' && document.getElementById('aura-explorer-detail').style.display !== 'none') {
+            showAuraDetail(window.lastExploredKey || window.currentResultKey);
+        }
+    }
 }
 
 function updatePageLanguage() {

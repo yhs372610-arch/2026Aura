@@ -187,6 +187,7 @@ function populateAuraTabs() {
 }
 
 function showAuraDetail(key) {
+    window.lastExploredKey = key;
     const lang = window.currentLanguage || 'ko';
     const langData = translations[lang] || translations['ko'];
     const detail = langData.colors[key] || translations['en'].colors[key];
