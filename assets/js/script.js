@@ -22,12 +22,12 @@ const answerScores = [
 ];
 
 const colorData = {
-    coolBlue: { image: 'cool-blue.png?v=3' },
-    vampPurple: { image: 'vamp-purple.png?v=2' },
-    solarGold: { image: 'solar-gold.png?v=2' },
-    forestGreen: { image: 'forest-green.png?v=2' },
-    softPink: { image: 'soft-pink.png?v=2' },
-    midnightBlack: { image: 'midnight-black.png?v=3' }
+    coolBlue: { image: 'assets/images/cool-blue.png?v=3' },
+    vampPurple: { image: 'assets/images/vamp-purple.png?v=2' },
+    solarGold: { image: 'assets/images/solar-gold.png?v=2' },
+    forestGreen: { image: 'assets/images/forest-green.png?v=2' },
+    softPink: { image: 'assets/images/soft-pink.png?v=2' },
+    midnightBlack: { image: 'assets/images/midnight-black.png?v=3' }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
