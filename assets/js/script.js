@@ -213,7 +213,10 @@ async function shareResult() {
     const resKey = window.currentResultKey;
     const canvas = document.getElementById('result-canvas');
     const lang = window.currentLanguage || 'ko';
-    const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
+    
+    // 현재 URL에서 파일명을 제외한 베이스 경로 추출
+    const loc = window.location;
+    const baseUrl = loc.origin + loc.pathname.substring(0, loc.pathname.lastIndexOf('/'));
     
     let file = 'index.html';
     if (lang === 'en') file = 'en.html';

@@ -218,9 +218,14 @@ function updatePageLanguage() {
         }
     });
 
+    // 메타 데이터 및 OG 실시간 동기화
+    let metaTitle = data.meta.title;
+    let metaDesc = data.meta.description;
+
     if (window.currentResultKey) {
         const res = data.colors[window.currentResultKey] || translations['ko'].colors[window.currentResultKey];
         if (res) {
+            // 결과 화면 UI 업데이트
             const titleEl = document.getElementById('result-title');
             const subtitleEl = document.getElementById('result-subtitle');
             const descEl = document.getElementById('result-description');
@@ -228,6 +233,7 @@ function updatePageLanguage() {
             if (subtitleEl) subtitleEl.textContent = res.subtitle;
             if (descEl) descEl.textContent = res.description;
             
+            // 키워드 및 리스트 업데이트
             const kw = document.getElementById('keywords');
             if (kw) {
                 kw.innerHTML = '';
@@ -248,19 +254,27 @@ function updatePageLanguage() {
                 recList.innerHTML = '';
                 res.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recList.appendChild(li); });
             }
+
+            // 공유용 메타 정보 맞춤 설정
+            metaTitle = t('shareMessage').replace('[COLOR]', res.name);
         }
     }
 
-    // 메타 데이터 및 OG 실시간 동기화
-    const meta = data.meta;
-    if (meta) {
-        document.title = "2026 Aura Color Test - " + meta.title;
-        updateMetaTag('property', 'og:title', meta.title);
-        updateMetaTag('property', 'og:description', meta.description);
-        updateMetaTag('name', 'title', "2026 Aura Color Test - " + meta.title);
-        updateMetaTag('name', 'description', meta.description);
-        updateMetaTag('property', 'og:url', window.location.href);
-    }
+    // 문서 타이틀 및 메타 태그 일괄 갱신
+    document.title = metaTitle + " | 2026 Aura Color Test";
+    
+    // OG 태그
+    updateMetaTag('property', 'og:title', metaTitle);
+    updateMetaTag('property', 'og:description', metaDesc);
+    updateMetaTag('property', 'og:url', window.location.href);
+    
+    // Twitter 태그
+    updateMetaTag('property', 'twitter:title', metaTitle);
+    updateMetaTag('property', 'twitter:description', metaDesc);
+    
+    // 일반 메타 태그
+    updateMetaTag('name', 'title', metaTitle);
+    updateMetaTag('name', 'description', metaDesc);
 }
 
 function updateMetaTag(n, v, c) {
