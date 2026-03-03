@@ -1,4 +1,4 @@
-// 다국어 번역 데이터 - 모든 언어 복구 및 SEO/마케팅 최적화 통합 버전
+// 다국어 번역 데이터 - 모든 언어 및 서브페이지 통합 최종 버전
 const translations = {
     ko: {
         meta: { title: "나의 2026 오라 컬러는? | 무료 심리 테스트", description: "심리학 기반 성격 분석으로 당신의 2026년 에너지 컬러를 찾으세요. 아우라 컬러의 의미와 2026년 행운의 조언을 확인하세요." },
@@ -33,11 +33,9 @@ const translations = {
             midnightBlack: { name: "미드나잇 블랙", subtitle: "깊은 사색가", keywords: ["내성적인", "지혜로운", "심오한"], description: "당신의 아우라는 위대한 통찰이 솟아나는 한밤중의 깊이를 간직하고 있습니다. 표면 너머의 의미를 찾으며, 당신의 사색적인 태도는 남들이 놓치는 진실을 밝혀냅니다.", strengths: ["심오한 철학적 사고 능력", "타인이 간과하는 연결 고리를 찾아냄", " 깊은 성찰에서 나오는 지혜"], recommendations: ["글쓰기를 통해 자신의 통찰을 나누세요", "고독과 사색을 위한 시간을 확보하세요", "철학이나 심리학 분야를 탐구해 보세요"] }
         },
         footer: { privacy: "개인정보처리방침", contact: "문의하기", about: "테스트 소개", psychology: "색채 심리학 가이드" },
-        seo: { 
-            learnMore: "✨ 2026 오라 컬러 테스트 상세 가이드", 
-            title: "2026 오라 컬러 테스트: 당신의 잠재된 에너지를 발견하는 여행", 
-            description: "2026년은 그 어느 때보다 개인의 고유한 에너지와 내면의 평화가 중요해지는 시기입니다. 2026 오라 컬러 테스트는 최신 색채 심리학과 성격 분석 알고리즘을 결합하여, 사용자가 현재 발산하고 있는 고유의 주파수를 색상으로 시각화해 줍니다.<br><br>왜 아우라 컬러가 중요할까요? 아우라는 단순한 색이 아니라 당신의 현재 심리 상태, 신체적 활력, 그리고 주변 세계와 상호작용하는 방식을 나타냅니다. 이 테스트는 15개의 정교한 질문을 통해 당신의 핵심 가치관과 행동 패턴을 분석합니다." 
-        }
+        about: { pageTitle: "아우라 컬러란 무엇인가? | 2026 오라 컬러 테스트", back: "← 테스트로 돌아가기", title: "아우라 컬러란 무엇인가?", p1: "많은 사람들이 자신의 '아우라'에 대해 궁금해합니다. 아우라는 라틴어로 '공기', '미풍'을 뜻하며, 심리학과 동양 철학에서는 생명체가 발산하는 고유의 에너지를 의미합니다.", h2_1: "아우라 컬러의 역사와 의미", p2: "고대 문명에서는 성인이나 리더 주변에 빛나는 후광을 묘사하곤 했는데, 이것이 현대에 와서는 개인의 성격적 특성과 심리적 상태를 나타내는 지표로 발전했습니다.", h2_2: "6가지 대표 아우라 컬러", cta: "지금 바로 테스트 시작하기" },
+        psychology: { pageTitle: "색채 심리학과 2026년 트렌드 | 2026 오라 컬러 테스트", back: "← 테스트로 돌아가기", title: "색채 심리학으로 본 2026년의 에너지", p1: "우리는 매일 수많은 색상에 둘러싸여 살아갑니다. 단순히 시각적인 즐거움을 넘어, 색상은 우리의 뇌파를 변화시키고 호르몬 분비에 영향을 준다는 사실을 알고 계셨나요?", h2_1: "색채 심리학이란?", p2: "색채 심리학은 색상이 인간의 행동과 감정에 미치는 영향을 연구하는 학문입니다. 2026 오라 컬러 테스트는 이러한 심리학적 원리를 설문에 녹여내어, 당신이 현재 필요로 하거나 발산하고 있는 에너지를 정확히 짚어냅니다.", h2_2: "2026년 트렌드 컬러: 왜 지금 아우라 테스트인가?", p3: "2026년은 인공지능과 기술의 급격한 발전 속에서 인간 본연의 '감성'과 '정체성'을 찾는 움직임이 그 어느 때보다 강해질 것으로 예측됩니다.", h2_3: "심리 테스트가 뇌에 미치는 긍정적 영향", p4: "단순한 재미를 넘어, 자신을 객관화하여 바라보는 과정(메타인지)은 스트레스 해소와 자존감 향상에 큰 도움을 줍니다.", cta: "나의 2026년 에너지 진단하기" },
+        seo: { learnMore: "✨ 2026 오라 컬러 테스트 상세 가이드", title: "2026 오라 컬러 테스트: 당신의 잠재된 에너지를 발견하는 여행", description: "2026년은 그 어느 때보다 개인의 고유한 에너지와 내면의 평화가 중요해지는 시기입니다. 2026 오라 컬러 테스트는 최신 색채 심리학과 성격 분석 알고리즘을 결합하여, 사용자가 현재 발산하고 있는 고유의 주파수를 색상으로 시각화해 줍니다." }
     },
     en: {
         meta: { title: "2026 Aura Color Test | Discover Your Energy", description: "Find your 2026 energy color based on psychology. Get personalized insights and aura meanings for 2026." },
@@ -72,11 +70,9 @@ const translations = {
             midnightBlack: { name: "Midnight Black", subtitle: "The Deep Philosopher", keywords: ["Introspective", "Wise", "Profound"], description: "Your aura holds the depth of midnight. Your contemplative nature reveals hidden truths.", strengths: ["Profound thinking", "Sees hidden connections", "Wisdom from reflection"], recommendations: ["Share insights", "Create time for solitude", "Explore philosophy"] }
         },
         footer: { privacy: "Privacy Policy", contact: "Contact", about: "About Test", psychology: "Color Guide" },
-        seo: { 
-            learnMore: "✨ Detailed Guide to 2026 Aura Color Test", 
-            title: "2026 Aura Color Test: A Journey to Discover Your Latent Energy", 
-            description: "2026 is a year where individual uniqueness and inner peace are more important than ever. The 2026 Aura Color Test combines the latest color psychology with personality analysis algorithms to visualize the unique frequency you emit as a color." 
-        }
+        about: { pageTitle: "What is Aura Color? | 2026 Aura Color Test", back: "← Back to Test", title: "What is Aura Color?", p1: "Many people wonder about their 'aura'. Aura means 'air' or 'breeze' in Latin, and in psychology and Eastern philosophy, it refers to the unique energy emitted by living beings.", h2_1: "History and Meaning of Aura Color", p2: "In ancient civilizations, a shining halo was often depicted around saints or leaders, which in modern times has evolved into an indicator of individual personality traits and psychological states.", h2_2: "6 Representative Aura Colors", cta: "Start the Test Now" },
+        psychology: { pageTitle: "Color Psychology and 2026 Trends | 2026 Aura Color Test", back: "← Back to Test", title: "Energy of 2026 through Color Psychology", p1: "We live surrounded by countless colors every day. Beyond mere visual pleasure, did you know that colors can change our brain waves and affect hormone secretion?", h2_1: "What is Color Psychology?", p2: "Color psychology is the study of how colors affect human behavior and emotions. The 2026 Aura Color Test melts these psychological principles into the survey to accurately pinpoint the energy you currently need or are emitting.", h2_2: "2026 Trend Color: Why the Aura Test Now?", p3: "2026 is predicted to be a year where the movement to find human 'sensitivity' and 'identity' will become stronger than ever amidst the rapid development of AI and technology.", h2_3: "Positive Effects of Psychological Tests on the Brain", p4: "Beyond simple fun, the process of looking at yourself objectively (metacognition) greatly helps in relieving stress and improving self-esteem.", cta: "Diagnose My 2026 Energy" },
+        seo: { learnMore: "✨ Detailed Guide to 2026 Aura Color Test", title: "2026 Aura Color Test: A Journey to Discover Your Latent Energy", description: "2026 is a year where individual uniqueness and inner peace are more important than ever. The 2026 Aura Color Test combines the latest color psychology with personality analysis algorithms to visualize the unique frequency you emit as a color." }
     },
     ja: {
         meta: { title: "あなたの2026年オー라カラーは? | 無料診断", description: "心理学に基づいた性格分析で2026年のエネルギーカラーを見つけましょう！" },
@@ -87,13 +83,13 @@ const translations = {
             { q: "2026年の朝、一日を始める時に最初に思うことは？", a: ["今日はどんな目標を達成しようか？", "今日も一日、平和で穏やかでありますように", "今日はどんなワクワクすることが起きるかな？", "自分一人のための充電時間が必要だ"] },
             { q: "ストレスを感じた時、どのように対処しますか？", a: ["問題を論理적으로分析して解決する", "親しい人と話をして気持ち을落ち着かせる", "創作活動に没頭してストレスを忘れる", "一人の時間を持って気持ちを整理する"] },
             { q: "2026年に夢見る理想的な週末は？", a: ["個人プロジェクトを計画して実行する", "愛する人たちと大切な時間を過ごす", "新しい場所を探検して冒険を楽しむ", "静かに読書や思索をして休息する"] },
-            { q: "重要な決定を下す際、優先する価値観は？", a: ["論理적인根拠と実質的な結果", "自分の決定が他人の感情に与える影響", "自分の直感と熱い情熱", "深い思索の末に得た知恵"] },
+            { q: "重要な決定を下す際、優先する価値観は？", a: ["論理的な根拠と実質的な結果", "自分の決定が他人の感情に与える影響", "自分の直感と熱い情熱", "深い思索の末に得た知恵"] },
             { q: "普段のエネルギーレベルは？", a: ["一定で集中力が高い状態", "温かく周囲を気遣う状態", "高く活気に満ち溢れた状態", "落ち着いて内面を見つめる状態"] },
             { q: "人々と一緒にいる時、あなたは？", a: ["状況を観察しながら戦略的に行動する", "人々と感情的に交流し、つながりを持つ", "雰囲気を主導し、活気を与える", "少数の人々と深い会話を楽しむ"] },
-            { q: "あなたを動かす最大の原動力は？", a: ["明確な目標を達成した時の快感", "誰かの助けになり、変化を作るやりがい", "新しいものを創造し、革新する楽しさ", "世界の象徴적인真理を理解すること"] },
+            { q: "あなたを動かす最大の原動力は？", a: ["明確な目標を達成した時の快感", "誰かの助けになり、変化を作るやりがい", "新しいものを創造し、革新する楽しさ", "世界の象徴的な真理を理解すること"] },
             { q: "困難な課題に直面した時のスタイルは？", a: ["綿密で戦略的な計画を立てる", "周囲に助言や支持を求める", "自信を持って情熱的に飛び込む", "原因を根本的に理解するために時間をかける"] },
-            { q: "他人が言うあなたのイメージは？", a: ["信頼できる計画적인人", "温かく共感能力に優れた人", "エネルギーに溢れ、インスピレーションを与える人", "賢明で考えが深い人"] },
-            { q: "最も効率的に働ける環境は？", a: ["目標가明確で構造化された環境", "互いに助け合い協力する温かい環境", "変化が速くダイナミックな環境", "静かで一人で集中できる環境"] },
+            { q: "他人が言うあなたのイメージは？", a: ["信頼できる計画的な人", "温かく共感能力に優れた人", "エネルギーに溢れ、インスピレーションを与える人", "賢明で考えが深い人"] },
+            { q: "最も効率的に働ける環境は？", a: ["目標が明確で構造化された環境", "互いに助け合い協力する温かい環境", "変化が速くダイナミックな環境", "静かで一人で集中できる環境"] },
             { q: "突然の変化に直面した時、あなたは？", a: ["徹底的に計画を立てて適応する", "他の人がどう感じているかまず確認する", "新しい機会だと考えて楽しく受け入れる", "その変化が人生に与える深い意味を考える"] },
             { q: "どのような方法で創造性を表現しますか？", a: ["複雑な問題を解決する戦略を立てる", "人々と深く交流し助けを与える", "芸術、音楽、公演などの感覚的な活動", "執筆、哲学、瞑想などの思索的な活動"] },
             { q: "2026年が終わる時、どんな気分でいたいですか？", a: ["大きな成果を成し遂げた達成感", "多くの愛を分かち合った充実感", "毎瞬間が生きていると感じた満足感", "平和で賢明になった平穏さ"] },
@@ -103,14 +99,16 @@ const translations = {
         loading: { analyzing: "オーラ分析中...", step1: "エネルギーパターン抽出中...", step2: "カラー周波数マッピング中...", step3: "2026年のオーラ公開中..." },
         result: { aboutTitle: "あなたのオーラ", strengthsTitle: "あなたの強み", recommendationsTitle: "2026年の推奨", downloadButton: "📸 結果カードを保存する", shareButton: "✨ エネルギーを共有する", retryButton: "🔄 もう一度診断する", exploreTitle: "すべてのオーラを見る" },
         colors: {
-            coolBlue: { name: "クールブルー", subtitle: "冷静な戦略家", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。論理と明確さを持って人生にアプローチし、生まれながらの問題解決者の役割を果たします。", strengths: ["綿密な戦略立案と分析能力", "プレッシャーの中でも沈着冷静", "混乱の中で秩序를創造する"], recommendations: ["計画が必要なプロジェクトを主導してください", "文章を通じて自分の洞察を共有してください", "論理と創造的な探求のバランスをとってください"] },
-            vampPurple: { name: "ヴァンプパープル", subtitle: "神秘的な創造者", keywords: ["神秘的", "創造적", "強烈"], description: "あなたのオーラは魅惑的で神秘的なエネルギーを秘めています。暗闇の中に美しさを見出し、複雑さの中に深みを見つけます。", strengths: ["深い創造적ビジョンと芸術的才能", "複雑な状況での柔軟性", "他人の好奇心を刺激する魅力的な存在感"], recommendations: ["あなた独自の創造的なスタイルを受け入れてください", "自分の芸術を世の中に堂々と発信してください", "劇的な美学を探求してみてください"] },
+            coolBlue: { name: "クールブルー", subtitle: "冷静な戦略家", keywords: ["戦略的", "冷静", "信頼"], description: "あなたのオーラは冷静で整ったエネルギーを放っています。論理と明確さを持って人生にアプローチし、生まれながらの問題解決者の役割を果たします。", strengths: ["綿密な戦略立案と分析能力", "プレッシャーの中でも沈着冷静", "混乱の中で秩序を創造する"], recommendations: ["計画が必要なプロジェクトを主導してください", "文章を通じて自分の洞察を共有してください", "論理と創造的な探求のバランスをとってください"] },
+            vampPurple: { name: "ヴァンプパープル", subtitle: "神秘的な創造者", keywords: ["神秘的", "創造的", "強烈"], description: "あなたのオーラは魅惑的で神秘的なエネルギーを秘めています。暗闇の中に美しさを見出し、複雑さの中に深みを見つけます。", strengths: ["深い創造的ビジョンと芸術的才能", "複雑な状況での柔軟性", "他人の好奇心を刺激する魅力的な存在感"], recommendations: ["あなた独自の創造的なスタイルを受け入れてください", "自分の芸術を世の中に堂々と発信してください", "劇的な美学を探求してみてください"] },
             solarGold: { name: "ソーラーゴールド", subtitle: "輝くリーダー", keywords: ["活気ある", "インスピレーション", "自信"], description: "あなたのオーラは太陽のように輝き、周囲のすべてを明るく照らします。あなたの伝染性のあるエネルギーと楽観主義は、あなたを生まれながらのリーダーにします。", strengths: ["天性のカリスマ性とリーダーシップ", "他人にエネルギーを与え動機付ける", "ダイナミックな環境で能力を発揮する"], recommendations: ["2026年はリーダーの役割を引き受けてみてください", "講演や発表を通じて情熱を共有してください", "エネルギーを大胆な新しい冒険に注いでください"] },
             forestGreen: { name: "フォレストグリーン", subtitle: "調和のとれた平和主義者", keywords: ["バランス", "安定的", "平和"], description: "あなたのオーラは自然的で調和のとれたエネルギーで流れています。森のように、あなたは周囲に安らぎとバランスを提供します。", strengths: ["調和を作り出す卓越した能力", "冷静で安定した存在感", "自然との深い絆"], recommendations: ["2026年はバランスのとれたルーチンを作ってください", "定期的に自然の中で時間を過ごしてください", "他人が内面の中心を見つけるのを助けてあげてください"] },
-            softPink: { name: "ソフトピンク", subtitle: "慈愛に満ちた癒し手", keywords: ["共感", "世話好き", "愛らしい"], description: "あなたのオーラは柔らかく癒しのエネルギーで輝いています。あなたは深い共感能力を備えており、他人が真に理解されていると感じさせます。", strengths: ["高い心の知能指数(EQ)", "他人を慰め癒す天性の能力", "脆弱さを見せても安全な空間を作る"], recommendations: ["奉仕活動や分かち合いに参加してみてください", "他人を世話しつつも、健康的な境界線を引いてください", "自分のための献身적인セルフケアを実践してください"] },
-            midnightBlack: { name: "ミッドナイトブラック", subtitle: "深い思索家", keywords: ["内省적", "賢明", "深遠"], description: "あなたのオーラは、偉大な洞察が湧き出る真夜中の深さを保持しています。表面の向こうの意味を探し、真実を明らかにします。", strengths: ["深遠な哲学的思考能力", "他人が見落とすつながりを見つけ出す", "深い省察から生まれる知恵"], recommendations: ["執筆を通じて自分の洞察を共有してください", "孤独と思索のための時間を確保してください", "哲学や心理学の分野を探求してみてください"] }
+            softPink: { name: "ソフトピンク", subtitle: "慈愛に満ちた癒し手", keywords: ["共感", "世話好き", "愛らしい"], description: "あなたのオーラは柔らかく癒しのエネルギーで輝いています。あなたは深い共感能力を備えており、他人が真に理解されていると感じさせます。", strengths: ["高い心の知能指数(EQ)", "他人を慰め癒す天性の能力", "脆弱さを見せても安全な空間を作る"], recommendations: ["奉仕活動や分かち合いに参加してみてください", "他人を世話しつつも、健康的な境界線を引いてください", "自分のための献身的なセルフケアを実践してください"] },
+            midnightBlack: { name: "ミッドナイトブラック", subtitle: "深い思索家", keywords: ["内省的", "賢明", "深遠"], description: "あなたのオーラは、偉大な洞察が湧き出る真夜中の深さを保持しています。表面の向こうの意味を探し、真実を明らかにします。", strengths: ["深遠な哲学的思考能力", "他人が見落とすつながりを見つけ出す", "深い省察から生まれる知恵"], recommendations: ["執筆を通じて自分の洞察を共有してください", "孤独と思索のための時間を確保してください", "哲学や心理学の分野を探求してみてください"] }
         },
         footer: { privacy: "プライバシーポリシー", contact: "お問い合わせ", about: "診断について", psychology: "色彩心理学ガイド" },
+        about: { pageTitle: "オーラカラーとは？ | 2026年オーラカラー診断", back: "← 診断に戻る", title: "オーラカラーとは？", p1: "多くの人が自分の「オーラ」について興味を持っています。オーラはラテン語で「空気」や「微風」を意味し、心理学や東洋哲学では生命体が発する独自のエネルギーを指します。", h2_1: "オーラカラーの歴史と意味", p2: "古代文明では、聖人や指導者の周りに光り輝く後光が描かれることがありましたが、これが現代では個人の性格的特徴や心理状態を示す指標へと発展しました。", h2_2: "6つの代表的なオーラカラー", cta: "今すぐ診断を始める" },
+        psychology: { pageTitle: "色彩心理学と2026年のトレンド | 2026年オーラカラー診断", back: "← 診断に戻る", title: "色彩心理学から見た2026年のエネルギー", p1: "私たちは毎日、無数の色に囲まれて生きています。単なる視覚的な楽しみを超えて、色が脳波を変化させ、ホルモン分泌に影響を与えることをご存知でしたか？", h2_1: "色彩心理学とは？", p2: "色彩心理学は、色が人間の行動や感情に与える影響を研究する学問です。2026年オーラカラー診断は、これらの心理学的原理を設問に盛り込み、あなたが現在必要としている、あるいは発しているエネルギーを正確に特定します。", h2_2: "2026年のトレンドカラー：なぜ今オーラ診断なのか？", p3: "2026年は、AIや技術の急激な発展の中で、人間の「感性」や「アイデンティティ」を求める動きがかつてないほど強まると予測されています。", h2_3: "心理テストが脳に与える好影響", p4: "単純な楽しみを超えて、自分を客観的に見つめるプロセス（メタ認知）は、ストレス解消や自尊心の向上に大きく役立ちます。", cta: "自分の2026年のエネルギーを診断する" },
         seo: { learnMore: "✨ 診断の詳細ガイド", title: "2026年オーラカラー診断：あなたのエネルギーを発見する旅", description: "心理学に基づいた最新のアルゴリズムで、あなたの2026年のエネルギーを診断します。" }
     },
     es: {
@@ -146,6 +144,8 @@ const translations = {
             midnightBlack: { name: "Negro Medianoche", subtitle: "Pensador Profundo", keywords: ["Introspectivo", "Sabio", "Profundo"], description: "Tu aura guarda la profundidad de la medianoche. Buscas el significado más allá.", strengths: ["Pensamiento filosófico profundo", "Encuentra conexiones ocultas", "Sabiduría de la reflexión"], recommendations: ["Comparte tus visiones", "Asegura tiempo para soledad", "Explora la psicología"] }
         },
         footer: { privacy: "Privacidad", contact: "Contacto", about: "Sobre el test", psychology: "Guía de colores" },
+        about: { pageTitle: "¿Qué es el Color de Aura? | Test de Aura 2026", back: "← Volver al Test", title: "¿Qué es el Color de Aura?", p1: "Mucha gente se pregunta por su 'aura'. Aura significa 'aire' o 'brisa' en latín, y en psicología y filosofía oriental, se refiere a la energía única emitida por los seres vivos.", h2_1: "Historia y Significado del Color de Aura", p2: "En las civilizaciones antiguas, a menudo se representaba un halo brillante alrededor de santos o líderes, lo que en tiempos modernos ha evolucionado hasta convertirse en un indicador de los rasgos de personalidad individuales y los estados psicológicos.", h2_2: "6 Colores de Aura Representativos", cta: "Empezar el Test Ahora" },
+        psychology: { pageTitle: "Psicología del Color y Tendencias 2026 | Test de Aura 2026", back: "← Volver al Test", title: "Energía de 2026 a través de la Psicología del Color", p1: "Vivimos rodeados de innumerables colores todos los días. Más allá del mero placer visual, ¿sabías que los colores pueden cambiar nuestras ondas cerebrales y afectar la secreción de hormonas?", h2_1: "¿Qué es la Psicología del Color?", p2: "La psicología del color es el estudio de cómo los colores afectan el comportamiento y las emociones humanas. El Test de Aura 2026 funde estos principios psicológicos en la encuesta para identificar con precisión la energía que necesitas o estás emitiendo actualmente.", h2_2: "Color de Tendencia 2026: ¿Por qué el Test de Aura ahora?", p3: "Se predice que 2026 será un año en el que el movimiento para encontrar la 'sensibilidad' e 'identidad' humana se volverá más fuerte que nunca en medio del rápido desarrollo de la IA y la tecnología.", h2_3: "Efectos Positivos de los Tests Psicológicos en el Cerebro", p4: "Más allá de la simple diversión, el proceso de mirarse a uno mismo objetivamente (metacognición) ayuda enormemente a aliviar el estrés y mejorar la autoestima.", cta: "Diagnosticar mi energía 2026" },
         seo: { learnMore: "✨ Guía detallada", title: "Test de Aura 2026: Tu energía interior", description: "Descubre tu color de energía basado en psicología para el 2026." }
     },
     pt: {
@@ -170,17 +170,19 @@ const translations = {
             { q: "A natureza para você é:", a: ["Ordem e harmonia", "Conexão", "Vitalidade", "Reflexão"] },
             { q: "Quando alguém precisa de ajuda:", a: ["Soluções práticas", "Consolo emocional", "Energia positiva", "Conselhos sábios"] }
         ],
-        loading: { analyzing: "Analisando sua aura...", step1: "Extraindo padrões...", step2: "Mapeando frequências...", step3: "Revelando sua aura 2026..." },
+        loading: { analyzing: "Analisando sua aura...", step1: "Extraindo padrões...", step2: "Mapping frequências...", step3: "Revelando sua aura 2026..." },
         result: { aboutTitle: "Sua Aura", strengthsTitle: "Seus Pontos Fortes", recommendationsTitle: "Dicas para 2026", downloadButton: "📸 Salvar meu cartão", shareButton: "✨ Partilhar minha energia", retryButton: "🔄 De novo", exploreTitle: "Explorar todas" },
         colors: {
-            coolBlue: { name: "Azul Frio", subtitle: "Estrategista Calmo", keywords: ["Estratégico", "Calmo", "Confiable"], description: "Sua aura emana uma energia serena e organizada. Você aborda a vida com lógica.", strengths: ["Análise minuciosa", "Calma sob pressão", "Cria ordem"], recommendations: ["Lidere planejamentos", "Compartilhe insights", "Equilibre lógica e criação"] },
+            coolBlue: { name: "Azul Frio", subtitle: "Estrategista Calmo", keywords: ["Estratégico", "Calmo", "Confiável"], description: "Sua aura emana uma energia serena e organizada. Você aborda a vida com lógica.", strengths: ["Análise minuciosa", "Calma sob pressão", "Cria ordem"], recommendations: ["Lidere planejamentos", "Compartilhe insights", "Equilibre lógica e criação"] },
             vampPurple: { name: "Púrpura Vamp", subtitle: "Criador Misterioso", keywords: ["Misterioso", "Criativo", "Intenso"], description: "Sua aura tem energia fascinante e misteriosa. Você vê beleza no escuro.", strengths: ["Visão criativa profunda", "Flexibilidade no complexo", "Presença magnética"], recommendations: ["Assuma seu estilo único", "Mostre sua arte ao mundo", "Explore o dramático"] },
             solarGold: { name: "Ouro Solar", subtitle: "Líder Radiante", keywords: ["Vibrante", "Inspirador", "Seguro"], description: "Sua aura brilha como o sol. Seu otimismo faz de você um líder natural.", strengths: ["Carisma e liderança", "Motiva os outros", "Foca no dinâmico"], recommendations: ["Lidere em 2026", "Compartilhe paixão", "Tente novas aventuras"] },
             forestGreen: { name: "Verde Floresta", subtitle: "Harmonizador Equilibrado", keywords: ["Equilibrado", "Estável", "Pacífico"], description: "Sua aura flui com harmonia. Como uma floresta, você traz equilíbrio.", strengths: ["Cria harmonia", "Presença estável", "Ligação com a natureza"], recommendations: ["Crie rotinas", "Vá à natureza", "Ajude outros no centro"] },
             softPink: { name: "Rosa Suave", subtitle: "Curador Compassivo", keywords: ["Empático", "Cuidador", "Amável"], description: "Sua aura brilha com cura. Sua empatia faz os outros se sentirem cuidados.", strengths: ["Inteligência emocional", "Consolo natural", "Cria segurança"], recommendations: ["Faça voluntariado", "Ponha limites", "Pratique autocuidado"] },
-            midnightBlack: { name: "Preto Meia-noite", subtitle: "Pensador Profundo", keywords: ["Introspectivo", "Sábio", "Profundo"], description: "Sua aura tem a profundidade da noite. Você busca significados além do óbvio.", strengths: ["Pensamiento filosófico", "Vê conexões ocultas", "Sabedoria reflexiva"], recommendations: ["Escreva insights", "Tenha tempo só", "Estude filosofia"] }
+            midnightBlack: { name: "Preto Meia-noite", subtitle: "Pensador Profundo", keywords: ["Introspectivo", "Sábio", "Profundo"], description: "Sua aura tem a profundidade da noite. Você busca significados além do óbvio.", strengths: ["Pensamento filosófico", "Vê conexões ocultas", "Sabedoria reflexiva"], recommendations: ["Escreva insights", "Tenha tempo só", "Estude filosofia"] }
         },
         footer: { privacy: "Privacidade", contact: "Contato", about: "Sobre", psychology: "Guia" },
+        about: { pageTitle: "O que é Cor de Aura? | Teste de Aura 2026", back: "← Voltar ao Teste", title: "O que é Cor de Aura?", p1: "Muitas pessoas se perguntam sobre sua 'aura'. Aura significa 'ar' ou 'brisa' em latim e, na psicologia e na filosofia oriental, refere-se à energia única emitida pelos seres vivos.", h2_1: "História e Significado da Cor de Aura", p2: "Nas civilizações antigas, um halo brilhante era frequentemente retratado em torno de santos ou líderes, o que nos tempos modernos evoluiu para um indicador de traços de personalidade individuais e estados psicológicos.", h2_2: "6 Cores de Aura Representativas", cta: "Começar o Teste Agora" },
+        psychology: { pageTitle: "Psicologia das Cores e Tendências 2026 | Teste de Aura 2026", back: "← Voltar ao Teste", title: "Energia de 2026 através da Psicologia das Cores", p1: "Vivemos cercados por inúmeras cores todos os dias. Além do mero prazer visual, você sabia que as cores podem mudar nossas ondas cerebrais e afetar a secreção de hormônios?", h2_1: "O que é Psicologia das Cores?", p2: "A psicologia das cores é o estudo de como as cores afetam o comportamento e as emoções humanas. O Teste de Aura 2026 derrete esses princípios psicológicos na pesquisa para identificar com precisão a energia que você precisa ou está emitindo no momento.", h2_2: "Cor de Tendência 2026: Por que o Teste de Aura agora?", p3: "Prevê-se que 2026 seja um ano em que o movimento para encontrar a 'sensibilidade' e 'identidade' humana se tornará mais forte do que nunca em meio ao rápido desenvolvimento da IA e da tecnologia.", h2_3: "Efeitos Positivos de Testes Psicológicos no Cérebro", p4: "Além da simples diversão, o processo de olhar para si mesmo objetivamente (metacognição) ajuda muito a aliviar o estresse e aumentar a autoestima.", cta: "Diagnosticar minha energia 2026" },
         seo: { learnMore: "✨ Guia de Aura", title: "Teste de Aura 2026", description: "Descubra sua cor de energia para 2026." }
     }
 };
@@ -200,20 +202,20 @@ function detectLanguage() {
 function changeLanguage(lang) {
     window.currentLanguage = lang;
     updatePageLanguage();
-    if (typeof displayQuestion === 'function' && document.getElementById('question-screen').classList.contains('active')) {
+    if (typeof displayQuestion === 'function' && document.getElementById('question-screen') && document.getElementById('question-screen').classList.contains('active')) {
         displayQuestion();
     }
     if (window.currentResultKey) {
         if (typeof drawResultToCanvas === 'function') drawResultToCanvas();
         if (typeof populateAuraTabs === 'function') populateAuraTabs();
-        if (typeof showAuraDetail === 'function' && document.getElementById('aura-explorer-detail').style.display !== 'none') {
+        if (typeof showAuraDetail === 'function' && document.getElementById('aura-explorer-detail') && document.getElementById('aura-explorer-detail').style.display !== 'none') {
             showAuraDetail(window.lastExploredKey || window.currentResultKey);
         }
     }
 }
 
 function updatePageLanguage() {
-    const lang = window.currentLanguage;
+    const lang = window.currentLanguage || 'ko';
     const data = translations[lang] || translations['ko'];
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -222,8 +224,11 @@ function updatePageLanguage() {
         let val = data;
         keys.forEach(k => { if (val) val = val[k]; });
         if (val && typeof val === 'string') {
-            if (key.startsWith('seo.') || key === 'seo.learnMore') el.innerHTML = val;
-            else el.textContent = val;
+            if (key.includes('description') || key.includes('p1') || key.includes('p2') || key.includes('p3') || key.includes('p4') || key.startsWith('seo.')) {
+                el.innerHTML = val;
+            } else {
+                el.textContent = val;
+            }
         }
     });
 

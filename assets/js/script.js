@@ -151,8 +151,7 @@ function calculateResult() {
 function showResultWithKey(resultKey) {
     window.currentResultKey = resultKey;
     const lang = window.currentLanguage || 'ko';
-    const langData = translations[lang] || translations['ko'];
-    const data = langData.colors[resultKey] || translations['en'].colors[resultKey];
+    const data = (translations[lang] || translations['ko']).colors[resultKey] || translations['en'].colors[resultKey];
     const info = colorData[resultKey];
     
     const displayEl = document.getElementById('result-color-display');
@@ -160,6 +159,37 @@ function showResultWithKey(resultKey) {
         displayEl.style.background = `url('${info.image}') center/cover no-repeat`;
         displayEl.setAttribute('role', 'img');
         displayEl.setAttribute('aria-label', `${data.name} - ${data.subtitle}`);
+    }
+    
+    // 텍스트 업데이트
+    const titleEl = document.getElementById('result-title');
+    const subtitleEl = document.getElementById('result-subtitle');
+    const descEl = document.getElementById('result-description');
+    if (titleEl) titleEl.textContent = data.name;
+    if (subtitleEl) subtitleEl.textContent = data.subtitle;
+    if (descEl) descEl.textContent = data.description;
+
+    const kw = document.getElementById('keywords');
+    if (kw) {
+        kw.innerHTML = '';
+        data.keywords.forEach(k => {
+            const t = document.createElement('div');
+            t.className = 'keyword-tag';
+            t.textContent = k;
+            kw.appendChild(t);
+        });
+    }
+
+    const stList = document.getElementById('strengths-list');
+    if (stList) {
+        stList.innerHTML = '';
+        data.strengths.forEach(s => { const li = document.createElement('li'); li.textContent = s; stList.appendChild(li); });
+    }
+
+    const recList = document.getElementById('recommendations-list');
+    if (recList) {
+        recList.innerHTML = '';
+        data.recommendations.forEach(r => { const li = document.createElement('li'); li.textContent = r; recList.appendChild(li); });
     }
     
     updatePageLanguage();
