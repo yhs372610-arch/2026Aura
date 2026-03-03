@@ -14,6 +14,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://2026aura.pages.dev/en.html"/>
   </url>
   <url>
+    <loc>https://2026aura.pages.dev/about-aura.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://2026aura.pages.dev/color-psychology.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://2026aura.pages.dev/en.html</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>weekly</changefreq>
